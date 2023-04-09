@@ -19,7 +19,7 @@ namespace TiemChungThuCung.Controllers
 
             return View();
         }
-
+        //sfíaíaì
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
