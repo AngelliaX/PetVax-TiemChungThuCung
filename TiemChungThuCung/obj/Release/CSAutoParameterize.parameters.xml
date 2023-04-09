@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="TiemChungThuCungDbContext-Web.config Connection String" description="TiemChungThuCungDbContext Connection String used in web.config by the application to access the database." defaultValue="data source=TUNG-TOP-PC\TIEMCHUNGTHUCUNG;initial catalog=TiemChungThuCung;user id=root;password=root;MultipleActiveResultSets=True;App=EntityFramework" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\namxm\\OneDrive\\Máy\ tính\\Ki2Nam2\\Pbl3\ -\ Quan\ li\ tiem\ chung\ thu\\ASP\.NET\ MVC\ Code\\TiemChungThuCung\\TiemChungThuCung\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TiemChungThuCungDbContext']/@connectionString" />
+  </parameter>
+</parameters>
