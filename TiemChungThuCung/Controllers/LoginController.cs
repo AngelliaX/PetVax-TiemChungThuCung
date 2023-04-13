@@ -1,4 +1,4 @@
-﻿using Models;
+﻿using Models.DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,11 +14,7 @@ namespace TiemChungThuCung.Controllers
 {
     public class LoginController : Controller
     {
-        public ActionResult Register()
-        {
-            return View();
-        }
-        
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -40,7 +36,7 @@ namespace TiemChungThuCung.Controllers
             }
             else
             {
-                ModelState.AddModelError("","Tên đăng nhập hoặc mật khẩu sai!");
+                ViewBag.FailedAttempt = "Tên đăng nhập hoặc mật khẩu sai";
             }
             return View(model);
         }
@@ -59,15 +55,16 @@ namespace TiemChungThuCung.Controllers
             }
             else if (User.IsInRole(credentialConstant.GetRole(2))) //Doctor
             {
-                return RedirectToAction("Index", "Home", new { area = "" });
+                Trace.WriteLine("Doctor called!");
+                return RedirectToAction("Index", "Home", new { area = "Doctor" });
             }
             else if (User.IsInRole(credentialConstant.GetRole(3))) //Pharmacist
             {
-                return RedirectToAction("Index", "Home", new { area = "" });
-            }
+                return RedirectToAction("Index", "Home", new { area = "Pharmacist" });
+                }
             else if (User.IsInRole(credentialConstant.GetRole(4))) //Cashier
             {
-                return RedirectToAction("Index", "Home", new { area = "" });
+                return RedirectToAction("Index", "Home", new { area = "Cashier" });
             }
             else
             {

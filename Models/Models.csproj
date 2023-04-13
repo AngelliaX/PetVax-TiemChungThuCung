@@ -53,11 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountModel.cs" />
-    <Compile Include="Framework\account.cs" />
-    <Compile Include="Framework\TiemChungThuCungDbContext.cs" />
+    <Compile Include="DataAccessLayer\AccountDAO.cs" />
+    <Compile Include="EntityFramework\account.cs" />
+    <Compile Include="EntityFramework\TiemChungThuCungDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatisticModel.cs" />
+    <Compile Include="DataAccessLayer\StatisticDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

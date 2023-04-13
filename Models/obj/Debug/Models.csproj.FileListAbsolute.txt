@@ -10,3 +10,15 @@ C:\Users\namxm\OneDrive\Máy tính\Ki2Nam2\Pbl3 - Quan li tiem chung thu\ASP.NET
 C:\Users\namxm\OneDrive\Máy tính\Ki2Nam2\Pbl3 - Quan li tiem chung thu\ASP.NET MVC Code\TiemChungThuCung\Models\obj\Debug\Models.csproj.CopyComplete
 C:\Users\namxm\OneDrive\Máy tính\Ki2Nam2\Pbl3 - Quan li tiem chung thu\ASP.NET MVC Code\TiemChungThuCung\Models\obj\Debug\Models.dll
 C:\Users\namxm\OneDrive\Máy tính\Ki2Nam2\Pbl3 - Quan li tiem chung thu\ASP.NET MVC Code\TiemChungThuCung\Models\obj\Debug\Models.pdb
+C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\bin\Debug\Models.dll.config
+C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\bin\Debug\Models.dll
+C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\bin\Debug\Models.pdb
+C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\bin\Debug\EntityFramework.dll
+C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\bin\Debug\EntityFramework.xml
+C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\obj\Debug\Models.csproj.AssemblyReference.cache
+C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\obj\Debug\Models.csproj.CopyComplete
+C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\obj\Debug\Models.dll
+C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\obj\Debug\Models.pdb

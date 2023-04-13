@@ -1,4 +1,4 @@
-﻿using Models;
+﻿using Models.DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +12,8 @@ namespace TiemChungThuCung.Areas.Admin.Controllers
         // GET: Admin/Statistic
         public ActionResult Index()
         {
-            var statisticModel = new StatisticModel();
-            var model = statisticModel.ListAll();
+            var statisticDAO = new StatisticDAO();
+            var model = statisticDAO.ListAll();
             return View(model);
         }
 

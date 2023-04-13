@@ -112,21 +112,32 @@
                         <!-- /Logo -->
                         <h4 class="mb-2"><span style="color: #2EFF00;">Chào mừng</span> tới Pet<span style="color: #FF0000;">Vax</span>! 👋</h4>
                         <p class="mb-4">Hãy đăng nhập tài khoản để bắt đầu khám phá</p>
-                        
+
                         @using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true, null, new { @class = "alert alert-danger"})
+                            if (@ViewBag.FailedAttempt != null)
+                            {
+                                <div class="alert alert-danger">
+                                    @ViewBag.FailedAttempt
+                                </div>
+                            }
+                            if (TempData["SuccessMessage"] != null)
+                            {
+                                <div class="alert alert-success">
+                                    @TempData["SuccessMessage"]
+                                </div>
+                            }
                             <div class="mb-3">
                                 <label for="email" class="form-label">Tên tài khoản</label>
-                                @Html.TextBoxFor(model => model.username, new 
-                                { 
-                                    @class = "form-control", 
+                                @Html.TextBoxFor(model => model.username, new
+                                {
+                                    @class = "form-control",
                                     @placeholder = "Enter your email or username",
                                     @autofocus = "autofocus",
-                                    @type= "text",
-                                    @id= "email",
-                                    @name= "email-username",
+                                    @type = "text",
+                                    @id = "email",
+                                    @name = "email-username",
                                     @tabindex = "1"
                                 })
                             </div>
@@ -143,25 +154,25 @@
                                         @class = "form-control",
                                         @placeholder = "********",
                                         @type = "password",
-                                        @id="password",
+                                        @id = "password",
                                         @name = "password",
                                         @tabindex = "2"
-                                        
+
                                     })
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <div class="form-check">
-                                    
-                                    @Html.CheckBoxFor(model => model.rememberMe, new 
-                                    { 
+
+                                    @Html.CheckBoxFor(model => model.rememberMe, new
+                                    {
                                         @class = "form-check-input",
                                         @type = "checkbox",
                                         @id = "remember-me",
                                         @tabindex = "3"
                                     })
-                                    
+
                                     <label class="form-check-label" for="remember-me">Ghi nhớ đăng nhập </label>
                                 </div>
                             </div>
@@ -175,7 +186,7 @@
 
                         <p class="text-center">
                             <span>Chưa có tài khoản?</span>
-                            <a href="/Login/Register">
+                            <a href="/Register">
                                 <span>Tạo mới</span>
                             </a>
                         </p>

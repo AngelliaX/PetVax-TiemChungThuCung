@@ -1,4 +1,4 @@
-﻿using Models;
+﻿using Models.DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,7 +108,7 @@ namespace TiemChungThuCung.Areas.Admin.Code
 
         public override bool ValidateUser(string username, string password)
         {
-            return new AccountModel().Login(username,password);
+            return new AccountDAO().Login(username,password);
             
         }
     }
