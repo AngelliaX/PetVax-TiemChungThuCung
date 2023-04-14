@@ -135,6 +135,7 @@
     <Compile Include="Areas\Cashier\CashierAreaRegistration.cs" />
     <Compile Include="Areas\Cashier\Controllers\CashierBaseController.cs" />
     <Compile Include="Areas\Cashier\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Client\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Pharmacist\PharmacistAreaRegistration.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\PharmacistBaseController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\HomeController.cs" />
@@ -284,6 +285,8 @@
     <Content Include="Areas\Cashier\Views\web.config" />
     <Content Include="Areas\Admin\Views\Control\Statistic.cshtml" />
     <Content Include="Areas\Admin\Views\Control\CreateStaffAccount.cshtml" />
+    <Content Include="Areas\Client\Views\Profile\Update.cshtml" />
+    <Content Include="Areas\Client\Views\Profile\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\khongcanten-001-site1 - FTP.pubxml" />
@@ -315,6 +318,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Shared\_HeaderLayout.cshtml" />
+    <Content Include="Views\Shared\_UpdateProfileForm.cshtml" />
+    <Content Include="Views\Shared\_ViewProfileForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

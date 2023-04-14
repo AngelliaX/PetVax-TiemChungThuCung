@@ -151,7 +151,7 @@
                     <!-- Components -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Quản lí</span></li>
                     <!-- Cards -->
-                    <li class="menu-item @(lastURLPart.ToLower() == "statistic" ? "active open" : "")">
+                    <li class="menu-item @(currentUrl.ToLower().Contains("control") ? "active open" : "")">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-chalkboard"></i>
                             <div data-i18n="Basic">Tất cả tài khoản</div>
