@@ -39,7 +39,9 @@ namespace TiemChungThuCung.MyRoleProvider
         public override string[] GetRolesForUser(string username)
         {
             TiemChungThuCungDbContext context = new TiemChungThuCungDbContext();
+            //todo lỗi null accounts
             var role_id = context.accounts.Where(x => x.username == username).FirstOrDefault().account_type;
+            
             string[] result = { new CredentialConstant().GetRole(role_id)};
             return result;
         }
