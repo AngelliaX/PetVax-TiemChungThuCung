@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 
-namespace TiemChungThuCung.Areas.Admin.Code
+namespace TiemChungThuCung.MyRoleProvider
 {
     public class CustomMembershipProvider : MembershipProvider
     {
