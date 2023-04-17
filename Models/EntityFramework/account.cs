@@ -10,36 +10,44 @@ namespace Models.EntityFramework
     public partial class account
     {
         [Key]
-        public int account_id { get; set; }
-
-        [Column(TypeName = "text")]
+        [StringLength(50)]
         [Required]
         public string username { get; set; }
 
-        [Column(TypeName = "text")]
+        [StringLength(50)]
         [Required]
         public string password { get; set; }
 
-        public int? account_type { get; set; }
-
-        [Column(TypeName = "text")]
+        [StringLength(50)]
         public string name { get; set; }
 
-        [Column(TypeName = "text")]
+        [StringLength(10)]
         public string phone { get; set; }
 
-        [Column(TypeName = "text")]
+        [StringLength(50)]
         public string email { get; set; }
 
-        [Column(TypeName = "text")]
+        [StringLength(50)]
         public string address { get; set; }
 
-        [Column(TypeName = "text")]
-        public string birthday { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? birthday { get; set; }
 
-        [Column(TypeName = "text")]
-        public string account_init_day { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? account_init_day { get; set; }
 
         public bool? isTerminated { get; set; }
+
+        public int? account_type { get; set; }
+
+        public virtual admin admin { get; set; }
+
+        public virtual cashier cashier { get; set; }
+
+        public virtual client client { get; set; }
+
+        public virtual doctor doctor { get; set; }
+
+        public virtual pharmacist pharmacist { get; set; }
     }
 }

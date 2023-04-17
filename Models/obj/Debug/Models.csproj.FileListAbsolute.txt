@@ -22,3 +22,15 @@ C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\obj\Debu
 C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\obj\Debug\Models.csproj.CopyComplete
 C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\obj\Debug\Models.dll
 C:\Users\namxm\OneDrive\Documents\GitHub\PetVax-TiemChungThuCung\Models\obj\Debug\Models.pdb
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\obj\Debug\Models.csproj.AssemblyReference.cache
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\obj\Debug\Models.dll
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\obj\Debug\Models.pdb
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Debug\Models.dll.config
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Debug\Models.dll
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Debug\Models.pdb
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Debug\EntityFramework.dll
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Debug\EntityFramework.xml
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\obj\Debug\Models.csproj.CopyComplete
