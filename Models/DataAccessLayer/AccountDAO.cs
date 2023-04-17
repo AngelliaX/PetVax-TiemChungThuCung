@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models.EntityFramework;
-
 namespace Models.DataAccessLayer
 {
     public class AccountDAO
@@ -57,8 +57,50 @@ namespace Models.DataAccessLayer
             account.username = username;
             account.password = password;
             account.account_type = account_type;
+            account.birthday = DateTime.Now;
+            account.account_init_day = DateTime.Now;
             context.accounts.Add(account);
             context.SaveChanges();
+        }
+
+        public void updateAccountProfile(string username, string name, string email, string phone, string address, DateTime? birthday)
+        {
+            account accountToUpdate = context.accounts.FirstOrDefault(a => a.username == username);
+
+            if (accountToUpdate != null)
+            {
+                // Update the account properties
+                accountToUpdate.name = name;
+                accountToUpdate.email = email;
+                accountToUpdate.phone = phone;
+                accountToUpdate.address = address;
+                accountToUpdate.birthday = birthday;
+
+                // Save the changes to the database
+                context.SaveChanges();
+            }
+            context.SaveChanges();
+        }
+
+        public bool updatePassword(string username, string oldpassword, string newpassword)
+        {
+            account accountToUpdate = context.accounts.FirstOrDefault(a => a.username == username);
+            if (accountToUpdate != null)
+            {
+                if (oldpassword == accountToUpdate.password)
+                {
+                    accountToUpdate.password = newpassword;
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public account getAccountbyUsername(string username)
+        {
+            account acc = context.accounts.FirstOrDefault(p => p.username == username);
+            return acc;
         }
 
     }

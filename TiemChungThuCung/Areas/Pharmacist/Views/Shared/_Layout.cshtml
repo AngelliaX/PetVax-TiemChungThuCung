@@ -103,7 +103,7 @@
                                 </g>
                             </svg>
                         </span>
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2">Khách Hàng</span>
+                        <span class="app-brand-text demo menu-text fw-bolder ms-2">Dược sĩ</span>
                     </a>
 
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -115,10 +115,11 @@
 
                 <ul class="menu-inner py-1">
                     @{
-                        string currentUrl = Request.Url.AbsolutePath;
+                        string currentUrl = HttpContext.Current.Request.Url.AbsoluteUri;
+                        string lastURLPart = Path.GetFileName(currentUrl.TrimEnd('/'));
                     }
                     <!-- Dashboard -->
-                    <li class="menu-item @(currentUrl.ToLower().Contains("/client") ? "active" : "")">
+                    <li class="menu-item @(lastURLPart.ToLower() == "pharmacist" ? "active" : "")">
                         <a href="/Client" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Tổng quan</div>
@@ -129,19 +130,19 @@
                         <span class="menu-header-text">Tài khoản</span>
                     </li>
                     <!-- User interface -->
-                    <li class="menu-item">
+                    <li class="menu-item @(currentUrl.ToLower().Contains("profile") ? "active open" : "")">
                         <a href="javascript:void(0)" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-collection"></i>
                             <div data-i18n="Authentications">Thông tin</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link">
+                            <li class="menu-item @(lastURLPart.ToLower() == "profile" ? "active" : "")">
+                                <a href="/Pharmacist/Profile" class="menu-link">
                                     <div data-i18n="Authentications">Thông tin cá nhân</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link">
+                            <li class="menu-item  @(lastURLPart.ToLower() == "update" ? "active" : "")">
+                                <a href="/Pharmacist/Profile/Update" class="menu-link">
                                     <div data-i18n="Authentications">Cài đặt</div>
                                 </a>
                             </li>

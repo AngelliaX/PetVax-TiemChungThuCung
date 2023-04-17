@@ -127,6 +127,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Cashier\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\CommonUse\ProfileCommonUse.cs" />
+    <Compile Include="Areas\Doctor\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Pharmacist\Controllers\ProfileController.cs" />
+    <Compile Include="Models\UpdateProfileModel.cs" />
     <Compile Include="MyRoleProvider\CustomMembershipProvider.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminBaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\ControlController.cs" />
@@ -287,6 +293,14 @@
     <Content Include="Areas\Admin\Views\Control\CreateStaffAccount.cshtml" />
     <Content Include="Areas\Client\Views\Profile\Update.cshtml" />
     <Content Include="Areas\Client\Views\Profile\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Profile\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Profile\Update.cshtml" />
+    <Content Include="Areas\Cashier\Views\Profile\Index.cshtml" />
+    <Content Include="Areas\Cashier\Views\Profile\Update.cshtml" />
+    <Content Include="Areas\Doctor\Views\Profile\Index.cshtml" />
+    <Content Include="Areas\Doctor\Views\Profile\Update.cshtml" />
+    <Content Include="Areas\Pharmacist\Views\Profile\Index.cshtml" />
+    <Content Include="Areas\Pharmacist\Views\Profile\Update.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\khongcanten-001-site1 - FTP.pubxml" />

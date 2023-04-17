@@ -2,7 +2,7 @@
 @{
 
 }
-
+@model TiemChungThuCung.Models.UpdateProfileModel
 <div class="row">
     <div class="col-md-12">
         <ul class="nav nav-pills flex-column flex-md-row mb-3">
@@ -42,21 +42,29 @@
                             <span class="d-none d-sm-block">Reset</span>
                         </button>
                         <br>
-                        <p class="form-label" style="display: inline-block;">Username: </p>&nbsp;<p style="display: inline-block;">@PageData["username"]</p>
+                        <p class="form-label" style="display: inline-block;">Username: </p>&nbsp;<p style="display: inline-block;">@Model.username</p>
 
                     </div>
                 </div>
             </div>
             <hr class="my-0" />
             <div class="card-body">
-                <form id="formAccountSettings" method="POST" onsubmit="return false">
+                @using (Html.BeginForm())
+                {
+                    if (TempData.ContainsKey("SuccessMessage") && TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    }
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label for="firstName" class="form-label">Họ và tên</label>
                             <input class="form-control"
                                    type="text"
-                                   id="firstName"
-                                   name=""
+                                   id="name"
+                                   name="name"
+                                   value="@Model.name"
                                    autofocus />
                         </div>
 
@@ -66,37 +74,89 @@
                                    type="text"
                                    id="email"
                                    name="email"
-                                   placeholder="john.doe@example.com" />
-                        </div>                       
+                                   value="@Model.email" />
+                        </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label" for="phoneNumber">Số điện thoại</label>
                             <div class="input-group input-group-merge">
                                 <span class="input-group-text">VN</span>
                                 <input type="text"
                                        id="phoneNumber"
-                                       name="phoneNumber"
+                                       name="phone"
                                        class="form-control"
-                                       placeholder="202 555 0111" />
+                                       value="@Model.phone" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="address" class="form-label">Địa chỉ</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" />
+                            <input type="text" class="form-control" id="address" name="address" value="@Model.address" />
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="html5-date-input" class="form-label">Ngày sinh</label>
                             <div class="col-md-10">
-                                <input class="form-control" type="date" value="2003-11-14" id="html5-date-input" />
+                                <input class="form-control" type="date" value="@Model.birthday.Value.ToString("yyyy-MM-dd")" id="birthday" name="birthday" />
                             </div>
                         </div>
-
-                        
                     </div>
-                    <div class="mt-2">
+
+                    //===================================================
+                    <div class="col-md-6 mx-auto">
+                        <div class="card mb-4">
+                             <h5 class="card-header">Đổi mật khẩu</h5>
+                             <div class="card-body demo-vertical-spacing demo-only-element">
+                                 @if (TempData.ContainsKey("SuccessChangepassword") && TempData["SuccessChangepassword"] != null)
+                                 {
+                                     <div class="alert alert-success">
+                                         @TempData["SuccessChangepassword"]
+                                     </div>
+                                 }
+                                 @if (TempData.ContainsKey("FailedChangepassword") && TempData["FailedChangepassword"] != null)
+                                 {
+                                     <div class="alert alert-danger">
+                                         @TempData["FailedChangepassword"]
+                                     </div>
+                                 }
+                                 <div class="form-password-toggle">
+                                     <label class="form-label" for="oldpassword">Mật khẩu cũ</label>
+                                     <div class="input-group">
+                                         <input type="password"
+                                                class="form-control"
+                                                id="oldpassword"
+                                                name="oldpassword"
+                                                placeholder="******"
+                                                aria-describedby="oldpassword" />
+                                         <span id="oldpassword" class="input-group-text cursor-pointer">
+                                             <i class="bx bx-hide"></i>
+                                         </span>
+                                     </div>
+                                 </div>
+
+                                 <div class="form-password-toggle">
+                                     <label class="form-label" for="newpassword">Mật khẩu mới</label>
+                                     <div class="input-group">
+                                         <input type="password"
+                                                class="form-control"
+                                                id="newpassword"
+                                                name="newpassword"
+                                                placeholder="******"
+                                                aria-describedby="newpassword">
+
+                                         <span id="newpassword" class="input-group-text cursor-pointer">
+                                             <i class="bx bx-hide"></i>
+                                         </span>
+                                     </div>
+                                 </div>
+                             </div>
+                        </div>
+                    </div>
+
+                    //===================================================================
+
+                    <div class="mt-2 mx-auto">
                         <button type="submit" class="btn btn-primary me-2">Lưu</button>
                         <button type="reset" class="btn btn-outline-secondary">Hủy</button>
                     </div>
-                </form>
+                }
             </div>
             <!-- /Account -->
         </div>

@@ -2,7 +2,7 @@
 @{
 
 }
-
+@model TiemChungThuCung.Models.UpdateProfileModel
 <div class="row">
     <div class="col-md-12">
         <div class="card mb-4">
@@ -17,8 +17,7 @@
                          width="100"
                          id="uploadedAvatar" />
                     <div class="button-wrapper">
-                        <br>
-                        <p class="form-label" style="display: inline-block;">Username: </p>&nbsp;<p style="display: inline-block;">@PageData["username"]</p>
+                        <p class="form-label" style="display: inline-block;">Username: </p>&nbsp;<p style="display: inline-block;">@Model.username</p>
                     </div>
                 </div>
             </div>
@@ -31,7 +30,7 @@
                                type="text"
                                id="firstName"
                                name=""
-                               value="John Doe"
+                               value="@Model.name"
                                readonly />
                     </div>
 
@@ -41,18 +40,18 @@
                                type="text"
                                id="email"
                                name="email"
-                               value="john.doe@example.com"
+                               value="@Model.email"
                                readonly />
                     </div>
                     <div class="mb-3 col-md-6">
                         <label class="form-label" for="phoneNumber">Số điện thoại</label>
                         <div class="input-group input-group-merge">
-                            <span class="input-group-text">VN</span>
+                            <span class="input-group-text" style="background-color: lightgray;">VN</span>
                             <input type="text"
                                    id="phoneNumber"
                                    name="phoneNumber"
                                    class="form-control"
-                                   value="202 555 0111"
+                                   value="@Model.phone"
                                    readonly />
                         </div>
                     </div>
@@ -62,7 +61,7 @@
                                class="form-control"
                                id="address"
                                name="address"
-                               value="Address"
+                               value="@Model.address"
                                readonly />
                     </div>
                     <div class="mb-3 col-md-6">
@@ -70,7 +69,7 @@
                         <div class="col-md-10">
                             <input class="form-control"
                                    type="date"
-                                   value="2003-11-14"
+                                   value="@Model.birthday.Value.ToString("yyyy-MM-dd")"
                                    id="html5-date-input"
                                    readonly />
                         </div>

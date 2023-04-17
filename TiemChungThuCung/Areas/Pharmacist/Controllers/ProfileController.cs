@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,11 +8,10 @@ using Models.EntityFramework;
 using TiemChungThuCung.Areas.CommonUse;
 using TiemChungThuCung.Models;
 
-namespace TiemChungThuCung.Areas.Client.Controllers
+namespace TiemChungThuCung.Areas.Pharmacist.Controllers
 {
     public class ProfileController : Controller
     {
-        // GET: Client/Profile
         public ActionResult Index()
         {
             string username = User.Identity.Name;

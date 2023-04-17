@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Web;
+
 using System.Web.Mvc;
 using Models.DataAccessLayer;
 using Models.EntityFramework;
 using TiemChungThuCung.Areas.CommonUse;
 using TiemChungThuCung.Models;
 
-namespace TiemChungThuCung.Areas.Client.Controllers
+
+namespace TiemChungThuCung.Areas.Cashier.Controllers
 {
     public class ProfileController : Controller
     {
-        // GET: Client/Profile
         public ActionResult Index()
         {
             string username = User.Identity.Name;
@@ -40,7 +40,6 @@ namespace TiemChungThuCung.Areas.Client.Controllers
             TempData["SuccessMessage"] = "Cập nhật thông tin thành công";
 
             UpdateProfileModel updateModel = profileCommonUse.retrieveViewBagProfileDatabyUsername(User.Identity.Name);
-
             if (!string.IsNullOrEmpty(model.newpassword) && !string.IsNullOrEmpty(model.oldpassword))
             {
                 var AccountDAO = new AccountDAO();

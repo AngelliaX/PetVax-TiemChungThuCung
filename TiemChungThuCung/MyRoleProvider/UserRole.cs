@@ -39,13 +39,28 @@ namespace TiemChungThuCung.MyRoleProvider
         public override string[] GetRolesForUser(string username)
         {
             TiemChungThuCungDbContext context = new TiemChungThuCungDbContext();
-            //todo lỗi null accounts
+            //check lỗi kho
+            
+            if (context.accounts.Where(x => x.username == username).FirstOrDefault() == null)
+            {
+                HttpContextBase httpContextBase = new HttpContextWrapper(HttpContext.Current);
+                ClearAuthenticationCookie(httpContextBase);
+                return new string[] { new CredentialConstant().GetRole(1) };
+            }
             var role_id = context.accounts.Where(x => x.username == username).FirstOrDefault().account_type;
             
             string[] result = { new CredentialConstant().GetRole(role_id)};
             return result;
         }
-
+        private void ClearAuthenticationCookie(HttpContextBase context)
+        {
+            HttpCookie authCookie = context.Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (authCookie != null)
+            {
+                authCookie.Expires = DateTime.Now.AddDays(-1);
+                context.Response.Cookies.Add(authCookie);
+            }
+        }
         public override string[] GetUsersInRole(string roleName)
         {
             throw new NotImplementedException();
