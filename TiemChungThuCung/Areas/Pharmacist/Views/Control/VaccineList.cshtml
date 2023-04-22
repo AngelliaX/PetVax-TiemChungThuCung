@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Models.EntityFramework.vaccine_lot>
+
+
+@{
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VaccineList</title>
+</head>
+<body>
+    <div>
+        <div class="card" style="margin:30px 30px">
+            <h5 class="card-header">
+                <div class="navbar-nav align-items-start">
+                    <div class="nav-item d-flex align-items-center">
+                        <i class="bx bx-search fs-4 lh-0"></i>
+                        <input type="text"
+                               class="form-control border-0 shadow-none"
+                               placeholder="Search..."
+                               aria-label="Search..." />
+                    </div>
+                </div>
+            </h5>
+            <div class="table-responsive text-nowrap">
+                <table class="table">
+                    <thead style="text-align:center">
+                        <tr class="text-nowrap">
+                            <th>#</th>
+                            <th>Số lô</th>
+                            <th>Tên Vaccine</th>
+                            <th>Tổng SL</th>
+                            <th>SL Còn lại</th>
+                            <th>Đơn vị</th>
+                            <th>Hạn sử dụng</th>
+                            <th>Giá nhập</th>
+                            <th>Giá Bán</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ 
+                            int i = 0;
+                        } 
+                        @foreach (var item in Model)
+                        {
+                            i++;
+                            <tr style="text-align:center">
+                                <th scope="row">@i</th>
+                                <td>@item.lot_number</td>
+                                <td>@item.vaccine_type.vaccine_name</td>
+                                <td>@item.total_amount</td>
+                                <td>@item.remain_amount</td>
+                                <td>@Html.Raw(item.dose_unit == 0 ? "Lọ" : "Liều")</td>
+                                <td>@item.expiration_date.ToString("dd-MM-yyyy")</td>
+                                <td>@item.import_price</td>
+                                <td>@item.sale_price</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="@Url.Action("DetailVaccineForm", "Control", new {LotNumber = item.lot_number})"><i class="bx bx-info-circle"></i> Chi tiết</a>
+                                            <a class="dropdown-item" href="@Url.Action("Edit", "Control", new {LotNumber = item.lot_number})"><i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
+                                            <a class="dropdown-item" href="@Url.Action("Delete", "Control", new {LotNumber = item.lot_number})"><i class="bx bx-trash me-1"></i> Xóa</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

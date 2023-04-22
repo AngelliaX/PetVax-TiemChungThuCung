@@ -151,22 +151,22 @@
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                            <div data-i18n="Authentications">Quản lí thú cưng</div>
+                            <div data-i18n="Authentications">Quản lí Vaccine</div>
                         </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="quanli.html" class="menu-link">
-                                    <div data-i18n="Basic">Danh sách</div>
+                        <ul class="menu-sub")>
+                            <li class="menu-item @(lastURLPart == "VaccineList" ? "active" : "")">
+                                <a href="/Pharmacist/Control/VaccineList" class="menu-link">
+                                    <div data-i18n="Basic">Kiểm kho</div>
+                                </a>
+                            </li>
+                            <li class="menu-item" @(lastURLPart == "Add" ? "active" : "")>
+                                <a href="/Pharmacist/Control/Add" class="menu-link">
+                                    <div data-i18n="Basic">Nhập tồn</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="javascript:void(0);" class="menu-link">
-                                    <div data-i18n="Basic">Thêm thú cưng</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link">
-                                    <div data-i18n="Basic">Tạo lịch tiêm</div>
+                                    <div data-i18n="Basic">////</div>
                                 </a>
                             </li>
                         </ul>

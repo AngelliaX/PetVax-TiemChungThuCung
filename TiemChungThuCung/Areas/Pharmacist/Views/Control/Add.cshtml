@@ -1,0 +1,161 @@
+﻿@model Models.EntityFramework.vaccine_lot
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add</h2>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+
+    <div class="card" style="margin:50px 100px">
+        <h5 class="card-header">Nhập lô</h5>
+        @using (Html.BeginForm("Add", "Control", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "alert-danger", @style = "text-align:center" })
+    <div class="card-body">
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Số lô</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       id="lot_number" name="lot_number" />
+                @Html.ValidationMessageFor(Model => Model.lot_number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Mã Vaccine</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       name="vaccine_code" />
+                @Html.ValidationMessageFor(Model => Model.vaccine_code, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Tổng SL</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       name="total_amount" />
+                @Html.ValidationMessageFor(Model => Model.total_amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">SL còn lại</label>
+            <div class="col-md-10">
+                <input class="form-control" type="hidden"
+                        name="remain_amount" />
+                @Html.ValidationMessageFor(Model => Model.remain_amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*@{
+            Model.remain_amount = Model.total_amount;
+        }*@
+
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Đơn vị</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       name="dose_unit" />
+                @Html.ValidationMessageFor(Model => Model.dose_unit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Ngày SX</label>
+            <div class="col-md-10">
+                <input class="form-control" type="date"
+                       name="production_date" />
+                @Html.ValidationMessageFor(Model => Model.production_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Hạn SD</label>
+            <div class="col-md-10">
+                <input class="form-control" type="date"
+                       name="expiration_date" />
+                @Html.ValidationMessageFor(Model => Model.expiration_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Giá nhập</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       name="import_price" />
+                @Html.ValidationMessageFor(Model => Model.import_price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Giá bán</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       name="sale_price" />
+                @Html.ValidationMessageFor(Model => Model.sale_price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Thuế</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       name="tax" />
+                @Html.ValidationMessageFor(Model => Model.tax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Nhà sản xuất</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       name="publisher" />
+                @Html.ValidationMessageFor(Model => Model.publisher, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Ngày nhập</label>
+            <div class="col-md-10">
+                <input class="form-control" type="date"
+                       name="rival_date" />
+                @Html.ValidationMessageFor(Model => Model.rival_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Ghi chú</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       name="note" />
+                @Html.ValidationMessageFor(Model => Model.note, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Thành tiền</label>
+            <div class="col-md-10">
+                <input class="form-control" type="number"
+                       name="note" readonly/>
+                
+            </div>
+        </div>
+
+    </div>
+            <button type="submit" class="btn btn-primary"
+                    style="margin-left: 200px;padding: 15px 45px;
+                                margin-bottom:30px">
+                Lưu
+            </button>
+
+            <button type="button" onclick="goBack()"
+                    style="margin-right: 200px;padding: 15px 45px; float:right;
+                                margin-bottom:30px"
+                    class="btn btn-outline-danger">
+                Hủy
+            </button>
+
+        }
+    </div>
+    </body>
+</html>

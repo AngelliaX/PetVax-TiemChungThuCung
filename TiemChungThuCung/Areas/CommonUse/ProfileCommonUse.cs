@@ -35,7 +35,7 @@ namespace TiemChungThuCung.Areas.CommonUse
                 updateProfileModel.address = account.address ?? "N/A";
                 updateProfileModel.birthday = birthday;
             }
-
+            
             return updateProfileModel;
         }
 

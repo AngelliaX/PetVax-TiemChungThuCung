@@ -1,4 +1,4 @@
-namespace Models.EntityFramework
+﻿namespace Models.EntityFramework
 {
     using System;
     using System.Collections.Generic;
@@ -9,21 +9,19 @@ namespace Models.EntityFramework
     public partial class bill_vaccine
     {
         [Key]
-        [Column(Order = 0)]
         [StringLength(10)]
         public string bill_id { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [StringLength(10)]
-        public string vaccine_code { get; set; }
+        [StringLength(10, ErrorMessage = "Không được vượt quá 10 kí tự")]
+        public string vaccine_lot_number { get; set; }
 
-        public int? amount { get; set; }
+        [Required(ErrorMessage = "Vui lòng không để trống")]
+        public int amount { get; set; }
 
         public int? cost { get; set; }
 
         public virtual bill bill { get; set; }
 
-        public virtual vaccine_type vaccine_type { get; set; }
+        public virtual vaccine_lot vaccine_lot { get; set; }
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models.EntityFramework;
-using System.Linq;
 
 namespace Models.DataAccessLayer
 {
@@ -14,6 +13,7 @@ namespace Models.DataAccessLayer
         public StatisticDAO()
         {
             context = new TiemChungThuCungDbContext();
+           
         }
 
         public List<account> ListAll()

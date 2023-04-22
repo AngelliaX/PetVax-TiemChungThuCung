@@ -11,9 +11,11 @@ namespace TiemChungThuCung.Areas.Admin.Controllers
 {
     public class ProfileController : Controller
     {
+      
         public ActionResult Index()
         {
             string username = User.Identity.Name;
+           
             ProfileCommonUse profileCommonUse = new ProfileCommonUse();
             UpdateProfileModel model = profileCommonUse.retrieveViewBagProfileDatabyUsername(username);
             return View(model);

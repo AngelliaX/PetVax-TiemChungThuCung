@@ -12,6 +12,7 @@ namespace Models.EntityFramework
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public breed()
         {
+            doctor_major = new HashSet<doctor_major>();
             pets = new HashSet<pet>();
         }
 
@@ -21,6 +22,9 @@ namespace Models.EntityFramework
 
         [StringLength(50)]
         public string breed_name { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<doctor_major> doctor_major { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pet> pets { get; set; }

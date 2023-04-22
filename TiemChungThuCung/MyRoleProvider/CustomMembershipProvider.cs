@@ -105,6 +105,7 @@ namespace TiemChungThuCung.MyRoleProvider
         {
             throw new NotImplementedException();
         }
+        
 
         public override bool ValidateUser(string username, string password)
         {

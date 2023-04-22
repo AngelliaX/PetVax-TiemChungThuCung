@@ -13,7 +13,6 @@ namespace Models.EntityFramework
         public pet()
         {
             appointments = new HashSet<appointment>();
-            pet_vaccine = new HashSet<pet_vaccine>();
         }
 
         [Key]
@@ -42,7 +41,6 @@ namespace Models.EntityFramework
 
         public virtual pet_disease pet_disease { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<pet_vaccine> pet_vaccine { get; set; }
+        public virtual pet_vaccine pet_vaccine { get; set; }
     }
 }

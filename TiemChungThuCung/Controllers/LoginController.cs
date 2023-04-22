@@ -31,8 +31,9 @@ namespace TiemChungThuCung.Controllers
             if (Membership.ValidateUser(model.username,model.password) && ModelState.IsValid)
             {
                 FormsAuthentication.SetAuthCookie(model.username, model.rememberMe);
+               
                 return redirectLogin();
-            }
+            }   
             else
             {
                 ViewBag.FailedAttempt = "Tên đăng nhập hoặc mật khẩu sai";

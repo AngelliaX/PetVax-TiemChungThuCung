@@ -11,11 +11,9 @@ namespace Models.EntityFramework
     {
         [Key]
         [StringLength(50)]
-        [Required]
         public string username { get; set; }
 
         [StringLength(50)]
-        [Required]
         public string password { get; set; }
 
         [StringLength(50)]
@@ -39,6 +37,8 @@ namespace Models.EntityFramework
         public bool? isTerminated { get; set; }
 
         public int? account_type { get; set; }
+
+        public string avatar { get; set; }
 
         public virtual admin admin { get; set; }
 

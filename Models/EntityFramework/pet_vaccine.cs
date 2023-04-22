@@ -9,14 +9,11 @@ namespace Models.EntityFramework
     public partial class pet_vaccine
     {
         [Key]
-        [Column(Order = 0)]
         [StringLength(10)]
         public string pet_id { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
         [StringLength(10)]
-        public string vaccinechosen_code { get; set; }
+        public string vaccine_code { get; set; }
 
         public bool? state { get; set; }
 

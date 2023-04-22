@@ -1,0 +1,167 @@
+﻿@model Models.EntityFramework.vaccine_lot
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+    List<Models.EntityFramework.vaccine_type> ListVaccineType = new Models.DataAccessLayer.VaccineDAL.VaccineTypeDAL().GetAllVaccineType();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VaccineList</title>
+</head>
+<body>
+
+    <div class="card" style="margin:50px 100px">
+        <h5 class="card-header">Thông tin Vaccine</h5>
+        @using (Html.BeginForm("Edit", "Control", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "alert-danger", @style = "text-align:center" })
+    <div class="card-body">
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Số lô</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       value="@Model.lot_number" id="lot_number" name="lot_number" readonly />
+                @Html.ValidationMessageFor(Model => Model.lot_number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Mã Vaccine</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       value="@Model.vaccine_code" name="vaccine_code" list="vaccine_list" />
+                <datalist id="vaccine_list">
+                    @foreach (var item in ListVaccineType)
+                    {
+
+                        <option value="@item.vaccine_code">@item.vaccine_name</option>
+                    }
+                </datalist>
+                @Html.ValidationMessageFor(Model => Model.vaccine_code, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Tổng SL</label>
+            <div class="col-md-10">
+                <input class="form-control" type="number"
+                       value="@Model.total_amount" name="total_amount" />
+                @Html.ValidationMessageFor(Model => Model.total_amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">SL còn lại</label>
+            <div class="col-md-10">
+                <input class="form-control" type="number"
+                       value="@Model.remain_amount" name="remain_amount" />
+                @Html.ValidationMessageFor(Model => Model.remain_amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Đơn vị</label>
+            <div class="col-md-10">
+                @*<input class="form-control" type="text"
+                value="@Html.Raw(Model.dose_unit == 0 ? "Lọ" : "Liều")" name="dose_unit" list="dose_list"/>*@
+                <select class="form-control" name="dose_unit">
+                    <option value="0" @Html.Raw(@Model.dose_unit == 0 ? "selected" : "")>Lọ</option>
+                    <option value="1" @Html.Raw(@Model.dose_unit == 1 ? "selected" : "")>Liều</option>
+                </select>
+                @Html.ValidationMessageFor(Model => Model.dose_unit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Ngày SX</label>
+            <div class="col-md-10">
+                <input class="form-control" type="date"
+                       value="@Model.production_date.ToString("yyyy-MM-dd")" name="production_date" />
+                @Html.ValidationMessageFor(Model => Model.production_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Hạn SD</label>
+            <div class="col-md-10">
+                <input class="form-control" type="date"
+                       value="@Model.expiration_date.ToString("yyyy-MM-dd")" name="expiration_date" />
+                @Html.ValidationMessageFor(Model => Model.expiration_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label" id="import-pirce">Giá nhập (Ngàn đồng)</label>
+            <div class="col-md-10">
+                <input class="form-control" type="number"
+                       value="@Model.import_price" name="import_price" />
+                @Html.ValidationMessageFor(Model => Model.import_price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Giá bán (Ngàn đồng)</label>
+            <div class="col-md-10">
+                <input class="form-control" type="number"
+                       value="@Model.sale_price" name="sale_price" />
+                @Html.ValidationMessageFor(Model => Model.sale_price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Thuế (%)</label>
+            <div class="col-md-10">
+                <input class="form-control" type="number"
+                       value="@Model.tax" name="tax" />
+                @Html.ValidationMessageFor(Model => Model.tax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Nhà sản xuất</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       value="@Model.publisher" name="publisher" />
+                @Html.ValidationMessageFor(Model => Model.publisher, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Ngày nhập</label>
+            <div class="col-md-10">
+                <input class="form-control" type="date"
+                       value="@Model.rival_date.ToString("yyyy-MM-dd")" name="rival_date" />
+                @Html.ValidationMessageFor(Model => Model.rival_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="html5-text-input" class="col-md-2 col-form-label">Ghi chú</label>
+            <div class="col-md-10">
+                <input class="form-control" type="text"
+                       value="@Model.note" name="note" />
+                @Html.ValidationMessageFor(Model => Model.note, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+                <button type="submit" class="btn btn-primary"
+                        style="margin-left: 200px;padding: 15px 45px;
+                                margin-bottom:30px">
+                    Lưu
+                </button>
+
+                <button type="button" onclick="backToList()"
+                        style="margin-right: 200px;padding: 15px 45px; float:right;
+                                margin-bottom:30px"
+                        class="btn btn-outline-danger">
+                    Hủy
+                </button>
+
+        }
+    </div>
+
+</body>
+</html>
+
+<script>
+    function backToList() {
+        window.location.replace('VaccineList');
+    }
+</script>

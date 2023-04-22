@@ -20,18 +20,19 @@ namespace Models.EntityFramework
         public string username { get; set; }
 
         [StringLength(10)]
-        public string species_id { get; set; }
+        public string breed_id { get; set; }
 
         public int? salary { get; set; }
 
-        public int? experience { get; set; }
+        public string experience { get; set; }
 
-        [StringLength(50)]
         public string education { get; set; }
 
         public virtual account account { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<appointment> appointments { get; set; }
+
+        public virtual doctor_major doctor_major { get; set; }
     }
 }

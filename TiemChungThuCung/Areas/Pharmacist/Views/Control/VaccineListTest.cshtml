@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Models.EntityFramework.vaccine_lot>
+
+@{
+    ViewBag.Title = "VaccineListTest";
+    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+}
+
+<h2>VaccineListTest</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.vaccine_type.vaccine_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.production_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.expiration_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rival_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.remain_amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dose_unit)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.vaccine_type.vaccine_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.production_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.expiration_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rival_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.remain_amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dose_unit)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.lot_number }) |
+            @Html.ActionLink("Details", "Details", new { id=item.lot_number }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.lot_number })
+        </td>
+    </tr>
+}
+
+</table>

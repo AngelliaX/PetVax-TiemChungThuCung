@@ -1,4 +1,4 @@
-namespace Models.EntityFramework
+﻿namespace Models.EntityFramework
 {
     using System;
     using System.Collections.Generic;
@@ -18,6 +18,7 @@ namespace Models.EntityFramework
 
         [Key]
         [StringLength(50)]
+
         public string username { get; set; }
 
         public int? total_pay { get; set; }

@@ -1,0 +1,76 @@
+﻿@model Models.EntityFramework.bill
+
+@{
+    List<Models.EntityFramework.vaccine_lot> ListVaccineLot = new Models.DataAccessLayer.VaccineDAL.VaccineLotDAL().GetAllVaccineLot();
+}
+
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card" style="margin:50px 100px">
+            <h5 class="card-header">Tạo hóa đơn</h5>
+            @using (Html.BeginForm("Add", "Control", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "alert-danger", @style = "text-align:center" })
+                <div class="card-body">
+                    <div class="mb-3 row">
+                        <label for="html5-text-input" class="col-md-2 col-form-label">Mã hóa đơn</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text"
+                                   id="lot_number" name="bill_id" />
+                            @Html.ValidationMessageFor(Model => Model.bill_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 row">
+                        <label for="html5-text-input" class="col-md-2 col-form-label">Username khách hàng</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text"
+                                   name="client_username" />
+                            @Html.ValidationMessageFor(Model => Model.client_username, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="html5-text-input" class="col-md-2 col-form-label">Nhập mã vaccine</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.bill_vaccine.vaccine_lot.vaccine_code, new { htmlAttributes = new { @class = "form-control", @list="vaccine_lot_list" } })
+                            <datalist id="vaccine_lot_list">
+                                @foreach(var item in ListVaccineLot)
+                                {
+                                    if(item.remain_amount > 0)
+                                    {
+                                        <option value="@item.vaccine_code">@Html.Raw(item.vaccine_type.vaccine_name) + (SL còn @item.remain_amount)</option>
+                                    }
+                                }
+                            </datalist>
+                            @Html.ValidationMessageFor(Model => Model.bill_vaccine.vaccine_lot.vaccine_code, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="html5-text-input" class="col-md-2 col-form-label">Số lượng</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.bill_vaccine.amount, new { htmlAttributes = new { @class = "form-control"} })
+
+                            @Html.ValidationMessageFor(Model => Model.bill_vaccine.amount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary"
+                        style="margin-left: 200px;padding: 15px 45px;
+                                margin-bottom:30px">
+                    Lưu
+                </button>
+
+                <button type="button" onclick="goBack()"
+                        style="margin-right: 200px;padding: 15px 45px; float:right;
+                                margin-bottom:30px"
+                        class="btn btn-outline-danger">
+                    Hủy
+                </button>
+
+            }
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-namespace Models.EntityFramework
+﻿namespace Models.EntityFramework
 {
     using System;
     using System.Collections.Generic;
@@ -9,27 +9,24 @@ namespace Models.EntityFramework
     [Table("bill")]
     public partial class bill
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public bill()
-        {
-            bill_vaccine = new HashSet<bill_vaccine>();
-        }
-
         [Key]
-        [StringLength(10)]
+        [StringLength(10, ErrorMessage = "Không được vượt qúa 10 kí tự")]
+        [Required(ErrorMessage ="Vui lòng không để trống")]
         public string bill_id { get; set; }
 
         [StringLength(50)]
+
         public string client_username { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? init_date { get; set; }
+        [Required(ErrorMessage = "Vui lòng không để trống")]
+        public DateTime init_date { get; set; }
 
-        public int? total_cost { get; set; }
+        public int total_cost { get; set; }
+
+        public string description { get; set; }
 
         public virtual client client { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<bill_vaccine> bill_vaccine { get; set; }
+        public virtual bill_vaccine bill_vaccine { get; set; }
     }
 }
