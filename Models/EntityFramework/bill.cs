@@ -24,6 +24,8 @@
 
         public string description { get; set; }
 
+        public string description { get; set; }
+
         public virtual client client { get; set; }
 
         public virtual bill_vaccine bill_vaccine { get; set; }

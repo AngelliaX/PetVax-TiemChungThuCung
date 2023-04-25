@@ -23,7 +23,6 @@ namespace Models.EntityFramework
         public virtual DbSet<doctor> doctors { get; set; }
         public virtual DbSet<pet> pets { get; set; }
         public virtual DbSet<pharmacist> pharmacists { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<vaccine_lot> vaccine_lot { get; set; }
         public virtual DbSet<vaccine_type> vaccine_type { get; set; }
         public virtual DbSet<bill_vaccine> bill_vaccine { get; set; }

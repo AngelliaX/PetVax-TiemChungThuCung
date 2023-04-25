@@ -60,6 +60,10 @@
     <Compile Include="DataAccessLayer\VaccineDAL\VaccineDAL.cs" />
     <Compile Include="DataAccessLayer\VaccineDAL\VaccineLotDAL.cs" />
     <Compile Include="DataAccessLayer\VaccineDAL\VaccineTypeDAL.cs" />
+    <Compile Include="DataAccessLayer\CommonUseDAO.cs" />
+    <Compile Include="DataAccessLayer\DoctorDAO.cs" />
+    <Compile Include="DataAccessLayer\PetDAO.cs" />
+    <Compile Include="DataAccessLayer\AppointmentDAO.cs" />
     <Compile Include="EntityFramework\account.cs" />
     <Compile Include="EntityFramework\admin.cs" />
     <Compile Include="EntityFramework\appointment.cs" />
@@ -75,7 +79,6 @@
     <Compile Include="EntityFramework\pet_disease.cs" />
     <Compile Include="EntityFramework\pet_vaccine.cs" />
     <Compile Include="EntityFramework\pharmacist.cs" />
-    <Compile Include="EntityFramework\sysdiagram.cs" />
     <Compile Include="EntityFramework\TiemChungThuCungDbContext.cs" />
     <Compile Include="EntityFramework\vaccine_compatible.cs" />
     <Compile Include="EntityFramework\vaccine_lot.cs" />
@@ -86,7 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="EntityFramework\App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

@@ -24,7 +24,6 @@
 
         public virtual bill bill { get; set; }
 
-
         public virtual vaccine_lot vaccine_lot { get; set; }
     }
 }

@@ -100,6 +100,18 @@ namespace Models.DataAccessLayer
         public account getAccountbyUsername(string username)
         {
             account acc = context.accounts.FirstOrDefault(p => p.username == username);
+            if (acc != null)
+            {
+                acc.name = acc.name ?? "N/A";
+                acc.email = acc.email ?? "N/A";
+                acc.phone = acc.phone ?? "N/A";
+                acc.address = acc.address ?? "N/A";
+                acc.birthday = acc.birthday ?? new DateTime(1, 1, 1);
+            }
+            else
+            {
+                acc = new account();
+            }
             return acc;
         }
 

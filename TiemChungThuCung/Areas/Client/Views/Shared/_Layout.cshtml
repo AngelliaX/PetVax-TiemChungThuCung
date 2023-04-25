@@ -4,7 +4,6 @@
 }
 
 <!DOCTYPE html>
-
 <html lang="en"
       class="light-style layout-menu-fixed"
       dir="ltr"
@@ -151,29 +150,29 @@
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Thú cưng</span>
                     </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link">
+                    <li class="menu-item @(lastURLPart.ToLower() == "pet" ? "active" : "")">
+                        <a href="/Client/Pet" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-bone"></i>
                             <div data-i18n="Authentications">Danh sách thú</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-message-add"></i>
-                            <div data-i18n="Basic">Thêm thú cưng</div>
+                    <li class="menu-item @(currentUrl.ToLower().Contains("pet/update") ? "active" : "")">
+                        <a href="/Client/Pet/Update" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-edit"></i>
+                            <div data-i18n="Basic">Sửa thông tin thú</div>
                         </a>
                     </li>
                     <!-- Components -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Lịch hẹn</span></li>
                     <!-- Cards -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link">
+                    <li class="menu-item @(lastURLPart.ToLower() == "create" ? "active" : "")">
+                        <a href="/Client/Appointment/Create" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-calendar-plus"></i>
                             <div data-i18n="Basic">Tạo lịch hẹn</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link">
+                    <li class="menu-item @(lastURLPart.ToLower() == "upcomming" ? "active" : "")">
+                        <a href="/Client/Appointment/Upcomming" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-calendar-exclamation"></i>
                             <div data-i18n="Basic">Lịch sắp tới</div>
                         </a>
@@ -269,9 +268,9 @@
                                     <li>
                                         @Html.ActionLink("Log out", "Logout", "Login", new { area = "" }, new { @class = "dropdown-item bx bx-power-off me-2 align-middle" })
                                         @*<a class="dropdown-item" href="auth-login-basic.html">
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>*@
+                                                <i class="bx bx-power-off me-2"></i>
+                                                <span class="align-middle">Log Out</span>
+                                            </a>*@
                                     </li>
                                 </ul>
                             </li>
@@ -287,9 +286,7 @@
                     <!-- Content -->
                     @RenderBody()
                     <!-- / Content -->
-
                     <!-- Footer -->
-                    
                     <!-- / Footer -->
 
                     <div class="content-backdrop fade"></div>
@@ -323,5 +320,6 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

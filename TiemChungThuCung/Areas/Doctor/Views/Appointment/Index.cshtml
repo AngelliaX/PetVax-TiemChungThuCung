@@ -1,0 +1,322 @@
+﻿
+@{
+
+}
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Các đơn yêu cầu</span> </h4>
+
+        <!-- Tabs -->
+        <div class="row">
+            <div class="col-xxl">
+                <div class="nav-align-top mb-4">
+                    <ul class="col-md-5 nav nav-pills mb-3 nav-fill" role="tablist">
+                        <li class="nav-item">
+                            <button type="button"
+                                    class="nav-link active"
+                                    role="tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#navs-main-justified-home"
+                                    aria-controls="navs-main-justified-home"
+                                    aria-selected="true">
+                                <i class="tf-icons bx bxs-graduation" style="color:orangered"></i> Chuyên môn
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button"
+                                    class="nav-link"
+                                    role="tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#navs-main-justified-profile"
+                                    aria-controls="navs-main-justified-profile"
+                                    aria-selected="false">
+                                <i class="tf-icons bx bx-globe"></i> Tất cả
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="navs-main-justified-home" role="tabpanel">
+                            <div class="table-responsive text-nowrap">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th><i class="tf-icons bx bx-bone"></i> Thú cưng</th>
+                                            <th><i class="tf-icons bx bx-calendar"></i> Ngày hẹn</th>
+                                            <th><i class="tf-icons bx bx-podcast"></i> Trạng thái</th>
+                                            <th><i class="tf-icons bx bx-cog"></i> Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Nâu</strong>
+                                            </td>
+                                            <td>2/2/4013</td>
+                                            <td>
+                                                Đang chờ nhận
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button type="button"
+                                                            class="btn p-0 dropdown-toggle hide-arrow"
+                                                            data-bs-toggle="dropdown">
+                                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AppointmentInfo"><i class="bx bx-detail me-1"></i> Xem chi tiết</a>
+                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i>Hủy cuộc hẹn</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><p></p></td>
+                                            <td><p></p></td>
+                                            <td><p></p></td>
+                                            <td><p></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><p></p></td>
+                                            <td><p></p></td>
+                                            <td><p></p></td>
+                                            <td><p></p></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!--Start of appointment model-->
+                                <div class="modal fade" id="AppointmentInfo" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Thông tin cuộc hẹn</h5>
+                                                <button type="button"
+                                                        class="btn-close"
+                                                        data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!--Start of client info-->
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">Tên khách hàng</label>
+                                                            <input class="form-control"
+                                                                   type="text"
+                                                                   id="firstName"
+                                                                   name=""
+                                                                   value="Model.name"
+                                                                   readonly />
+                                                        </div>
+
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="email" class="form-label">E-mail</label>
+                                                            <input class="form-control"
+                                                                   type="text"
+                                                                   id="email"
+                                                                   name="email"
+                                                                   value="Model.email"
+                                                                   readonly />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label class="form-label" for="phoneNumber">Số điện thoại</label>
+                                                            <div class="input-group input-group-merge">
+                                                                <span class="input-group-text" style="background-color: lightgray;">VN</span>
+                                                                <input type="text"
+                                                                       id="phoneNumber"
+                                                                       name="phoneNumber"
+                                                                       class="form-control"
+                                                                       value="Model.phone"
+                                                                       readonly />
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="address" class="form-label">Địa chỉ</label>
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   id="address"
+                                                                   name="address"
+                                                                   value="Model.address"
+                                                                   readonly />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="html5-date-input" class="form-label">Ngày sinh</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control"
+                                                                       type="date"
+                                                                       value="5/5/2023"
+                                                                       id="html5-date-input"
+                                                                       readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--End of client info-->
+                                                <hr class="my-0" />
+                                                <!--Start of appointment info-->
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">Ngày khởi tạo</label>
+                                                            <input type="text"
+                                                                   id="basic-icon-default-company"
+                                                                   class="form-control"
+                                                                   value="5/5/2023"
+                                                                   aria-label="ACME Inc."
+                                                                   aria-describedby="basic-icon-default-company2"
+                                                                   readonly />
+                                                        </div>
+
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">Ngày hẹn gặp</label>
+                                                            <input type="text"
+                                                                   id="basic-icon-default-company"
+                                                                   class="form-control"
+                                                                   value="5/5/2023"
+                                                                   aria-label="ACME Inc."
+                                                                   aria-describedby="basic-icon-default-company2"
+                                                                   readonly />
+                                                        </div>
+
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="address" class="form-label">Ghi chú</label>
+                                                            <textarea id="appointNote"
+                                                                      style="height: 150px;"
+                                                                      class="form-control"
+                                                                      placeholder=""
+                                                                      readonly>tin ghi nhớ</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--End of appointment info-->
+
+                                                <hr class="my-0" />
+                                                <!--Start of pet info-->
+                                                <div class="card-body">
+                                                    <div class="col-md-9 col-12 mx-auto">
+                                                        <h6 class="text-muted">Chi tiết thú cưng</h6>
+                                                        <div class="nav-align-top mb-4">
+                                                            <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+                                                                <li class="nav-item">
+                                                                    <button type="button"
+                                                                            class="nav-link active"
+                                                                            role="tab"
+                                                                            data-bs-toggle="tab"
+                                                                            data-bs-target="#navs-pills-justified-general"
+                                                                            aria-controls="navs-pills-justified-general"
+                                                                            aria-selected="false">
+                                                                        <i class="tf-icons bx bx-home"></i> Chung
+                                                                    </button>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <button type="button"
+                                                                            class="nav-link"
+                                                                            role="tab"
+                                                                            data-bs-toggle="tab"
+                                                                            data-bs-target="#navs-pills-justified-profile"
+                                                                            aria-controls="navs-pills-justified-profile"
+                                                                            aria-selected="false">
+                                                                        <i class="tf-icons bx bx-check-shield"></i> Hồ sơ tiêm
+                                                                    </button>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <button type="button"
+                                                                            class="nav-link"
+                                                                            role="tab"
+                                                                            data-bs-toggle="tab"
+                                                                            data-bs-target="#navs-pills-justified-messages"
+                                                                            aria-controls="navs-pills-justified-messages"
+                                                                            aria-selected="false">
+                                                                        <i class="tf-icons bx bx-message-square"></i> Ghi chú
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="tab-content">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                                                        <img src="~/Assets/General/img/pets/symbol.png" alt="google" class="me-3" height="100" width="100" />
+                                                                        <div class="button-wrapper">
+                                                                            <label class=" me-2 mb-4">
+                                                                                <span class="d-none d-sm-block"><b>Tên thú:</b> Model.pet_name</span>
+                                                                                <span class="text-muted mb-0"><b>Loài: Model.breed_name</b> </span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="tab-pane fade show activee" id="navs-pills-justified-general" role="tabpanel">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label><b>Số tuổi:</b> Model.age tháng</label>
+                                                                            </div>
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label><b>Trọng lượng:</b> Model.weight kg</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label>- TODO</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label>- Cần ăn nhiều thịt sống</label>
+                                                                                <br>
+                                                                                <label>- Thiếu vitamin D</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--End of pet info-->
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
+                                                    Nhận
+                                                </button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                    Tắt
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End of appointment model-->
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="navs-main-justified-profile" role="tabpanel">
+                            <p>
+                                Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice
+                                cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream
+                                cheesecake fruitcake.
+                            </p>
+                            <p class="mb-0">
+                                Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah
+                                cotton candy liquorice caramels.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Tabs -->
+
+
+    </div>
+</div>
+
