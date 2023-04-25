@@ -14,8 +14,7 @@
         [Required(ErrorMessage ="Vui lòng không để trống")]
         public string bill_id { get; set; }
 
-        [StringLength(50)]
-
+        [StringLength(50, ErrorMessage = "Không được vượt quá 50 kí tự")]
         public string client_username { get; set; }
 
         [Required(ErrorMessage = "Vui lòng không để trống")]

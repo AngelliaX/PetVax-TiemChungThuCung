@@ -59,6 +59,11 @@ namespace Models.DataAccessLayer.VaccineDAL
             vaccine_lot lot = db.vaccine_lot.Where(x => x.lot_number == LotNumber).FirstOrDefault();
             return lot;
         }
-
+        public List<vaccine_lot> GetListVaccineByVaccineCode(string VaccineCode)
+        {
+            var list = db.vaccine_lot.Where(m => m.vaccine_code == VaccineCode).ToList();
+            return list;
+        }
+      
     }
 }

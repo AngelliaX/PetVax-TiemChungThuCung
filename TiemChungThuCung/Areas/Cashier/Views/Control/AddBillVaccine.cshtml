@@ -1,0 +1,184 @@
+﻿@model List<TiemChungThuCung.Areas.Cashier.Model.BillRecordModel>
+
+@{
+    List<Models.EntityFramework.vaccine_type> ListVaccineType = new Models.DataAccessLayer.VaccineDAL.VaccineTypeDAL().GetAllVaccineType();
+    bool SuccessSate = TempData["AddBillSuccess"] == null ? false : true;
+}
+
+
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card" style="margin:50px 100px">
+            <h5 class="card-header">Tạo hóa đơn</h5>
+            @using (Html.BeginForm("AddBillVaccine", "Control", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "alert-danger", @style = "text-align:center" })
+
+                for (int i = 1; i < Model.ToList().Count; i++)
+                {
+                    <input class="form-control" type="hidden" name="[@i].bill_id" value="@Model[0].bill_id">
+                    <input class="form-control" type="hidden" name="[@i].client_username" value="@Model[0].client_username">
+                }
+
+                if (SuccessSate)
+                {
+                    <div class="alert alert-success" role="alert" style="text-align:center">Tạo hóa đơn thành công</div>
+                    <div class="alert alert-info" role="alert" style="text-align:center">Ngày tạo @DateTime.Now.ToString("dd/MM/yyy lúc H:m:s")</div>
+                }
+                <div class="card-body">
+                    <nav class="mb-3 row" style="display:inline-block; margin-left:5%; float: left; width:40%">
+                        <label for="html5-text-input" class="col-md-2 col-form-label" style="width:100%">Mã hóa đơn</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" name="[0].bill_id" value="@Model[0].bill_id" readonly />
+
+
+                        </div>
+                    </nav>
+
+
+                    <div class="mb-3 row" style="display:inline-block; margin-right:5%; float:right; width:40%">
+                        <label for="html5-text-input" class="col-md-2 col-form-label" style="width:100%">Username khách hàng</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" name="[0].client_username" value="@Model[0].client_username" readonly />
+
+                            @*@Html.ValidationMessageFor(Model => Model.client_username, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="display:inline-block">
+                    <h5 class="card-header"></h5>
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Mã Vaccine</th>
+                                        <th>ĐVT</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @{
+                                        int index = 1;
+                                    }
+                                    <tr>
+                                        @{
+                                            int LastIndex = Model.ToList().Count - 1;
+                                        }
+
+                                        <td>@index</td>
+                                        <td>
+                                            @Html.EditorFor(Model => Model[LastIndex].vaccine_code, new { htmlAttributes = new { @class = "form-control", @list = "vaccine_list" } })
+                                            <datalist id="vaccine_list">
+                                                @foreach (var item in ListVaccineType)
+                                                {
+
+                                                    <option value="@item.vaccine_code">@item.vaccine_name</option>
+                                                }
+                                            </datalist>
+                                            @Html.ValidationMessageFor(Model => Model[LastIndex].vaccine_code, "", new { @class = "text-danger" })
+
+                                        </td>
+                                        <td>
+                                            @*@Html.EditorFor(Model => Model[index - 1].dose_unit, new { htmlAttributes = new { @class = "form-control" } })*@
+                                            <select class="form-control" name="[@Html.Raw(LastIndex)].dose_unit">
+                                                <option value="0" @Html.Raw(@Model[LastIndex].dose_unit == 0 ? "selected" : "")>Lọ</option>
+                                                <option value="1" @Html.Raw(@Model[LastIndex].dose_unit == 1 ? "selected" : "")>Liều</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(Model => Model[LastIndex].dose_unit, "", new { @class = "text-danger" })
+
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(Model => Model[LastIndex].amount, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(Model => Model[LastIndex].amount, "", new { @class = "text-danger" })
+
+                                        </td>
+                                        <td><input class="form-control" type="text" name="" readonly></td>
+                                        <td><input class="form-control" type="text" name="" readonly></td>
+
+                                    </tr>
+
+                                    @for (int i = Model.ToList().Count - 2; i >= 0; i--)
+                                    {
+                                        index++;
+
+                                        <tr>
+
+                                            <td>@index</td>
+                                            @*Ma vaccine*@
+                                            <td>
+                                                @Html.EditorFor(Model => Model[i].vaccine_code, new { htmlAttributes = new { @class = "form-control", @list = "vaccine_list" } })
+                                                <datalist id="vaccine_list">
+                                                    @foreach (var item in ListVaccineType)
+                                                    {
+
+                                                        <option value="@item.vaccine_code">@item.vaccine_name</option>
+                                                    }
+                                                </datalist>
+                                                @Html.ValidationMessageFor(Model => Model[i].vaccine_code, "", new { @class = "text-danger" })
+                                            </td>
+                                            <td>
+                                                @*@Html.EditorFor(Model => Model[i].dose_unit, new { htmlAttributes = new { @class = "form-control" } })*@
+                                                <select class="form-control" name="[@i].dose_unit">
+                                                    <option value="0" @Html.Raw(@Model[i].dose_unit == 0 ? "selected" : "")>Lọ</option>
+                                                    <option value="1" @Html.Raw(@Model[i].dose_unit == 1 ? "selected" : "")>Liều</option>
+                                                </select>
+                                                @Html.ValidationMessageFor(Model => Model[i].dose_unit, "", new { @class = "text-danger" })
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(Model => Model[i].amount, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(Model => Model[i].amount, "", new { @class = "text-danger" })
+                                            </td>
+                                            <td><input class="form-control" type="text" name="" readonly></td>
+                                            <td><input class="form-control" type="text" name="" readonly></td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="mb-3 row" style="display:inline-block; margin-top:2%; float:right; width:50%; height: 200%">
+                            <label for="html5-text-input" class="col-md-2 col-form-label" style="width:100%">Ghi chú</label>
+                            <div class="col-md-10">
+                                <input class="form-control" type="text" name="description" style="height:100px" />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-success"
+                        style=" padding: 2% 4%; margin-left: 10%" name="ConfirmButton" value="Confirm">
+                    Xác nhận
+                </button>
+
+                <button type="submit" class="btn btn-outline-info"
+                        style=" padding: 2% 4%; margin:2% 19%; float:revert" name="AddRowButton" value="Add">
+                    Thêm dòng mới
+                </button>
+
+                <button name="CancelButton"
+                        style="  padding: 2% 4%; margin-right:10%"
+                        class="btn btn-outline-danger">
+                    Hủy
+                </button>
+                <a href="@Url.Action("Confirm", "Control")"></a>
+
+            }
+        </div>
+    </div>
+</div>
+
+
+ 

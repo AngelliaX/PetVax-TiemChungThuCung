@@ -131,6 +131,7 @@
     <Compile Include="Areas\Admin\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Cashier\Controllers\ControlController.cs" />
     <Compile Include="Areas\Cashier\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Cashier\Model\BillRecordModel.cs" />
     <Compile Include="Areas\CommonUse\ProfileCommonUse.cs" />
     <Compile Include="Areas\Doctor\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\ControlController.cs" />
@@ -311,6 +312,7 @@
     <Content Include="Areas\Pharmacist\Views\Control\VaccineList.cshtml" />
     <Content Include="Areas\Pharmacist\Views\Control\Add.cshtml" />
     <Content Include="Areas\Cashier\Views\Control\Add.cshtml" />
+    <Content Include="Areas\Cashier\Views\Control\AddBillVaccine.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\khongcanten-001-site1 - FTP.pubxml" />

@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="DataAccessLayer\AccountDAO.cs" />
     <Compile Include="DataAccessLayer\BillDAL\BillDAL.cs" />
+    <Compile Include="DataAccessLayer\BillDAL\BillVaccineDAL.cs" />
+    <Compile Include="DataAccessLayer\ClientDAL\ClientDAL.cs" />
     <Compile Include="DataAccessLayer\VaccineDAL\VaccineDAL.cs" />
     <Compile Include="DataAccessLayer\VaccineDAL\VaccineLotDAL.cs" />
     <Compile Include="DataAccessLayer\VaccineDAL\VaccineTypeDAL.cs" />

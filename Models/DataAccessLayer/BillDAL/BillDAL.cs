@@ -19,11 +19,18 @@ namespace Models.DataAccessLayer.BillDAL
             var billList = db.bills.Select(m => m);
             return billList.ToList();
         }
+        public bool CheckIfBillIsExist(string BillId)
+        {
+            //Check trùng id
+            if (db.bills.Count(m => m.bill_id == BillId) > 0) return true;
+            else return false;
+        }
         public void AddBill(bill billToAdd)
         {
             db.bills.Add(billToAdd);
             db.SaveChanges();
         }
+
         public void UpdateBill(bill billToUpdate, string BillId)
         {
             bill tmp = db.bills.Where(m => m.bill_id == BillId).FirstOrDefault();

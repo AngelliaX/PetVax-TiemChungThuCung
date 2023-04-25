@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -45,6 +46,23 @@ namespace Models.DataAccessLayer.VaccineDAL
                 db.SaveChanges();
             }
         }
-
+        public int GetAmountOfVaccineType(string VaccineCode)
+        {
+            int count = 0;
+            foreach(var Lot in db.vaccine_lot.Where(m => m.vaccine_code == VaccineCode).ToList())
+            {
+                count += Lot.remain_amount;   
+            }
+            return count;
+        }
+        public vaccine_lot GetAppropriateVaccineLotByVaccineCode(string VaccineCode)
+        {
+            vaccine_lot Lot = db.vaccine_lot.OrderBy(m => m.expiration_date).FirstOrDefault();
+            return Lot;
+        }
+        public bool CheckIfVaccineCodeIsExist(string VaccineCode)
+        {
+            return db.vaccine_type.Count(m => m.vaccine_code == VaccineCode) > 0 ? true : false;
+        }
     }
 }

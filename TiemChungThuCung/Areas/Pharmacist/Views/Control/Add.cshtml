@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Add";
     Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+    List<Models.EntityFramework.vaccine_type> ListVaccineType = new Models.DataAccessLayer.VaccineDAL.VaccineTypeDAL().GetAllVaccineType();
+
 }
 
 <h2>Add</h2>
@@ -20,13 +22,17 @@
         @using (Html.BeginForm("Add", "Control", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "alert-danger", @style = "text-align:center" })
+            
+               
+            @Html.ValidationSummary(true, "", new { @class = "alert-danger", @style = "text-align:center" }); 
+                
+            
     <div class="card-body">
         <div class="mb-3 row">
             <label for="html5-text-input" class="col-md-2 col-form-label">Số lô</label>
             <div class="col-md-10">
                 <input class="form-control" type="text"
-                       id="lot_number" name="lot_number" />
+                       id="lot_number" name="lot_number" value="@Model.lot_number"/>
                 @Html.ValidationMessageFor(Model => Model.lot_number, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,35 +42,44 @@
             <label for="html5-text-input" class="col-md-2 col-form-label">Mã Vaccine</label>
             <div class="col-md-10">
                 <input class="form-control" type="text"
-                       name="vaccine_code" />
+                       name="vaccine_code" list="vaccine_list" value="@Model.vaccine_code"/>
+                <datalist id="vaccine_list">
+                    @foreach (var item in ListVaccineType)
+                    {
+
+                        <option value="@item.vaccine_code">@item.vaccine_name</option>
+                    }
+                </datalist>
                 @Html.ValidationMessageFor(Model => Model.vaccine_code, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="mb-3 row">
             <label for="html5-text-input" class="col-md-2 col-form-label">Tổng SL</label>
             <div class="col-md-10">
-                <input class="form-control" type="text"
-                       name="total_amount" />
+                <input class="form-control" type="number"
+                       name="total_amount" id="quanity" value="@Model.total_amount"/>
                 @Html.ValidationMessageFor(Model => Model.total_amount, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="mb-3 row">
             <label for="html5-text-input" class="col-md-2 col-form-label">SL còn lại</label>
             <div class="col-md-10">
-                <input class="form-control" type="hidden"
-                        name="remain_amount" />
+                <input class="form-control" type="number"
+                        name="remain_amount" value="@Model.remain_amount"/>
                 @Html.ValidationMessageFor(Model => Model.remain_amount, "", new { @class = "text-danger" })
             </div>
         </div>
-        @*@{
+        @{
             Model.remain_amount = Model.total_amount;
-        }*@
+        }
 
         <div class="mb-3 row">
             <label for="html5-text-input" class="col-md-2 col-form-label">Đơn vị</label>
             <div class="col-md-10">
-                <input class="form-control" type="text"
-                       name="dose_unit" />
+                <select class="form-control" name="dose_unit">
+                    <option value="0" @Html.Raw(@Model.dose_unit == 0 ? "selected" : "")>Lọ</option>
+                    <option value="1" @Html.Raw(@Model.dose_unit == 1 ? "selected" : "")>Liều</option>
+                </select>
                 @Html.ValidationMessageFor(Model => Model.dose_unit, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -72,7 +87,7 @@
             <label for="html5-text-input" class="col-md-2 col-form-label">Ngày SX</label>
             <div class="col-md-10">
                 <input class="form-control" type="date"
-                       name="production_date" />
+                       name="production_date" value="@Model.production_date.ToString("yyyy-MM-dd")" />
                 @Html.ValidationMessageFor(Model => Model.production_date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -80,31 +95,31 @@
             <label for="html5-text-input" class="col-md-2 col-form-label">Hạn SD</label>
             <div class="col-md-10">
                 <input class="form-control" type="date"
-                       name="expiration_date" />
+                       name="expiration_date" value="@Model.expiration_date.ToString("yyyy-MM-dd")"/>
                 @Html.ValidationMessageFor(Model => Model.expiration_date, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="html5-text-input" class="col-md-2 col-form-label">Giá nhập</label>
+            <label for="html5-text-input" class="col-md-2 col-form-label">Giá nhập (Ngàn đồng)</label>
             <div class="col-md-10">
-                <input class="form-control" type="text"
-                       name="import_price" />
+                <input class="form-control" type="number"
+                       name="import_price" id="price" value="@Model.import_price"/>
                 @Html.ValidationMessageFor(Model => Model.import_price, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="html5-text-input" class="col-md-2 col-form-label">Giá bán</label>
+            <label for="html5-text-input" class="col-md-2 col-form-label">Giá bán (Ngàn đồng)</label>
             <div class="col-md-10">
-                <input class="form-control" type="text"
-                       name="sale_price" />
+                <input class="form-control" type="number"
+                       name="sale_price" value="@Model.sale_price"/>
                 @Html.ValidationMessageFor(Model => Model.sale_price, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="html5-text-input" class="col-md-2 col-form-label">Thuế</label>
+            <label for="html5-text-input" class="col-md-2 col-form-label">Thuế (%)</label>
             <div class="col-md-10">
-                <input class="form-control" type="text"
-                       name="tax" />
+                <input class="form-control" type="number" id="vax"
+                       name="tax" value="@Model.tax"/>
                 @Html.ValidationMessageFor(Model => Model.tax, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -112,7 +127,7 @@
             <label for="html5-text-input" class="col-md-2 col-form-label">Nhà sản xuất</label>
             <div class="col-md-10">
                 <input class="form-control" type="text"
-                       name="publisher" />
+                       name="publisher" value="@Model.publisher"/>
                 @Html.ValidationMessageFor(Model => Model.publisher, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -120,7 +135,7 @@
             <label for="html5-text-input" class="col-md-2 col-form-label">Ngày nhập</label>
             <div class="col-md-10">
                 <input class="form-control" type="date"
-                       name="rival_date" />
+                       name="rival_date" value="@Model.rival_date.ToString("yyyy-MM-dd")"/>
                 @Html.ValidationMessageFor(Model => Model.rival_date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -128,7 +143,7 @@
             <label for="html5-text-input" class="col-md-2 col-form-label">Ghi chú</label>
             <div class="col-md-10">
                 <input class="form-control" type="text"
-                       name="note" />
+                       name="note" value="@Model.note"/>
                 @Html.ValidationMessageFor(Model => Model.note, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -136,9 +151,20 @@
             <label for="html5-text-input" class="col-md-2 col-form-label">Thành tiền</label>
             <div class="col-md-10">
                 <input class="form-control" type="number"
-                       name="note" readonly/>
-                
+                       name="note" id="total_price" readonly/>
             </div>
+            <script>
+                var quanity = document.getElementById("quanity");
+                var price = document.getElementById("price");
+                var vax = document.getElementById("vax");
+                var total_price = document.getElementById("total_price");
+                quanity.oninput = function () {
+                    total_price.value = price.value * quanity.value  ;
+                }
+                price.oninput = function () {
+                    total_price.value = price.value * quanity.value ;
+                }
+            </script>
         </div>
 
     </div>

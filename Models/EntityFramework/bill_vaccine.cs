@@ -8,6 +8,7 @@
 
     public partial class bill_vaccine
     {
+
         [Key]
         [StringLength(10)]
         public string bill_id { get; set; }
@@ -18,9 +19,11 @@
         [Required(ErrorMessage = "Vui lòng không để trống")]
         public int amount { get; set; }
 
-        public int? cost { get; set; }
+        public int cost { get; set; }
+
 
         public virtual bill bill { get; set; }
+
 
         public virtual vaccine_lot vaccine_lot { get; set; }
     }

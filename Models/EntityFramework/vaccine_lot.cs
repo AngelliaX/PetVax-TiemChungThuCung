@@ -42,12 +42,12 @@
         //====================================================================
         [Required(ErrorMessage = "Vui lòng không để trống")]
         [Range(1, 99999, ErrorMessage = "Số lượng nhập không hợp lệ hoặc quá lớn")]
-        public int? total_amount { get; set; }
+        public int total_amount { get; set; }
 
         //====================================================================
         [Required(ErrorMessage = "Vui lòng không để trống")]
         [Range(1, 99999, ErrorMessage = "Số lượng nhập không hợp lệ hoặc quá lớn")]
-        public int? remain_amount { get; set; }
+        public int remain_amount { get; set; }
 
         //====================================================================
         [Required(ErrorMessage = "Vui lòng không để trống")]
@@ -56,17 +56,17 @@
         //====================================================================
         [Required(ErrorMessage = "Vui lòng không để trống")]
         [Range(1, 999999, ErrorMessage = "Giá nhập không hợp lệ hoặc quá lớn")]
-        public int? import_price { get; set; }
+        public int import_price { get; set; }
 
         //====================================================================
         [Required(ErrorMessage = "Vui lòng không để trống")]
         [Range(1, 999999, ErrorMessage = "Giá nhập không hợp lệ hoặc quá lớn")]
-        public int? sale_price { get; set; }
+        public int sale_price { get; set; }
 
         //====================================================================
         [Required(ErrorMessage = "Vui lòng không để trống")]
         [Range(0, 999999, ErrorMessage = "Giá trị nhập vào không hợp lệ hoặc quá lớn")]
-        public int? tax { get; set; }
+        public int tax { get; set; }
 
         //====================================================================
         [Required(ErrorMessage = "Vui lòng không để trống")]
