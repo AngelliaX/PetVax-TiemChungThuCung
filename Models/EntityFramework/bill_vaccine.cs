@@ -9,14 +9,11 @@ namespace Models.EntityFramework
     public partial class bill_vaccine
     {
         [Key]
-        [Column(Order = 0)]
         [StringLength(10)]
         public string bill_id { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
         [StringLength(10)]
-        public string vaccine_code { get; set; }
+        public string vaccine_lot_number { get; set; }
 
         public int? amount { get; set; }
 
@@ -24,6 +21,6 @@ namespace Models.EntityFramework
 
         public virtual bill bill { get; set; }
 
-        public virtual vaccine_type vaccine_type { get; set; }
+        public virtual vaccine_lot vaccine_lot { get; set; }
     }
 }

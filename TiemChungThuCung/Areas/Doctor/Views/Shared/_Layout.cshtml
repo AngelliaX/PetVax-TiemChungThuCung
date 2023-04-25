@@ -130,9 +130,9 @@
                         <span class="menu-header-text">Tài khoản</span>
                     </li>
                     <!-- User interface -->
-                    <li class="menu-item @(currentUrl.ToLower().Contains("profile") ? "active open" : "")">
+                    <li class="menu-item @(currentUrl.ToLower().Contains("profile") && !currentUrl.ToLower().Contains("profession") ? "active open" : "")">
                         <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <i class="menu-icon tf-icons bx bx-user"></i>
                             <div data-i18n="Authentications">Thông tin</div>
                         </a>
                         <ul class="menu-sub">
@@ -147,19 +147,19 @@
                                 </a>
                             </li>
                         </ul>
-                    <li class="menu-item">
+                    <li class="menu-item @(lastURLPart.ToLower() == "profession" || lastURLPart.ToLower() == "professionupdate" ? "active open" : "")">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                            <i class="menu-icon tf-icons bx bx-notepad"></i>
                             <div data-i18n="Authentications">Hồ sơ nghiệp vụ</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="quanli.html" class="menu-link">
+                            <li class="menu-item @(lastURLPart.ToLower() == "profession" ? "active" : "")">
+                                <a href="/Doctor/Profile/Profession" class="menu-link">
                                     <div data-i18n="Basic">Chi tiết</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link">
+                            <li class="menu-item @(lastURLPart.ToLower() == "professionupdate" ? "active" : "")">
+                                <a href="/Doctor/Profile/ProfessionUpdate" class="menu-link">
                                     <div data-i18n="Basic">Chỉnh sửa</div>
                                 </a>
                             </li>
@@ -169,31 +169,32 @@
                     <!-- Components -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Tiêm phòng</span></li>
                     <!-- Cards -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                    <li class="menu-item @(lastURLPart.ToLower() == "appointment" ? "active" : "")">
+                        <a href="/Doctor/Appointment" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-band-aid"></i>
                             <div data-i18n="Basic">Đơn tiêm</div>
                         </a>
                     </li>
                     <!-- User interface -->
                     <li class="menu-item">
-                        <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-box"></i>
-                            <div data-i18n="User interface">Lời nhắc</div>
+                        <a href="javascript:void(0)" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-calendar-exclamation"></i>
+                            <div data-i18n="User interface">Sắp tới</div>
                         </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="javascript:void(0);" class="menu-link">
-                                    <div data-i18n="Accordion">Accordion</div>
-                                </a>
-                            </li>
-                        </ul>
+                    </li>
+
+                    <!-- Lịch sử-->
+                    <li class="menu-item">
+                        <a href="javascript:void(0)" class="menu-link">
+                            <i class="menu-icon tf-icons bx bxs-book-open"></i>
+                            <div data-i18n="User interface">Lịch sử</div>
+                        </a>
                     </li>
 
                     <!-- Extended components -->
                     <li class="menu-item">
                         <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-copy"></i>
+                            <i class="menu-icon tf-icons bx bx-group"></i>
                             <div data-i18n="Extended UI">Khách hàng</div>
                         </a>
                         <ul class="menu-sub">
@@ -244,7 +245,7 @@
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="~/Assets/General/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                        <img src="~/Assets/General/img/avatars/5.png" alt class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -253,7 +254,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="~/Assets/General/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                        <img src="~/Assets/General/img/avatars/5.png" alt class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">

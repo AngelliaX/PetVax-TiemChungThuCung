@@ -129,8 +129,16 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Cashier\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Client\Controllers\AppointmentController.cs" />
+    <Compile Include="Areas\Client\Controllers\PetController.cs" />
+    <Compile Include="Areas\Client\Models\CreateAppointmentModel.cs" />
+    <Compile Include="Areas\Client\Models\PetInfoModel.cs" />
+    <Compile Include="Areas\Client\Models\UpcommingModel.cs" />
+    <Compile Include="Areas\CommonUse\AppointmentCommonUse.cs" />
     <Compile Include="Areas\CommonUse\ProfileCommonUse.cs" />
+    <Compile Include="Areas\Doctor\Controllers\AppointmentController.cs" />
     <Compile Include="Areas\Doctor\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Doctor\Models\ProfessionModel.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\ProfileController.cs" />
     <Compile Include="Models\UpdateProfileModel.cs" />
     <Compile Include="MyRoleProvider\CustomMembershipProvider.cs" />
@@ -166,6 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\General\css\demo.css" />
+    <Content Include="Assets\General\img\avatars\2.png" />
     <Content Include="Assets\General\img\avatars\1.png" />
     <Content Include="Assets\General\img\avatars\5.png" />
     <Content Include="Assets\General\img\avatars\6.png" />
@@ -210,6 +219,8 @@
     <Content Include="Assets\General\img\layouts\layout-fluid-light.png" />
     <Content Include="Assets\General\img\layouts\layout-without-menu-light.png" />
     <Content Include="Assets\General\img\layouts\layout-without-navbar-light.png" />
+    <Content Include="Assets\General\img\pets\7.png" />
+    <Content Include="Assets\General\img\pets\symbol.png" />
     <Content Include="Assets\General\js\config.js" />
     <Content Include="Assets\General\js\dashboards-analytics.js" />
     <Content Include="Assets\General\js\extended-ui-perfect-scrollbar.js" />
@@ -301,6 +312,14 @@
     <Content Include="Areas\Doctor\Views\Profile\Update.cshtml" />
     <Content Include="Areas\Pharmacist\Views\Profile\Index.cshtml" />
     <Content Include="Areas\Pharmacist\Views\Profile\Update.cshtml" />
+    <Content Include="Areas\Client\Views\Pet\Index.cshtml" />
+    <Content Include="Areas\Client\Views\Appointment\Index.cshtml" />
+    <Content Include="Areas\Client\Views\Appointment\Create.cshtml" />
+    <Content Include="Areas\Doctor\Views\Profile\Profession.cshtml" />
+    <Content Include="Areas\Doctor\Views\Profile\ProfessionUpdate.cshtml" />
+    <Content Include="Areas\Client\Views\Appointment\Upcomming.cshtml" />
+    <Content Include="Areas\Client\Views\Pet\Update.cshtml" />
+    <Content Include="Areas\Doctor\Views\Appointment\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\khongcanten-001-site1 - FTP.pubxml" />
@@ -339,7 +358,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Cashier\Data\" />
-    <Folder Include="Areas\Client\Data\" />
     <Folder Include="Areas\Doctor\Data\" />
     <Folder Include="Areas\Doctor\Views\DoctorBase\" />
     <Folder Include="Areas\Pharmacist\Data\" />

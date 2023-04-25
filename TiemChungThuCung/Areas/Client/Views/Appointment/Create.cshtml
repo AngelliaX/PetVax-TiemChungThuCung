@@ -1,0 +1,152 @@
+﻿
+@{
+
+}
+
+@model TiemChungThuCung.Areas.Client.Models.CreateAppointmentModel
+
+<style>
+    input[readonly] {
+        background-color: transparent !important;
+        border-color: #ced4da !important; /* or your desired border color */
+    }
+</style>
+
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">
+            <span class="text-muted fw-light">Đặt lịch hẹn</span>
+        </h4>
+
+        <div class="row mx-auto">
+            <!-- Basic with Icons -->
+            <div class="col-xl-8 mx-auto">
+                <div class="card mb-4 mx-auto">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <h5 class="mb-0">Đơn hẹn kiểm tra trước khi tiêm</h5>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm())
+                        {
+                            if (TempData["SuccessMessage"] != null)
+                            {
+                                <div class="alert alert-success">
+                                    @TempData["SuccessMessage"]
+                                </div>
+                            }
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label " for="basic-icon-default-fullname">Tên khách hàng:</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-fullname2" class="input-group-text">
+                                            <i class="bx bx-user"></i>
+                                        </span>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="basic-icon-default-fullname"
+                                               value="@Model.account.name"
+                                               aria-label="John Doe"
+                                               aria-describedby="basic-icon-default-fullname2"
+                                               readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Ngày sinh</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-company2" class="input-group-text">
+                                            <i class="bx bx-buildings"></i>
+                                        </span>
+                                        <input type="text"
+                                               id="basic-icon-default-company"
+                                               class="form-control"
+                                               value="@Model.account.birthday"
+                                               aria-label="ACME Inc."
+                                               aria-describedby="basic-icon-default-company2"
+                                               readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 form-label" for="basic-icon-default-phone">Số điện thoại</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-phone2" class="input-group-text">
+                                            <i class="bx bx-phone"></i>
+                                        </span>
+                                        <input type="text"
+                                               id="basic-icon-default-phone"
+                                               class="form-control phone-mask"
+                                               value="@Model.account.phone"
+                                               aria-label="658 799 8941"
+                                               aria-describedby="basic-icon-default-phone2"
+                                               readonly />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+                            <hr class="my-0" />
+                            <br>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 form-label" for="chosenPetID">Chọn thú</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-phone2" class="input-group-text">
+                                            <i class="bx bx-bone"></i>
+                                        </span>
+                                        @{
+                                            var roles = new Dictionary<string, string>();
+                                            foreach (var item in Model.listPet)
+                                            {
+                                                roles.Add(item.pet_id, item.pet_name);
+                                            }
+                                        }
+                                        @Html.DropDownListFor(m => m.chosenPetID, new SelectList(roles, "Key", "Value"), "Hãy chọn 1 con", new { @class = "form-select", @required = "required" })
+                                        @Html.ValidationMessageFor(m => m.chosenPetID, null, new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 form-label" for="date">Ngày hẹn</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-phone2" class="input-group-text">
+                                            <i class="bx bx-calendar"></i>
+                                        </span>
+                                        @Html.TextBoxFor(model => model.date, new { @class = "form-control", @id = "date", type = "datetime-local", @required = "required" })
+                                        @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 form-label" for="note">Ghi chú</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group input-group-merge">
+                                        <span id="basic-icon-default-message2" class="input-group-text">
+                                            <i class="bx bx-comment"></i>
+                                        </span>
+                                        @Html.TextAreaFor(model => model.note, new { @class = "form-control", @id = "note", placeholder = "Nhập tin nhắn muốn bổ sung", aria_label = "Hi, Do you have a moment to talk Joe?", aria_describedby = "basic-icon-default-message2" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-end">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Gửi</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

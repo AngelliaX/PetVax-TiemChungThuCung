@@ -1,0 +1,192 @@
+﻿
+@{
+
+}
+
+@model TiemChungThuCung.Areas.Client.Models.PetInfoModel
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">
+            <span class="text-muted fw-light">Thú cưng </span>
+        </h4>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row mx-auto">
+                    <div class="col-md-6 col-12 mb-md-0 mb-4 mx-auto">
+                        <div class="card mx-auto">
+                            <h5 class="card-header">
+                                Danh sách:
+                            </h5>
+                            <div class="card-body">
+                                <p>Tick vào ô thú cưng muốn hiển thị thông tin</p>
+                                @{
+                                    int num = -1;
+                                }
+                                <!-- Pets -->
+                                @using (Html.BeginForm())
+                                {
+                                    if (Model != null && Model.listPet != null)
+                                    {
+                                        foreach (var pet in Model.listPet)
+                                        {
+                                            num++;
+                                            <div class="d-flex mb-3">
+                                                <div class="flex-shrink-0">
+                                                    <img src="~/Assets/General/img/pets/symbol.png" alt="google" class="me-3" height="30" />
+                                                </div>
+                                                <div class="flex-grow-1 row">
+                                                    <div class="col-9 mb-sm-0 mb-2">
+                                                        <h6 class="mb-0">@pet.pet_name</h6>
+                                                        <small class="text-muted">Loài: @Model.listPet_breedName[num]</small>
+                                                    </div>
+                                                    <div class="col-3 text-end">
+                                                        <div class="form-check form-switch">
+                                                            <div class="form-check mt-3">
+                                                                @Html.RadioButtonFor(m => m.pet_id, @pet.pet_id, new { @class = "form-check-input float-end" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    <button type="submit" class="btn btn-primary d-none" id="pickPetbtn">Submit</button>
+                                }
+                                <!-- /Pets -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        @if (@Model != null && @Model.pet_id != null)
+        {
+            <div class="col-md-6 col-12 mx-auto">
+                <h6 class="text-muted">Chi tiết thú cưng</h6>
+                <div class="nav-align-top mb-4">
+                    <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+                        <li class="nav-item">
+                            <button type="button"
+                                    class="nav-link active"
+                                    role="tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#navs-pills-justified-home"
+                                    aria-controls="navs-pills-justified-home"
+                                    aria-selected="true">
+                                <i class="tf-icons bx bx-home"></i> Thông tin chung
+                            </button>
+                        </li>
+                    </ul>
+                    @using (Html.BeginForm())
+                    {
+
+                        <input type="text"
+                               class="form-control d-none"
+                               name="pet_id"
+                               value="@Model.pet_id" />
+
+                        <div class="tab-content">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                    <img src="~/Assets/General/img/pets/symbol.png" alt="google" class="me-3" height="100" width="100" />
+                                    <div class="button-wrapper">
+                                        <label class=" me-2 mb-4">
+                                            <div class="row mb-3">
+                                                <label class="col-sm-4 col-form-label " for="basic-icon-default-fullname">Tên thú:</label>
+                                                <div class="col-sm-8">
+                                                    <div class="input-group input-group-merge">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="basic-icon-default-fullname"
+                                                               name="updateName"
+                                                               value="@Model.updateName"
+                                                               aria-label="John Doe"
+                                                               aria-describedby="basic-icon-default-fullname2" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label class="col-sm-4 col-form-label  text-muted mb-0" for="basic-icon-default-fullname">Loài:</label>
+                                                <div class="col-sm-8">
+                                                    <div class="input-group input-group-merge">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="basic-icon-default-fullname"
+                                                               value="@Model.breed_name"
+                                                               aria-label="John Doe"
+                                                               aria-describedby="basic-icon-default-fullname2"
+                                                               readonly />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="mb-3 col-md-6">
+                                            <div class="row mb-3">
+                                                <label class="col-sm-6 col-form-label" for="basic-icon-default-fullname"><b>Tuổi (tháng):</b></label>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-merge">
+                                                        <input type="number"
+                                                               class="form-control"
+                                                               id="basic-icon-default-fullname"
+                                                               name="updateAge"
+                                                               value="@Model.updateAge"
+                                                               aria-label="John Doe"
+                                                               aria-describedby="basic-icon-default-fullname2" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 col-md-6">
+                                            <div class="row mb-3">
+                                                <label class="col-sm-6 col-form-label" for="basic-icon-default-fullname"><b>Khối lượng (kg):</b></label>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group input-group-merge">
+                                                        <input type="number"
+                                                               class="form-control"
+                                                               id="basic-icon-default-fullname"
+                                                               name="updateWeight"
+                                                               value="@Model.updateWeight"
+                                                               aria-label="John Doe"
+                                                               aria-describedby="basic-icon-default-fullname2" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Gửi</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('input[type=radio][name=pet_id]').change(function () {
+            if (this.checked) {
+                $('#pickPetbtn').click();
+            }
+        });
+    });
+
+</script>

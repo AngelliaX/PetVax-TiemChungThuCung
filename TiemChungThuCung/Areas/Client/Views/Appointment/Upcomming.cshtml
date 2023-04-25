@@ -1,0 +1,372 @@
+﻿
+@{
+
+}
+
+@using TiemChungThuCung.Areas.CommonUse
+
+<style>
+    input[readonly], textarea[readonly] {
+        background-color: transparent !important;
+        border-color: #ced4da !important; /* or your desired border color */
+    }
+</style>
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <div class="card-body">
+            <div class="row justify-content-end">
+
+                <div class="mb-3 col-md-3">
+                    <label for="html5-month-input" class="form-label">Tháng</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="month" value="2023-04" id="html5-month-input" />
+                    </div>
+                </div>
+
+                <div class="mb-3 col-md-3">
+                    <label for="html5-month-input" class="form-label">Cách hiển thị</label>
+                    <div class="col-md-10">
+                        <button type="button" class="btn btn-primary">Theo tháng</button>
+                        &nbsp;
+                        <button type="button" class="btn btn-secondary">Tất cả</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bordered Table -->
+        <div class="card">
+            <h5 class="card-header">Danh sách cuộc hẹn</h5>
+            <div class="card-body">
+                <div class="table-responsive text-nowrap">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Thú cưng</th>
+                                <th>Ngày hẹn</th>
+                                <th>Bác sĩ</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int temp = 0;
+                            }
+                            @foreach (var app in Model.apps)
+                            {
+                                string doctorInfo = "#DoctorInfo" + temp.ToString();
+                                string appInfo = "#AppointmentDetail" + temp.ToString();
+                                <tr>
+                                    <td>
+                                        <i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@Model.petname[temp]</strong>
+                                    </td>
+                                    <td>@app.date.ToString("dd/MM/yyyy")</td>
+                                    @{
+                                        string doctorname = @Model.accs[temp].name;
+                                    }
+                                    @if (string.IsNullOrEmpty(doctorname))
+                                    {
+                                        <td>
+                                            Đang chờ nhận
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="@doctorInfo">@doctorname</a>
+                                        </td>
+                                    }
+
+                                    @if (app.state == 0)
+                                    {
+                                        <td><span class="badge bg-label-secondary me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
+                                    }
+                                    else if (app.state == 1)
+                                    {
+                                        <td><span class="badge bg-label-danger me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
+                                    }
+                                    else if (app.state == 2)
+                                    {
+                                        <td><span class="badge bg-label-success me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td><span class="badge bg-label-dark me-1">Có lỗi dữ liệu</span></td>
+                                    }
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button"
+                                                    class="btn p-0 dropdown-toggle hide-arrow"
+                                                    data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="@appInfo"><i class="bx bx-detail me-1"></i> Xem chi tiết</a>
+                                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i>Hủy cuộc hẹn</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                temp++;
+                            }
+                            @{
+                                if (temp < 3)
+                                {
+                                    for (int i = temp; i <= 3; i++)
+                                    {
+                                        <tr>
+                                            <td><p></p></td>
+                                            <td><p></p></td>
+                                            <td><p></p></td>
+                                            <td><p></p></td>
+                                            <td><p></p></td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <!--/ Bordered Table -->
+        <!-- Appointment defail Modal -->
+        @{
+            temp = 0;
+        }
+        @foreach (var app in Model.apps)
+        {
+            string appInfo = "AppointmentDetail" + temp.ToString();
+            string note = "AppointmentNote" + temp.ToString();
+            <div class="modal fade" id="@appInfo" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Thông tin cuộc hẹn</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label" for="basic-icon-default-company">Ngày khởi tạo:</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-company2" class="input-group-text">
+                                                <i class="bx bx-cog"></i>
+                                            </span>
+                                            <input type="text"
+                                                   id="basic-icon-default-company"
+                                                   class="form-control"
+                                                   value="@app.init_day.ToString("dd/MM/yyyy")"
+                                                   aria-label="ACME Inc."
+                                                   aria-describedby="basic-icon-default-company2"
+                                                   readonly />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label" for="basic-icon-default-company">Ngày hẹn gặp:</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-company2" class="input-group-text">
+                                                <i class="bx bx-calendar"></i>
+                                            </span>
+                                            <input type="text"
+                                                   id="basic-icon-default-company"
+                                                   class="form-control"
+                                                   value="@app.date.ToString("dd/MM/yyyy")"
+                                                   aria-label="ACME Inc."
+                                                   aria-describedby="basic-icon-default-company2"
+                                                   readonly />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label" for="basic-icon-default-company">Ghi chú:</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-phone2" class="input-group-text">
+                                                <i class="bx bx-note"></i>
+                                            </span>
+                                            <textarea id="@note"
+                                                      style="height: 150px;"
+                                                      class="form-control"
+                                                      placeholder=""
+                                                      readonly>@app.note</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            temp++;
+        }
+        <!-- Modal -->
+        <!-- Doctor info Modal -->
+
+        @{
+            temp = 0;
+        }
+        @foreach (var app in Model.apps)
+        {
+            if (string.IsNullOrEmpty(@Model.accs[temp].name))
+            {
+                temp++;
+                continue;
+            }
+            string doctorInfo = "DoctorInfo" + temp.ToString();
+            string docEdu = "DoctorEdu" + temp.ToString();
+            string docExp = "DoctorExp" + temp.ToString();
+            <div class="modal fade" id="@doctorInfo" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Thông tin bác sĩ</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label " for="basic-icon-default-fullname">Tên:</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-fullname2" class="input-group-text">
+                                                <i class="bx bx-user"></i>
+                                            </span>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="basic-icon-default-fullname"
+                                                   value="@Model.accs[temp].name"
+                                                   aria-label="John Doe"
+                                                   aria-describedby="basic-icon-default-fullname2"
+                                                   readonly />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label" for="basic-icon-default-company">Ngày sinh:</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-company2" class="input-group-text">
+                                                <i class="bx bx-buildings"></i>
+                                            </span>
+                                            <input type="text"
+                                                   id="basic-icon-default-company"
+                                                   class="form-control"
+                                                   value="@Model.accs[temp].birthday.ToString("dd/MM/yyyy")"
+                                                   aria-label="ACME Inc."
+                                                   aria-describedby="basic-icon-default-company2"
+                                                   readonly />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label" for="basic-icon-default-company">Số điện thoại:</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-phone2" class="input-group-text">
+                                                <i class="bx bx-phone"></i>
+                                            </span>
+                                            <input type="text"
+                                                   id="basic-icon-default-phone"
+                                                   class="form-control phone-mask"
+                                                   value="@Model.accs[temp].phone"
+                                                   aria-label="658 799 8941"
+                                                   aria-describedby="basic-icon-default-phone2"
+                                                   readonly />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label" for="basic-icon-default-company">Học vấn:</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-phone2" class="input-group-text">
+                                                <i class="bx bxs-graduation"></i>
+                                            </span>
+                                            <textarea id="@docEdu"
+                                                      style="height: 150px;"
+                                                      class="form-control"
+                                                      placeholder=""
+                                                      readonly>@Model.docs[temp].education</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label" for="basic-icon-default-company">Kinh nghiệm:</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-phone2" class="input-group-text">
+                                                <i class="bx bxs-trophy"></i>
+                                            </span>
+                                            <textarea id="@docExp"
+                                                       style="height: 150px;"
+                                                      class="form-control"
+                                                      placeholder=""
+                                                      readonly>@Model.docs[temp].experience</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            temp++;
+        }
+        <!-- Modal -->
+
+    <script>
+        //todo: fix this, havent worked yet
+        function resizeTextarea(id) {
+            var element = document.getElementById(id);
+            element.style.height = "auto";
+            element.style.height = element.scrollHeight + 50 + "px";
+        }
+        
+        window.onload = function () {
+            for (var i = -1; i < 2; i++) {
+                var docEdu = "DoctorEdu" + i.ToString();
+                var docExp = "DoctorExp" + i.ToString();
+                var note = "AppointmentNote" + i.ToString();
+                resizeTextarea(docEdu);
+                resizeTextarea(docExp);
+                resizeTextarea(note);
+            }
+        }
+    </script>
+
+    </div>
+</div>

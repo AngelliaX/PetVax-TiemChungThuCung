@@ -1,0 +1,11 @@
+Đổi:
+	Table appointment:
+		- init_day -> datetime
+		- date -> datetime
+	Table doctor:
+		- experience -> nvarchar(max)
+		- education -> nvarchar(max)
+		
+Thêm:
+	Table pet_vaccine:
+		- lot_number (là lot_number của table vaccine_lot)

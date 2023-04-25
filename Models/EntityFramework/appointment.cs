@@ -19,12 +19,10 @@ namespace Models.EntityFramework
         [StringLength(50)]
         public string doctor_username { get; set; }
 
-        public bool? state { get; set; }
+        public int? state { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime? init_day { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime? date { get; set; }
 
         [StringLength(200)]

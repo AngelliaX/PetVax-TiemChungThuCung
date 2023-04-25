@@ -12,7 +12,7 @@ using TiemChungThuCung.Models;
 
 namespace TiemChungThuCung.Areas.Client.Controllers
 {
-    public class ProfileController : Controller
+    public class ProfileController : ClientBaseController
     {
         // GET: Client/Profile
         public ActionResult Index()
