@@ -20,7 +20,7 @@ namespace Models.EntityFramework
         public string disease_code { get; set; }
 
         [StringLength(50)]
-        public string diease_name { get; set; }
+        public string disease_name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pet_disease> pet_disease { get; set; }

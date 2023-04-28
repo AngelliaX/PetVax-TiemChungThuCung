@@ -138,6 +138,7 @@
     <Compile Include="Areas\CommonUse\ProfileCommonUse.cs" />
     <Compile Include="Areas\Doctor\Controllers\AppointmentController.cs" />
     <Compile Include="Areas\Doctor\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Doctor\Models\DoctorUpcommingModel.cs" />
     <Compile Include="Areas\Doctor\Models\ProfessionModel.cs" />
     <Compile Include="Areas\Pharmacist\Controllers\ProfileController.cs" />
     <Compile Include="Models\UpdateProfileModel.cs" />
@@ -320,6 +321,8 @@
     <Content Include="Areas\Client\Views\Appointment\Upcomming.cshtml" />
     <Content Include="Areas\Client\Views\Pet\Update.cshtml" />
     <Content Include="Areas\Doctor\Views\Appointment\Index.cshtml" />
+    <Content Include="Areas\Doctor\Views\Appointment\Upcomming.cshtml" />
+    <Content Include="Areas\Doctor\Views\Appointment\History.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\khongcanten-001-site1 - FTP.pubxml" />

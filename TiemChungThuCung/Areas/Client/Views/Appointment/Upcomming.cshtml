@@ -60,57 +60,62 @@
                             {
                                 string doctorInfo = "#DoctorInfo" + temp.ToString();
                                 string appInfo = "#AppointmentDetail" + temp.ToString();
-                                <tr>
+                            <tr>
+                                <td>
+                                    <i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@Model.petname[temp]</strong>
+                                </td>
+                                <td>@app.date.ToString("dd/MM/yyyy")</td>
+                                @{
+                                    string doctorname = @Model.accs[temp].name;
+                                }
+                                @if (string.IsNullOrEmpty(doctorname))
+                                {
                                     <td>
-                                        <i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@Model.petname[temp]</strong>
+                                        Đang chờ nhận
                                     </td>
-                                    <td>@app.date.ToString("dd/MM/yyyy")</td>
-                                    @{
-                                        string doctorname = @Model.accs[temp].name;
-                                    }
-                                    @if (string.IsNullOrEmpty(doctorname))
-                                    {
-                                        <td>
-                                            Đang chờ nhận
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="@doctorInfo">@doctorname</a>
-                                        </td>
-                                    }
+                                }
+                                else
+                                {
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="@doctorInfo">@doctorname</a>
+                                    </td>
+                                }
 
-                                    @if (app.state == 0)
-                                    {
-                                        <td><span class="badge bg-label-secondary me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
-                                    }
-                                    else if (app.state == 1)
-                                    {
-                                        <td><span class="badge bg-label-danger me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
-                                    }
-                                    else if (app.state == 2)
-                                    {
-                                        <td><span class="badge bg-label-success me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
-                                    }
-                                    else
-                                    {
-                                        <td><span class="badge bg-label-dark me-1">Có lỗi dữ liệu</span></td>
-                                    }
-                                    <td>
-                                        <div class="dropdown">
-                                            <button type="button"
-                                                    class="btn p-0 dropdown-toggle hide-arrow"
-                                                    data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="@appInfo"><i class="bx bx-detail me-1"></i> Xem chi tiết</a>
-                                                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i>Hủy cuộc hẹn</a>
-                                            </div>
+                                @if (app.state == 0)
+                                {
+                                    <td><span class="badge bg-label-secondary me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
+                                }
+                                else if (app.state == 1)
+                                {
+                                    <td><span class="badge bg-label-warning me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
+                                }
+                                else if (app.state == 2)
+                                {
+                                    <td><span class="badge bg-label-success me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
+                                }
+                                else if (app.state == 3)
+                                {
+                                    <td><span class="badge bg-label-danger me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
+                                }
+
+                                else
+                                {
+                                    <td><span class="badge bg-label-dark me-1">Có lỗi dữ liệu</span></td>
+                                }
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button"
+                                                class="btn p-0 dropdown-toggle hide-arrow"
+                                                data-bs-toggle="dropdown">
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="@appInfo"><i class="bx bx-detail me-1"></i> Xem chi tiết</a>
+                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i>Hủy cuộc hẹn</a>
                                         </div>
-                                    </td>
-                                </tr>
+                                    </div>
+                                </td>
+                            </tr>
                                 temp++;
                             }
                             @{

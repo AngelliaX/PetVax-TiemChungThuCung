@@ -176,16 +176,16 @@
                         </a>
                     </li>
                     <!-- User interface -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0)" class="menu-link">
+                    <li class="menu-item  @(lastURLPart.ToLower() == "upcomming" ? "active" : "")">
+                        <a href="/Doctor/Appointment/Upcomming" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-calendar-exclamation"></i>
                             <div data-i18n="User interface">Sắp tới</div>
                         </a>
                     </li>
 
                     <!-- Lịch sử-->
-                    <li class="menu-item">
-                        <a href="javascript:void(0)" class="menu-link">
+                    <li class="menu-item  @(lastURLPart.ToLower() == "history" ? "active" : "")">
+                        <a href="/Doctor/Appointment/History" class="menu-link">
                             <i class="menu-icon tf-icons bx bxs-book-open"></i>
                             <div data-i18n="User interface">Lịch sử</div>
                         </a>
