@@ -38,6 +38,18 @@ namespace Models.DataAccessLayer
             return name;
         }
 
+        public string getBreedIdbyPetId(string pet_id)
+        {
+            var pet = context.pets.FirstOrDefault(p => p.pet_id == pet_id);
+
+            string result = "No Data Found";
+            if (pet != null)
+            {
+                result = pet.breed_id;
+            }
+            return result;
+        }
+
         public string getPetNamebyId(string id)
         {
             var pet = context.pets.FirstOrDefault(p => p.pet_id == id);
@@ -49,6 +61,13 @@ namespace Models.DataAccessLayer
             }
             return result;
         }
+
+        public pet getPetbyId(string id)
+        {
+            var pet = context.pets.FirstOrDefault(p => p.pet_id == id) ?? new pet();
+            return pet;
+        }
+
 
         public List<breed> getAllBreed()
         {

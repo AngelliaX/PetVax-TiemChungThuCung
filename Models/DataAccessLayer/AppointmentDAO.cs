@@ -15,11 +15,52 @@ namespace Models.DataAccessLayer
             context = new TiemChungThuCungDbContext();
         }
 
+        public appointment getAppointmentById(string appId)
+        {
+            var app = context.appointments.FirstOrDefault(a => a.appointment_id == appId) ?? new appointment();
+            return app;
+        }
+
+        //should get the appointment from context then update it, shoulnd passs the appointment directly into the function
+        public void setDoctorforApp(string appId, string doctor_username)
+        {
+            var app = context.appointments.FirstOrDefault(a => a.appointment_id == appId) ?? new appointment();
+            app.doctor_username = doctor_username;
+            app.state = 1;
+            context.SaveChanges();
+        }
+
+        public List<appointment> getUpcommingAppointmentsOfDoctorUsername(string username)
+        {
+            var list = context.appointments.Where(a => a.doctor_username == username && a.state == 0 || a.state == 1).ToList() ?? new List<appointment>();
+            return list;
+        }
+
+        public List<appointment> getFinishedAppointmentsOfDoctorUsername(string username)
+        {
+            var list = context.appointments.Where(a => a.doctor_username == username && a.state == 2 || a.state == 3).ToList() ?? new List<appointment>();
+            return list;
+        }
+
         public List<appointment> getAllAppointmentsfromPetList(List<pet> pets)
         {
             var petIds = pets.Select(p => p.pet_id).ToList();
             var list = context.appointments.Where(a => petIds.Contains(a.pet_id)).ToList() ?? new List<appointment>();
             return list;
+        }
+
+        public List<appointment> getAll_unOwnedAppointments()
+        {            
+            var list = context.appointments.Where(a => a.state == 0).ToList() ?? new List<appointment>();
+            return list;
+        }
+
+        public List<appointment> getAll_unOwnedAppointments_FilterSpecialist(List<string> breedIds)
+        {
+            PetDAO petDAO = new PetDAO();
+            var list = getAll_unOwnedAppointments();
+            var specialist_List = list.Where(a => breedIds.Contains(petDAO.getBreedIdbyPetId(a.pet_id))).ToList() ?? new List<appointment>();
+            return specialist_List;
         }
 
         public void insertNewAppointment(string pet_id, DateTime date, string note)

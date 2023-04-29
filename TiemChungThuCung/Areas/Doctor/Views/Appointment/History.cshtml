@@ -1,0 +1,301 @@
+﻿
+@{
+
+}
+
+@using TiemChungThuCung.Areas.CommonUse
+@model TiemChungThuCung.Areas.Doctor.Models.DoctorUpcommingModel
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <div class="card">
+            <h5 class="card-header">Lịch sử</h5>
+            <div class="card-body">
+                <div class="table-responsive text-nowrap">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th><i class="tf-icons bx bx-bone"></i> Thú cưng</th>
+                                <th><i class="tf-icons bx bx-user"></i> Khách hàng</th>
+                                <th><i class="tf-icons bx bx-calendar"></i> Ngày hẹn</th>
+                                <th><i class="tf-icons bx bx-podcast"></i> Trạng thái</th>
+                                <th><i class="tf-icons bx bx-cog"></i> Hành động</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <!--start of loop-->
+                            @{
+                                int temp = 0;
+                            }
+                            @foreach (var app in Model.apps)
+                            {
+                                string modelId_button = "#modelId" + temp.ToString();
+                                string manageVacc_button = "#manageVaccId" + temp.ToString();
+                                <tr>
+                                    <td>
+                                        <strong style="float:left;">@Model.pets[temp].pet_name</strong>
+                                        <span style="float:right;">@Model.breednames[temp]</span>
+                                    </td>
+                                    <td>
+                                        @Model.accs[temp].name
+                                    </td>
+                                    <td>@(app.date?.ToString("dd/MM/yyyy"))</td>
+
+                                    @if (app.state == 0)
+                                    {
+                                        <td><span class="badge bg-label-secondary me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
+                                    }
+                                    else if (app.state == 1)
+                                    {
+                                        <td><span class="badge bg-label-warning me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
+                                    }
+                                    else if (app.state == 2)
+                                    {
+                                        <td><span class="badge bg-label-success me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
+                                    }
+                                    else if (app.state == 3)
+                                    {
+                                        <td><span class="badge bg-label-danger me-1">@AppointmentCommonUse.getStatus(app.state)</span></td>
+                                    }
+
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button"
+                                                    class="btn p-0 dropdown-toggle hide-arrow"
+                                                    data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="@modelId_button"><i class="bx bx-detail me-1"></i> Xem chi tiết</a>
+                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="@manageVacc_button"><i class="bx bx-edit-alt me-1"></i>Cập nhật lộ trình</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                temp++;
+                            }
+                        </tbody>
+                    </table>
+                    <!--Start of appointment model-->
+                    @{
+                        temp = 0;
+                    }
+                    @foreach (var app in Model.apps)
+                    {
+                        using (Html.BeginForm())
+                        {
+                            string modelId = "modelId" + temp.ToString();
+                            <div class="modal fade" id="@modelId" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Thông tin cuộc hẹn</h5>
+                                            <button type="button"
+                                                    class="btn-close"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!--Start of client info-->
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="mb-3 col-md-6">
+                                                        <label for="firstName" class="form-label">Tên khách hàng</label>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               id="firstName"
+                                                               value="@Model.accs[temp].name"
+                                                               readonly />
+                                                    </div>
+
+                                                    <div class="mb-3 col-md-6">
+                                                        <label for="email" class="form-label">E-mail</label>
+                                                        <input class="form-control"
+                                                               type="text"
+                                                               id="email"
+                                                               value="@Model.accs[temp].email"
+                                                               readonly />
+                                                    </div>
+                                                    <div class="mb-3 col-md-6">
+                                                        <label class="form-label" for="phoneNumber">Số điện thoại</label>
+                                                        <div class="input-group input-group-merge">
+                                                            <span class="input-group-text" style="background-color: lightgray;">VN</span>
+                                                            <input type="text"
+                                                                   id="phoneNumber"
+                                                                   class="form-control"
+                                                                   value="@Model.accs[temp].phone"
+                                                                   readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 col-md-6">
+                                                        <label for="address" class="form-label">Địa chỉ</label>
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               id="address"
+                                                               value="@Model.accs[temp].address"
+                                                               readonly />
+                                                    </div>
+                                                    <div class="mb-3 col-md-6">
+                                                        <label for="html5-date-input" class="form-label">Ngày sinh</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control"
+                                                                   type="text"
+                                                                   value="@(Model.accs[temp].birthday?.ToString(" dd /MM/yyyy"))"
+                                                                   id="html5-date-input"
+                                                                   readonly />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--End of client info-->
+                                            <hr class="my-0" />
+                                            <!--Start of appointment info-->
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="mb-3 col-md-6">
+                                                        <label for="firstName" class="form-label">Ngày khởi tạo</label>
+                                                        <input type="text"
+                                                               id="basic-icon-default-company"
+                                                               class="form-control"
+                                                               value="@(app.init_day?.ToString("dd/MM/yyyy"))"
+                                                               aria-label="ACME Inc."
+                                                               aria-describedby="basic-icon-default-company2"
+                                                               readonly />
+                                                    </div>
+
+                                                    <div class="mb-3 col-md-6">
+                                                        <label for="firstName" class="form-label">Ngày hẹn gặp</label>
+                                                        <input type="text"
+                                                               id="basic-icon-default-company"
+                                                               class="form-control"
+                                                               value="@(app.date?.ToString("dd/MM/yyyy"))"
+                                                               aria-label="ACME Inc."
+                                                               aria-describedby="basic-icon-default-company2"
+                                                               readonly />
+                                                    </div>
+
+                                                    <div class="mb-3 col-md-6">
+                                                        <label for="address" class="form-label">Ghi chú</label>
+                                                        <textarea id="appointNote"
+                                                                  style="height: 150px;"
+                                                                  class="form-control"
+                                                                  placeholder=""
+                                                                  readonly>@app.note</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--End of appointment info-->
+
+                                            <hr class="my-0" />
+                                            <!--Start of pet info-->
+                                            <div class="card-body">
+                                                <div class="col-md-9 col-12 mx-auto">
+                                                    <h6 class="text-muted">Chi tiết thú cưng</h6>
+                                                    <div class="nav-align-top mb-4">
+                                                        <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+                                                            <li class="nav-item">
+                                                                <button type="button"
+                                                                        class="nav-link active"
+                                                                        role="tab"
+                                                                        data-bs-toggle="tab"
+                                                                        data-bs-target='@("#All_navs-pills-justified-general" + temp.ToString())'
+                                                                        aria-controls='@("All_navs-pills-justified-general" + temp.ToString())'
+                                                                        aria-selected="false">
+                                                                    <i class="tf-icons bx bx-home"></i> Chung
+                                                                </button>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <button type="button"
+                                                                        class="nav-link"
+                                                                        role="tab"
+                                                                        data-bs-toggle="tab"
+                                                                        data-bs-target='@("#All_navs-pills-justified-profile" + temp.ToString())'
+                                                                        aria-controls='@("All_navs-pills-justified-profile" + temp.ToString())'
+                                                                        aria-selected="false">
+                                                                    <i class="tf-icons bx bx-check-shield"></i> Hồ sơ tiêm
+                                                                </button>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <button type="button"
+                                                                        class="nav-link"
+                                                                        role="tab"
+                                                                        data-bs-toggle="tab"
+                                                                        data-bs-target='@("#All_navs-pills-justified-messages" + temp.ToString())'
+                                                                        aria-controls='@("All_navs-pills-justified-messages" + temp.ToString())'
+                                                                        aria-selected="false">
+                                                                    <i class="tf-icons bx bx-message-square"></i> Ghi chú
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            <div class="card-body">
+                                                                <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                                                    <img src="~/Assets/General/img/pets/symbol.png" alt="google" class="me-3" height="100" width="100" />
+                                                                    <div class="button-wrapper">
+                                                                        <label class=" me-2 mb-4">
+                                                                            <span class="d-none d-sm-block"><b>Tên thú:</b>@Model.pets[temp].pet_name</span>
+                                                                            <span class="text-muted mb-0"><b>Loài: @Model.breednames[temp]</b> </span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="tab-pane fade show active" id='@("All_navs-pills-justified-general" + temp.ToString())' role="tabpanel">
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="mb-3 col-md-6">
+                                                                            <label><b>Số tuổi:</b> @Model.pets[temp].age tháng</label>
+                                                                        </div>
+                                                                        <div class="mb-3 col-md-6">
+                                                                            <label><b>Trọng lượng:</b> @Model.pets[temp].weight kg</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="tab-pane fade" id='@("All_navs-pills-justified-profile" + temp.ToString())' role="tabpanel">
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="mb-3 col-md-6">
+                                                                            <label>- TODO</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id='@("All_navs-pills-justified-messages" + temp.ToString())' role="tabpanel">
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="mb-3 col-md-6">
+                                                                            <label>- Cần ăn nhiều thịt sống</label>
+                                                                            <br>
+                                                                            <label>- Thiếu vitamin D</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--End of pet info-->
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                Tắt
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <!--End of appointment model-->
+                        temp++;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
