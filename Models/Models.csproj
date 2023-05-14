@@ -64,6 +64,7 @@
     <Compile Include="DataAccessLayer\DoctorDAO.cs" />
     <Compile Include="DataAccessLayer\PetDAO.cs" />
     <Compile Include="DataAccessLayer\AppointmentDAO.cs" />
+    <Compile Include="DataAccessLayer\VaccineDAO.cs" />
     <Compile Include="EntityFramework\account.cs" />
     <Compile Include="EntityFramework\admin.cs" />
     <Compile Include="EntityFramework\appointment.cs" />

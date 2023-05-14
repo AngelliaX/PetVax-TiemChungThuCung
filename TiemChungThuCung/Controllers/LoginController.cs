@@ -17,11 +17,13 @@ namespace TiemChungThuCung.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            Trace.WriteLine("Index httpget called");
             if (User.Identity.IsAuthenticated)
             {
+                Trace.WriteLine("Index redirect called");
                 return redirectLogin();
             }
-            return View();
+            return View(new LoginModel());
         }
 
         [HttpPost]

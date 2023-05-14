@@ -11,6 +11,12 @@
 
         <div class="card">
             <h5 class="card-header">Danh sách cuộc hẹn sắp tới</h5>
+            @if (TempData["SuccessUpdateApp"] != null)
+            {
+                <div class="alert alert-success">
+                    @Html.Raw(TempData["SuccessUpdateApp"])
+                </div>
+            }
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <table class="table table-bordered">
@@ -76,201 +82,219 @@
                                 </tr>
                                 temp++;
                             }
-                        </tbody>
-                    </table>
-                    <!--Start of appointment model-->
-                    @{
-                        temp = 0;
-                    }
-                    @foreach (var app in Model.apps)
-                    {
-                        using (Html.BeginForm())
+                            @if (temp < 3)
+                            {
+                                for (int i = temp; i < 3; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span> ‌ </span>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                        }
+                                        }
+                                </tbody>
+                        </table>
+                        <!--Start of appointment model-->
+                        @{
+                            temp = 0;
+                        }
+                        @foreach (var app in Model.apps)
                         {
-                            string modelId = "modelId" + temp.ToString();
-                            <div class="modal fade" id="@modelId" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Thông tin cuộc hẹn</h5>
-                                            <button type="button"
-                                                    class="btn-close"
-                                                    data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <!--Start of client info-->
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Tên khách hàng</label>
-                                                        <input class="form-control"
-                                                               type="text"
-                                                               id="firstName"
-                                                               value="@Model.accs[temp].name"
-                                                               readonly />
-                                                    </div>
-
-                                                    <div class="mb-3 col-md-6">
-                                                        <label for="email" class="form-label">E-mail</label>
-                                                        <input class="form-control"
-                                                               type="text"
-                                                               id="email"
-                                                               value="@Model.accs[temp].email"
-                                                               readonly />
-                                                    </div>
-                                                    <div class="mb-3 col-md-6">
-                                                        <label class="form-label" for="phoneNumber">Số điện thoại</label>
-                                                        <div class="input-group input-group-merge">
-                                                            <span class="input-group-text" style="background-color: lightgray;">VN</span>
-                                                            <input type="text"
-                                                                   id="phoneNumber"
-                                                                   class="form-control"
-                                                                   value="@Model.accs[temp].phone"
-                                                                   readonly />
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3 col-md-6">
-                                                        <label for="address" class="form-label">Địa chỉ</label>
-                                                        <input type="text"
-                                                               class="form-control"
-                                                               id="address"
-                                                               value="@Model.accs[temp].address"
-                                                               readonly />
-                                                    </div>
-                                                    <div class="mb-3 col-md-6">
-                                                        <label for="html5-date-input" class="form-label">Ngày sinh</label>
-                                                        <div class="col-md-10">
+                            using (Html.BeginForm())
+                            {
+                                string modelId = "modelId" + temp.ToString();
+                                <div class="modal fade" id="@modelId" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Thông tin cuộc hẹn</h5>
+                                                <button type="button"
+                                                        class="btn-close"
+                                                        data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!--Start of client info-->
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">Tên khách hàng</label>
                                                             <input class="form-control"
                                                                    type="text"
-                                                                   value="@(Model.accs[temp].birthday?.ToString(" dd /MM/yyyy"))"
-                                                                   id="html5-date-input"
+                                                                   id="firstName"
+                                                                   value="@Model.accs[temp].name"
                                                                    readonly />
                                                         </div>
+
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="email" class="form-label">E-mail</label>
+                                                            <input class="form-control"
+                                                                   type="text"
+                                                                   id="email"
+                                                                   value="@Model.accs[temp].email"
+                                                                   readonly />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label class="form-label" for="phoneNumber">Số điện thoại</label>
+                                                            <div class="input-group input-group-merge">
+                                                                <span class="input-group-text" style="background-color: lightgray;">VN</span>
+                                                                <input type="text"
+                                                                       id="phoneNumber"
+                                                                       class="form-control"
+                                                                       value="@Model.accs[temp].phone"
+                                                                       readonly />
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="address" class="form-label">Địa chỉ</label>
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   id="address"
+                                                                   value="@Model.accs[temp].address"
+                                                                   readonly />
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="html5-date-input" class="form-label">Ngày sinh</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control"
+                                                                       type="text"
+                                                                       value="@(Model.accs[temp].birthday?.ToString("dd/MM/yyyy"))"
+                                                                       id="html5-date-input"
+                                                                       readonly />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!--End of client info-->
-                                            <hr class="my-0" />
-                                            <!--Start of appointment info-->
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ngày khởi tạo</label>
-                                                        <input type="text"
-                                                               id="basic-icon-default-company"
-                                                               class="form-control"
-                                                               value="@(app.init_day?.ToString("dd/MM/yyyy"))"
-                                                               aria-label="ACME Inc."
-                                                               aria-describedby="basic-icon-default-company2"
-                                                               readonly />
-                                                    </div>
+                                                <!--End of client info-->
+                                                <hr class="my-0" />
+                                                <!--Start of appointment info-->
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">Ngày khởi tạo</label>
+                                                            <input type="text"
+                                                                   id="basic-icon-default-company"
+                                                                   class="form-control"
+                                                                   value="@(app.init_day?.ToString("dd/MM/yyyy"))"
+                                                                   aria-label="ACME Inc."
+                                                                   aria-describedby="basic-icon-default-company2"
+                                                                   readonly />
+                                                        </div>
 
-                                                    <div class="mb-3 col-md-6">
-                                                        <label for="firstName" class="form-label">Ngày hẹn gặp</label>
-                                                        <input type="text"
-                                                               id="basic-icon-default-company"
-                                                               class="form-control"
-                                                               value="@(app.date?.ToString("dd/MM/yyyy"))"
-                                                               aria-label="ACME Inc."
-                                                               aria-describedby="basic-icon-default-company2"
-                                                               readonly />
-                                                    </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="firstName" class="form-label">Ngày hẹn gặp</label>
+                                                            <input type="text"
+                                                                   id="basic-icon-default-company"
+                                                                   class="form-control"
+                                                                   value="@(app.date?.ToString("dd/MM/yyyy"))"
+                                                                   aria-label="ACME Inc."
+                                                                   aria-describedby="basic-icon-default-company2"
+                                                                   readonly />
+                                                        </div>
 
-                                                    <div class="mb-3 col-md-6">
-                                                        <label for="address" class="form-label">Ghi chú</label>
-                                                        <textarea id="appointNote"
-                                                                  style="height: 150px;"
-                                                                  class="form-control"
-                                                                  placeholder=""
-                                                                  readonly>@app.note</textarea>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label for="address" class="form-label">Ghi chú</label>
+                                                            <textarea id="appointNote"
+                                                                      style="height: 150px;"
+                                                                      class="form-control"
+                                                                      placeholder=""
+                                                                      readonly>@app.note</textarea>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!--End of appointment info-->
+                                                <!--End of appointment info-->
 
-                                            <hr class="my-0" />
-                                            <!--Start of pet info-->
-                                            <div class="card-body">
-                                                <div class="col-md-9 col-12 mx-auto">
-                                                    <h6 class="text-muted">Chi tiết thú cưng</h6>
-                                                    <div class="nav-align-top mb-4">
-                                                        <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
-                                                            <li class="nav-item">
-                                                                <button type="button"
-                                                                        class="nav-link active"
-                                                                        role="tab"
-                                                                        data-bs-toggle="tab"
-                                                                        data-bs-target='@("#All_navs-pills-justified-general" + temp.ToString())'
-                                                                        aria-controls='@("All_navs-pills-justified-general" + temp.ToString())'
-                                                                        aria-selected="false">
-                                                                    <i class="tf-icons bx bx-home"></i> Chung
-                                                                </button>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <button type="button"
-                                                                        class="nav-link"
-                                                                        role="tab"
-                                                                        data-bs-toggle="tab"
-                                                                        data-bs-target='@("#All_navs-pills-justified-profile" + temp.ToString())'
-                                                                        aria-controls='@("All_navs-pills-justified-profile" + temp.ToString())'
-                                                                        aria-selected="false">
-                                                                    <i class="tf-icons bx bx-check-shield"></i> Hồ sơ tiêm
-                                                                </button>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <button type="button"
-                                                                        class="nav-link"
-                                                                        role="tab"
-                                                                        data-bs-toggle="tab"
-                                                                        data-bs-target='@("#All_navs-pills-justified-messages" + temp.ToString())'
-                                                                        aria-controls='@("All_navs-pills-justified-messages" + temp.ToString())'
-                                                                        aria-selected="false">
-                                                                    <i class="tf-icons bx bx-message-square"></i> Ghi chú
-                                                                </button>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="tab-content">
-                                                            <div class="card-body">
-                                                                <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                                                    <img src="~/Assets/General/img/pets/symbol.png" alt="google" class="me-3" height="100" width="100" />
-                                                                    <div class="button-wrapper">
-                                                                        <label class=" me-2 mb-4">
-                                                                            <span class="d-none d-sm-block"><b>Tên thú:</b>@Model.pets[temp].pet_name</span>
-                                                                            <span class="text-muted mb-0"><b>Loài: @Model.breednames[temp]</b> </span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="tab-pane fade show active" id='@("All_navs-pills-justified-general" + temp.ToString())' role="tabpanel">
+                                                <hr class="my-0" />
+                                                <!--Start of pet info-->
+                                                <div class="card-body">
+                                                    <div class="col-md-9 col-12 mx-auto">
+                                                        <h6 class="text-muted">Chi tiết thú cưng</h6>
+                                                        <div class="nav-align-top mb-4">
+                                                            <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+                                                                <li class="nav-item">
+                                                                    <button type="button"
+                                                                            class="nav-link active"
+                                                                            role="tab"
+                                                                            data-bs-toggle="tab"
+                                                                            data-bs-target='@("#All_navs-pills-justified-general" + temp.ToString())'
+                                                                            aria-controls='@("All_navs-pills-justified-general" + temp.ToString())'
+                                                                            aria-selected="false">
+                                                                        <i class="tf-icons bx bx-home"></i> Chung
+                                                                    </button>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <button type="button"
+                                                                            class="nav-link"
+                                                                            role="tab"
+                                                                            data-bs-toggle="tab"
+                                                                            data-bs-target='@("#All_navs-pills-justified-profile" + temp.ToString())'
+                                                                            aria-controls='@("All_navs-pills-justified-profile" + temp.ToString())'
+                                                                            aria-selected="false">
+                                                                        <i class="tf-icons bx bx-check-shield"></i> Hồ sơ tiêm
+                                                                    </button>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <button type="button"
+                                                                            class="nav-link"
+                                                                            role="tab"
+                                                                            data-bs-toggle="tab"
+                                                                            data-bs-target='@("#All_navs-pills-justified-messages" + temp.ToString())'
+                                                                            aria-controls='@("All_navs-pills-justified-messages" + temp.ToString())'
+                                                                            aria-selected="false">
+                                                                        <i class="tf-icons bx bx-message-square"></i> Ghi chú
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="tab-content">
                                                                 <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="mb-3 col-md-6">
-                                                                            <label><b>Số tuổi:</b> @Model.pets[temp].age tháng</label>
-                                                                        </div>
-                                                                        <div class="mb-3 col-md-6">
-                                                                            <label><b>Trọng lượng:</b> @Model.pets[temp].weight kg</label>
+                                                                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                                                        <img src="~/Assets/General/img/pets/symbol.png" alt="google" class="me-3" height="100" width="100" />
+                                                                        <div class="button-wrapper">
+                                                                            <label class=" me-2 mb-4">
+                                                                                <span class="d-none d-sm-block"><b>Tên thú:</b>@Model.pets[temp].pet_name</span>
+                                                                                <span class="text-muted mb-0"><b>Loài: @Model.breednames[temp]</b> </span>
+                                                                            </label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
-                                                            <div class="tab-pane fade" id='@("All_navs-pills-justified-profile" + temp.ToString())' role="tabpanel">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="mb-3 col-md-6">
-                                                                            <label>- TODO</label>
+                                                                <div class="tab-pane fade show active" id='@("All_navs-pills-justified-general" + temp.ToString())' role="tabpanel">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label><b>Số tuổi:</b> @Model.pets[temp].age tháng</label>
+                                                                            </div>
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label><b>Trọng lượng:</b> @Model.pets[temp].weight kg</label>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="tab-pane fade" id='@("All_navs-pills-justified-messages" + temp.ToString())' role="tabpanel">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="mb-3 col-md-6">
-                                                                            <label>- Cần ăn nhiều thịt sống</label>
-                                                                            <br>
-                                                                            <label>- Thiếu vitamin D</label>
+
+                                                                <div class="tab-pane fade" id='@("All_navs-pills-justified-profile" + temp.ToString())' role="tabpanel">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <label>@Html.Raw(@Model.petDocuments[temp])</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab-pane fade" id='@("All_navs-pills-justified-messages" + temp.ToString())' role="tabpanel">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label>- Cần ăn nhiều thịt sống</label>
+                                                                                <br>
+                                                                                <label>- Thiếu vitamin D</label>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -278,287 +302,380 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!--End of pet info-->
                                             </div>
-                                            <!--End of pet info-->
-                                        </div>
 
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                                Tắt
-                                            </button>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                    Tắt
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
+                            <!--End of appointment model-->
+                            temp++;
                         }
-                        <!--End of appointment model-->
-                        temp++;
-                    }
 
-                    <!--Start of manage vaccine modal-->
-                    @{
-                        temp = 0;
-                    }
-                    @foreach (var app in Model.apps)
-                    {
-                        using (Html.BeginForm())
+                        <!--Start of manage vaccine modal-->
+                        @{
+                            temp = 0;
+                        }
+                        @foreach (var app in Model.apps)
                         {
-                            string manageVacc = "manageVaccId" + temp.ToString();
-                            <div class="modal fade" id="@manageVacc" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Liệu trình vaccine</h5>
-                                            <button type="button"
-                                                    class="btn-close"
-                                                    data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <!--Start of pet info-->
-                                            <div class="card-body">
-                                                <div class="col-md-9 col-12 mx-auto">
-                                                    <h6 class="text-muted">Chi tiết thú cưng</h6>
-                                                    <div class="nav-align-top mb-4">
-                                                        <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
-                                                            <li class="nav-item">
-                                                                <button type="button"
-                                                                        class="nav-link active"
-                                                                        role="tab"
-                                                                        data-bs-toggle="tab"
-                                                                        data-bs-target='@("#All_navs-pills-justified-general_manageVacc" + temp.ToString())'
-                                                                        aria-controls='@("All_navs-pills-justified-general_manageVacc" + temp.ToString())'
-                                                                        aria-selected="false">
-                                                                    <i class="tf-icons bx bx-home"></i> Chung
-                                                                </button>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <button type="button"
-                                                                        class="nav-link"
-                                                                        role="tab"
-                                                                        data-bs-toggle="tab"
-                                                                        data-bs-target='@("#All_navs-pills-justified-profile_manageVacc" + temp.ToString())'
-                                                                        aria-controls='@("All_navs-pills-justified-profile_manageVacc" + temp.ToString())'
-                                                                        aria-selected="false">
-                                                                    <i class="tf-icons bx bx-check-shield"></i> Hồ sơ tiêm
-                                                                </button>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <button type="button"
-                                                                        class="nav-link"
-                                                                        role="tab"
-                                                                        data-bs-toggle="tab"
-                                                                        data-bs-target='@("#All_navs-pills-justified-messages_manageVacc" + temp.ToString())'
-                                                                        aria-controls='@("All_navs-pills-justified-messages_manageVacc" + temp.ToString())'
-                                                                        aria-selected="false">
-                                                                    <i class="tf-icons bx bx-message-square"></i> Ghi chú
-                                                                </button>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="tab-content">
+                            using (Html.BeginForm())
+                            {
+                                string manageVacc = "manageVaccId" + temp.ToString();
+                                @Html.HiddenFor(model => model.remainModalId, new { @Value = manageVacc })
+
+                                <div class="modal fade" id="@manageVacc" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Liệu trình vaccine</h5>
+                                                <button type="button"
+                                                        class="btn-close"
+                                                        data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @if (TempData["SuccessMessage" + manageVacc] != null)
+                                                {
+                                                    <div class="alert alert-success">
+                                                        @Html.Raw(TempData["SuccessMessage" + manageVacc])
+                                                    </div>
+                                                }
+                                                @if (TempData["FailedMessage" + manageVacc] != null)
+                                                {
+                                                    <div class="alert alert-danger">
+                                                        @Html.Raw(@TempData["FailedMessage" + manageVacc])
+                                                    </div>
+                                                }
+                                                <!--Start of pet info-->
+                                                <div class="card-body">
+                                                    <div class="col-md-9 col-12 mx-auto">
+                                                        <h6 class="text-muted">Chi tiết thú cưng</h6>
+                                                        <div class="nav-align-top mb-4">
+                                                            <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+                                                                <li class="nav-item">
+                                                                    <button type="button"
+                                                                            class="nav-link "
+                                                                            role="tab"
+                                                                            data-bs-toggle="tab"
+                                                                            data-bs-target='@("#All_navs-pills-justified-general_manageVacc" + temp.ToString())'
+                                                                            aria-controls='@("All_navs-pills-justified-general_manageVacc" + temp.ToString())'
+                                                                            aria-selected="false">
+                                                                        <i class="tf-icons bx bx-home"></i> Chung
+                                                                    </button>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <button type="button"
+                                                                            class="nav-link active"
+                                                                            role="tab"
+                                                                            data-bs-toggle="tab"
+                                                                            data-bs-target='@("#All_navs-pills-justified-profile_manageVacc" + temp.ToString())'
+                                                                            aria-controls='@("All_navs-pills-justified-profile_manageVacc" + temp.ToString())'
+                                                                            aria-selected="false">
+                                                                        <i class="tf-icons bx bx-check-shield"></i> Hồ sơ tiêm
+                                                                    </button>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <button type="button"
+                                                                            class="nav-link"
+                                                                            role="tab"
+                                                                            data-bs-toggle="tab"
+                                                                            data-bs-target='@("#All_navs-pills-justified-messages_manageVacc" + temp.ToString())'
+                                                                            aria-controls='@("All_navs-pills-justified-messages_manageVacc" + temp.ToString())'
+                                                                            aria-selected="false">
+                                                                        <i class="tf-icons bx bx-message-square"></i> Ghi chú
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="tab-content">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                                                        <img src="~/Assets/General/img/pets/symbol.png" alt="google" class="me-3" height="100" width="100" />
+                                                                        <div class="button-wrapper">
+                                                                            <label class=" me-2 mb-4">
+                                                                                <span class="d-none d-sm-block"><b>Tên thú:</b> @Model.pets[temp].pet_name</span>
+                                                                                <span class="text-muted mb-0"><b>Loài: @Model.breednames[temp]</b> </span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="tab-pane fade" id='@("All_navs-pills-justified-general_manageVacc" + temp.ToString())' role="tabpanel">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label><b>Số tuổi:</b> @Model.pets[temp].age tháng</label>
+                                                                            </div>
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label><b>Trọng lượng:</b> @Model.pets[temp].weight kg</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="tab-pane fade  show active" id='@("All_navs-pills-justified-profile_manageVacc" + temp.ToString())' role="tabpanel">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <label>@Html.Raw(@Model.petDocuments[temp])</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab-pane fade" id='@("All_navs-pills-justified-messages_manageVacc" + temp.ToString())' role="tabpanel">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="mb-3 col-md-6">
+                                                                                <label>- Cần ăn nhiều thịt sống</label>
+                                                                                <br>
+                                                                                <label>- Thiếu vitamin D</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--End of pet info-->
+                                                <!--Start of hồ sơ vaccine-->
+                                                <div class="card-body">
+                                                    <div class="col-md-9 col-12 mx-auto">
+                                                        <h6 class="text-muted">Hồ sơ Vaccine</h6>
+
+                                                        <div class="card">
                                                             <div class="card-body">
-                                                                <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                                                    <img src="~/Assets/General/img/pets/symbol.png" alt="google" class="me-3" height="100" width="100" />
-                                                                    <div class="button-wrapper">
-                                                                        <label class=" me-2 mb-4">
-                                                                            <span class="d-none d-sm-block"><b>Tên thú:</b> @Model.pets[temp].pet_name</span>
-                                                                            <span class="text-muted mb-0"><b>Loài: @Model.breednames[temp]</b> </span>
-                                                                        </label>
-                                                                    </div>
+                                                                <div class="table-responsive text-nowrap">
+                                                                    <table class="table table-bordered">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th><i class="tf-icons bx bx-bone"></i> Vaccine</th>
+                                                                                <th><i class="tf-icons bx bx-calendar"></i> Ngày hẹn tiêm</th>
+                                                                                <th><i class="tf-icons bx bx-purchase-tag"></i> Mũi thứ</th>
+                                                                                <th><i class="tf-icons bx bx-user"></i> Trạng thái</th>
+                                                                                <th><i class="tf-icons bx bx-cog"></i> Sửa</th>
+                                                                            </tr>
+                                                                        </thead>
+
+                                                                        <tbody>
+                                                                            @{
+                                                                                int vaccine_tmp = 0;
+                                                                            }
+                                                                            @if (temp < Model.pet_vacc.Count && Model.pet_vacc[temp] != null)
+                                                                            {
+                                                                                foreach (var vaccine in Model.pet_vacc[temp])
+                                                                                {
+
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <strong>@Model.correspond_vaccine_name[temp][vaccine_tmp]</strong>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @(vaccine.vaccine_date?.ToString("dd/MM/yyyy"))
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @vaccine.dose_order.ToString()
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <!--When submit this form, it wont submit other which is [temp], so we use [0]-->
+                                                                                            @Html.HiddenFor(model => model.updatePetVacc[vaccine_tmp].record_id, new { @Value = vaccine.record_id })
+                                                                                            @Html.HiddenFor(model => model.updatePetVacc[vaccine_tmp].vaccine_code, new { @Value = vaccine.vaccine_code })
+                                                                                            @Html.HiddenFor(model => model.updatePetVacc[vaccine_tmp].dose_order, new { @Value = vaccine.dose_order })
+                                                                                            @Html.HiddenFor(model => model.updatePetVacc[vaccine_tmp].vaccine_date, new { @Value = vaccine.vaccine_date })
+                                                                                            @{
+                                                                                                var VACC_stateItems = new List<SelectListItem>
+                                                                                                                                                                                                                                                                                                                                                                {
+                                                                                                new SelectListItem { Text = "Chưa", Value = false.ToString() },
+                                                                                                new SelectListItem { Text = "Đã tiêm", Value = true.ToString() }
+                                                                                            };
+                                                                                                var VACC_selectedState = vaccine.state.ToString();
+                                                                                                foreach (var item in VACC_stateItems)
+                                                                                                {
+                                                                                                    if (item.Value == VACC_selectedState)
+                                                                                                    {
+                                                                                                        item.Selected = true;
+                                                                                                        break;
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                            @Html.DropDownListFor(model => model.updatePetVacc[vaccine_tmp].state, VACC_stateItems, new { @class = "form-select", aria_label = "Default select example", id = "exampleFormControlSelect1" })
+
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @using (Html.BeginForm())
+                                                                                            {
+                                                                                                @Html.HiddenFor(model => model.remainModalId, new { @Value = manageVacc })
+                                                                                                @Html.HiddenFor(model => model.pet_vaccIdtoRemove, new { @Value = vaccine.record_id })
+                                                                                                <button type="submit" class="btn btn-outline-danger" name="buttonObj" value="removeVaccine">
+                                                                                                    Xóa
+                                                                                                </button>
+                                                                                            }
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    vaccine_tmp++;
+                                                                                }
+                                                                            }
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn rounded-pill btn-warning" name="buttonObj" value="updateVaccine">Cập nhật</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <!--end of hồ sơ vaccine-->
+                                                <!--Start of thêm lịch tiêm info-->
+                                                <div class="card-body">
+                                                    <div class="col-md-9 col-12 mx-auto">
+                                                        <h6 class="text-muted">Thêm lịch tiêm</h6>
+
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <div class="table-responsive text-nowrap">
+                                                                    <table class="table table-bordered">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th><i class="tf-icons bx bx-bone"></i> Vaccine</th>
+                                                                                <th><i class="tf-icons bx bx-calendar"></i> Ngày tiêm</th>
+                                                                                <th><i class="tf-icons bx bx-purchase-tag"></i> Mũi thứ</th>
+                                                                            </tr>
+                                                                        </thead>
+
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    @{
+                                                                                        int tmp_vacList = 0;
+                                                                                        var selectList = new List<SelectListItem>();
+                                                                                        foreach (var vaccine_id in Model.Data_vaccineId)
+                                                                                        {
+                                                                                            selectList.Add(new SelectListItem { Text = Model.Data_vaccineName[tmp_vacList], Value = vaccine_id });
+                                                                                            tmp_vacList++;
+                                                                                        }
+                                                                                    }
+
+                                                                                    @Html.DropDownListFor(model => model.vaccineIdtoAdd, selectList, new { @class = "form-select", aria_label = "Default select example", id = "exampleFormControlSelect1" })
+
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="col-md-10">
+                                                                                        <input class="form-control" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" id="vaccineDateToJab" name="vaccineDateToJab" />
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    @Html.DropDownListFor(model => model.doseNumber, new List<SelectListItem>
+                                                                                    {
+                                                                                        new SelectListItem { Text = "Thứ 1", Value = "1" },
+                                                                                        new SelectListItem { Text = "Thứ 2", Value = "2" },
+                                                                                        new SelectListItem { Text = "Thứ 3", Value = "3" },
+                                                                                        new SelectListItem { Text = "Thứ 4", Value = "4" },
+                                                                                        new SelectListItem { Text = "Thứ 5", Value = "5" },
+                                                                                        new SelectListItem { Text = "Thứ 6", Value = "6" },
+                                                                                        new SelectListItem { Text = "Thứ 7", Value = "7" }
+                                                                                    }, new { @class = "form-select", aria_label = "Default select example", id = "exampleFormControlSelect1" })
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
                                                                 </div>
                                                             </div>
 
-                                                            <div class="tab-pane fade show active" id='@("All_navs-pills-justified-general_manageVacc" + temp.ToString())' role="tabpanel">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="mb-3 col-md-6">
-                                                                            <label><b>Số tuổi:</b> @Model.pets[temp].age tháng</label>
-                                                                        </div>
-                                                                        <div class="mb-3 col-md-6">
-                                                                            <label><b>Trọng lượng:</b> @Model.pets[temp].weight kg</label>
-                                                                        </div>
-                                                                    </div>
+                                                            @Html.HiddenFor(model => model.petIdtoAddVaccine, new { Value = app.pet_id })
+
+
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-outline-primary" name="buttonObj" value="addVaccine">
+                                                                    Thêm vaccine
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                <!--end of thêm lịch tiêm info-->
+                                                <!--Start of Cập nhật trạng thái info-->
+                                                <div class="card-body">
+                                                    <div class="col-md-5 col-12 mx-auto">
+                                                        <h6 class="text-muted">Cập nhật trạng thái đơn hẹn</h6>
+
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <div class="table-responsive text-nowrap">
+                                                                    <table class="table table-bordered">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th><i class="tf-icons bx bx-inject"></i> Trạng thái</th>
+                                                                            </tr>
+                                                                        </thead>
+
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <!--This code works fine, i use [0] because i don't want to create another variable just for this-->
+                                                                                    @Html.HiddenFor(model => model.apps[0].appointment_id, new { @Value = app.appointment_id })
+                                                                                    @{
+                                                                                        var stateItems = new List<SelectListItem>
+                                                                                                                                                                                                                                                                                                                                                                     {
+                                                                                                new SelectListItem { Selected = true , Text = "Chưa tiêm", Value = "1" },
+                                                                                                new SelectListItem { Text = "Thất bại", Value = "3" },
+                                                                                                new SelectListItem { Text = "Thành công", Value = "2" }
+                                                                                            };
+                                                                                    }
+                                                                                    @Html.DropDownListFor(model => model.apps[0].state, stateItems, new { @class = "form-select", aria_label = "Default select example", id = "exampleFormControlSelect1" })
+
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
                                                                 </div>
                                                             </div>
 
-                                                            <div class="tab-pane fade" id='@("All_navs-pills-justified-profile_manageVacc" + temp.ToString())' role="tabpanel">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="mb-3 col-md-6">
-                                                                            <label>- TODO</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane fade" id='@("All_navs-pills-justified-messages_manageVacc" + temp.ToString())' role="tabpanel">
-                                                                <div class="card-body">
-                                                                    <div class="row">
-                                                                        <div class="mb-3 col-md-6">
-                                                                            <label>- Cần ăn nhiều thịt sống</label>
-                                                                            <br>
-                                                                            <label>- Thiếu vitamin D</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-outline-success" name="buttonObj" value="updateAppointment">
+                                                                    Cập nhật trạng thái đơn hẹn
+                                                                </button>
                                                             </div>
                                                         </div>
+
+
                                                     </div>
                                                 </div>
+                                                <!--end of Cập nhật trạng thái -->
                                             </div>
-                                            <!--End of pet info-->
-                                            <!--Start of hồ sơ vaccine-->
-                                            <div class="card-body">
-                                                <div class="col-md-9 col-12 mx-auto">
-                                                    <h6 class="text-muted">Hồ sơ Vaccine</h6>
 
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="table-responsive text-nowrap">
-                                                                <table class="table table-bordered">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th><i class="tf-icons bx bx-bone"></i> Vaccine</th>
-                                                                            <th><i class="tf-icons bx bx-user"></i> Ngày tiêm</th>
-                                                                            <th><i class="tf-icons bx bx-user"></i> Trạng thái</th>
-                                                                            <th><i class="tf-icons bx bx-user"></i> Hành động</th>
-                                                                        </tr>
-                                                                    </thead>
+                                            <!-- Html.HiddenFor(model => model.chosen_appointmentId, new { Value = app.appointment_id })-->
 
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <strong>Pzifer</strong>
-                                                                            </td>
-                                                                            <td>
-                                                                                5/5/2023
-                                                                            </td>
-                                                                            <td>
-                                                                                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                                                                                    <option>Chọn 1 giá trị</option>
-                                                                                    <option value="1">Chưa tiêm</option>
-                                                                                    <option value="2">Đã tiêm</option>
-                                                                                </select>
-                                                                            </td>
-                                                                            <td>
-                                                                                <button type="button" class="btn rounded-pill btn-warning">Cập nhật</button>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
-                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                    Tắt
+                                                </button>
                                             </div>
-                                            <!--end of hồ sơ vaccine-->
-                                            <!--Start of thêm lịch tiêm info-->
-                                            <div class="card-body">
-                                                <div class="col-md-9 col-12 mx-auto">
-                                                    <h6 class="text-muted">Thêm lịch tiêm</h6>
-
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="table-responsive text-nowrap">
-                                                                <table class="table table-bordered">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th><i class="tf-icons bx bx-inject"></i> Vaccine</th>
-                                                                            <th><i class="tf-icons bx bx-user"></i> Ngày tiêm</th>
-                                                                        </tr>
-                                                                    </thead>
-
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                                                                                    <option>Chọn vaccine</option>
-                                                                                    <option value="VC001">Vaccine Care</option>
-                                                                                    <option value="VC003">MLV CAV-1</option>
-                                                                                    <option value="VC005">Vaccine 5 bệnh ở chó</option>
-                                                                                </select>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="col-md-10">
-                                                                                    <input class="form-control" type="date" value="2023-06-18" id="html5-date-input" />
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-outline-primary">
-                                                                Thêm vaccine
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                            <!--end of thêm lịch tiêm info-->
-                                            <!--Start of Cập nhật trạng thái info-->
-                                            <div class="card-body">
-                                                <div class="col-md-5 col-12 mx-auto">
-                                                    <h6 class="text-muted">Cập nhật trạng thái đơn hẹn</h6>
-
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="table-responsive text-nowrap">
-                                                                <table class="table table-bordered">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th><i class="tf-icons bx bx-inject"></i> Trạng thái</th>
-                                                                        </tr>
-                                                                    </thead>
-
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                                                                                    <option>Chọn trạng thái</option>
-                                                                                    <option value="VC001"><span class="badge bg-label-success me-1">Thành công</span></option>
-                                                                                    <option value="VC003"><span class="badge bg-label-success me-1">Thất bại</span></option>
-                                                                                </select>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-outline-success">
-                                                                Cập nhật trạng thái đơn hẹn
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                            <!--end of Cập nhật trạng thái -->
-                                        </div>
-
-                                        <!-- Html.HiddenFor(model => model.chosen_appointmentId, new { Value = app.appointment_id })-->
-
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                                Tắt
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
+                            <!--End of manage vaccine modal-->
+                            temp++;
                         }
-                        <!--End of manage vaccine modal-->
-                        temp++;
-                    }
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <script src="~/Assets/General/vendor/libs/jquery/jquery.js"></script>
+    
+<script>
+    $(document).ready(function() {
+        $('@Model.remainModalId').modal('show');
+    });
+    </script>

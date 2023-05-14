@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TiemChungThuCung.Areas.Client.Models;
-
+using TiemChungThuCung.Areas.CommonUse;
 namespace TiemChungThuCung.Areas.Client.Controllers
 {
     public class PetController : ClientBaseController
@@ -40,6 +40,8 @@ namespace TiemChungThuCung.Areas.Client.Controllers
                 {
                     userModel.pet_name = pet.pet_name;
                     userModel.breed_name = userModel.listPet_breedName[temp];
+                    PetDocumentCommonUse petdoc = new PetDocumentCommonUse();
+                    userModel.petDocuments = petdoc.getPetDocument(model.pet_id); 
                     userModel.weight = pet.weight ?? 0;
                     userModel.age = pet.age ?? 0;
                 }

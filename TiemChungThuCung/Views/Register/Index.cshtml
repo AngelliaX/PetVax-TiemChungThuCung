@@ -62,7 +62,7 @@
                     <div class="card-body">
                         <!-- Logo -->
                         <div class="app-brand justify-content-center">
-                            <a href="index.html" class="app-brand-link gap-2">
+                            <a href="./" class="app-brand-link gap-2">
                                 <span class="app-brand-logo demo">
                                     <svg width="25"
                                          viewBox="0 0 25 42"
@@ -188,7 +188,7 @@
                                     })
                                     <label class="form-check-label" for="terms-conditions">
                                         Tôi đồng ý với
-                                        <a href="javascript:void(0);">Điều Khoản Chính Sách</a>
+                                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#modalCenter">Điều Khoản Chính Sách</a>
                                     </label>
                                 </div>
                                 @Html.ValidationMessageFor(model => model.agreePolicy, null, new { @class = "text-danger" })
@@ -209,8 +209,31 @@
         </div>
     </div>
 
-    <!-- / Content -->
+    <div class="col-lg-4 col-md-6">
+        <div class="mt-3">
+            <!-- Modal -->
+            <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalCenterTitle">Điều khoản chính cách:</h5>
 
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                1. Mọi hình ảnh....
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- / Content -->
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="~/Assets/General/vendor/libs/jquery/jquery.js"></script>

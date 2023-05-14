@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Web;
+﻿using Models.DataAccessLayer;
 using System.Web.Mvc;
-using Models.DataAccessLayer;
-using Models.EntityFramework;
 using TiemChungThuCung.Areas.CommonUse;
 using TiemChungThuCung.Models;
 

@@ -1,4 +1,4 @@
-﻿namespace Models.EntityFramework
+namespace Models.EntityFramework
 {
     using System;
     using System.Collections.Generic;
@@ -15,62 +15,34 @@
         }
 
         [Key]
-        [StringLength(10, ErrorMessage = "Số lô không được vượt quá 10 kí tự")]
-        [Required(ErrorMessage = "Vui lòng không để trống")]
+        [StringLength(10)]
         public string lot_number { get; set; }
 
-        //====================================================================
-        [Required(ErrorMessage = "Vui lòng không để trống")]
-        [StringLength(10, ErrorMessage = "Mã vaccine không vượt quá 10 kí tự")]
+        [StringLength(10)]
         public string vaccine_code { get; set; }
 
-        //====================================================================
         [Column(TypeName = "date")]
-        [Required(ErrorMessage = "Vui lòng không để trống")]
         public DateTime production_date { get; set; }
 
-        //====================================================================
         [Column(TypeName = "date")]
-        [Required(ErrorMessage = "Vui lòng không để trống")]
         public DateTime expiration_date { get; set; }
 
-        //====================================================================
         [Column(TypeName = "date")]
-        [Required(ErrorMessage = "Vui lòng không để trống")]
         public DateTime rival_date { get; set; }
 
-        //====================================================================
-        [Required(ErrorMessage = "Vui lòng không để trống")]
-        [Range(1, 99999, ErrorMessage = "Số lượng nhập không hợp lệ hoặc quá lớn")]
         public int total_amount { get; set; }
 
-        //====================================================================
-        [Required(ErrorMessage = "Vui lòng không để trống")]
-        [Range(1, 99999, ErrorMessage = "Số lượng nhập không hợp lệ hoặc quá lớn")]
         public int remain_amount { get; set; }
 
-        //====================================================================
-        [Required(ErrorMessage = "Vui lòng không để trống")]
         public int? dose_unit { get; set; }
 
-        //====================================================================
-        [Required(ErrorMessage = "Vui lòng không để trống")]
-        [Range(1, 999999, ErrorMessage = "Giá nhập không hợp lệ hoặc quá lớn")]
-        public int import_price { get; set; }
+        public int? import_price { get; set; }
 
-        //====================================================================
-        [Required(ErrorMessage = "Vui lòng không để trống")]
-        [Range(1, 999999, ErrorMessage = "Giá nhập không hợp lệ hoặc quá lớn")]
-        public int sale_price { get; set; }
+        public int? sale_price { get; set; }
 
-        //====================================================================
-        [Required(ErrorMessage = "Vui lòng không để trống")]
-        [Range(0, 999999, ErrorMessage = "Giá trị nhập vào không hợp lệ hoặc quá lớn")]
-        public int tax { get; set; }
+        public int? tax { get; set; }
 
-        //====================================================================
-        [Required(ErrorMessage = "Vui lòng không để trống")]
-        [StringLength(200, ErrorMessage = "Không được vượt quá 200 kí tự")]
+        [StringLength(200)]
         public string publisher { get; set; }
 
         public string note { get; set; }

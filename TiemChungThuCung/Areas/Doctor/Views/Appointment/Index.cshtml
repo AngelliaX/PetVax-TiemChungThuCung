@@ -289,9 +289,7 @@
                                                                         <div class="tab-pane fade" id='@("navs-pills-justified-profile" + temp.ToString())' role="tabpanel">
                                                                             <div class="card-body">
                                                                                 <div class="row">
-                                                                                    <div class="mb-3 col-md-6">
-                                                                                        <label>- TODO</label>
-                                                                                    </div>
+                                                                                    <label>@Html.Raw(@Model.petDocuments[temp])</label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -401,7 +399,6 @@
                                                         </button>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="@modelId_button"><i class="bx bx-detail me-1"></i> Xem chi tiết</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i>Hủy cuộc hẹn</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -591,9 +588,7 @@
                                                                         <div class="tab-pane fade" id='@("All_navs-pills-justified-profile" + temp.ToString())' role="tabpanel">
                                                                             <div class="card-body">
                                                                                 <div class="row">
-                                                                                    <div class="mb-3 col-md-6">
-                                                                                        <label>- TODO</label>
-                                                                                    </div>
+                                                                                    <label>@Html.Raw(@Model.All_petDocuments[temp])</label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
