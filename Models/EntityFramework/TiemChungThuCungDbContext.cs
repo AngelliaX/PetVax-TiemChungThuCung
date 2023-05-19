@@ -23,13 +23,13 @@ namespace Models.EntityFramework
         public virtual DbSet<disease> diseases { get; set; }
         public virtual DbSet<doctor> doctors { get; set; }
         public virtual DbSet<pet> pets { get; set; }
+        public virtual DbSet<pet_vaccine> pet_vaccine { get; set; }
         public virtual DbSet<pharmacist> pharmacists { get; set; }
+        public virtual DbSet<vaccine_compatible> vaccine_compatible { get; set; }
         public virtual DbSet<vaccine_lot> vaccine_lot { get; set; }
         public virtual DbSet<vaccine_type> vaccine_type { get; set; }
         public virtual DbSet<doctor_major> doctor_major { get; set; }
         public virtual DbSet<pet_disease> pet_disease { get; set; }
-        public virtual DbSet<pet_vaccine> pet_vaccine { get; set; }
-        public virtual DbSet<vaccine_compatible> vaccine_compatible { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -145,8 +145,9 @@ namespace Models.EntityFramework
                 .IsUnicode(false);
 
             modelBuilder.Entity<disease>()
-                .HasOptional(e => e.vaccine_compatible)
-                .WithRequired(e => e.disease);
+                .HasMany(e => e.vaccine_compatible)
+                .WithRequired(e => e.disease)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<doctor>()
                 .Property(e => e.username)
@@ -182,11 +183,28 @@ namespace Models.EntityFramework
                 .WithRequired(e => e.pet);
 
             modelBuilder.Entity<pet>()
-                .HasOptional(e => e.pet_vaccine)
-                .WithRequired(e => e.pet);
+                .HasMany(e => e.pet_vaccine)
+                .WithRequired(e => e.pet)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<pet_vaccine>()
+                .Property(e => e.pet_id)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<pet_vaccine>()
+                .Property(e => e.vaccine_code)
+                .IsUnicode(false);
 
             modelBuilder.Entity<pharmacist>()
                 .Property(e => e.username)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<vaccine_compatible>()
+                .Property(e => e.disease_code)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<vaccine_compatible>()
+                .Property(e => e.vaccine_code)
                 .IsUnicode(false);
 
             modelBuilder.Entity<vaccine_lot>()
@@ -224,22 +242,6 @@ namespace Models.EntityFramework
 
             modelBuilder.Entity<pet_disease>()
                 .Property(e => e.disease_code)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<pet_vaccine>()
-                .Property(e => e.pet_id)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<pet_vaccine>()
-                .Property(e => e.vaccine_code)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<vaccine_compatible>()
-                .Property(e => e.disease_code)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<vaccine_compatible>()
-                .Property(e => e.vaccine_code)
                 .IsUnicode(false);
         }
     }

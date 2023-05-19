@@ -60,6 +60,11 @@ namespace Models.DataAccessLayer
             account.birthday = DateTime.Now;
             account.account_init_day = DateTime.Now;
             context.accounts.Add(account);
+
+            var client = new client();
+            client.username = username;
+            client.total_pay = 123;
+            context.clients.Add(client);
             context.SaveChanges();
         }
 
@@ -113,6 +118,12 @@ namespace Models.DataAccessLayer
                 acc = new account();
             }
             return acc;
+        }
+
+        public string getNamebyUsername(string username)
+        {
+            account acc = context.accounts.FirstOrDefault(p => p.username == username) ?? new account();
+            return acc.name;
         }
 
     }

@@ -1,4 +1,4 @@
-﻿namespace Models.EntityFramework
+namespace Models.EntityFramework
 {
     using System;
     using System.Collections.Generic;
@@ -18,14 +18,12 @@
         public string bill_id { get; set; }
          
 
-        [StringLength(10, ErrorMessage = "Không được vượt quá 10 kí tự")]
+        [StringLength(10)]
         public string vaccine_lot_number { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng không để trống")]
-        public int amount { get; set; }
+        public int? amount { get; set; }
 
-        public int cost { get; set; }
-
+        public int? cost { get; set; }
 
         public virtual bill bill { get; set; }
 

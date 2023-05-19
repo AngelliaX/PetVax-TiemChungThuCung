@@ -13,6 +13,7 @@ namespace Models.EntityFramework
         public disease()
         {
             pet_disease = new HashSet<pet_disease>();
+            vaccine_compatible = new HashSet<vaccine_compatible>();
         }
 
         [Key]
@@ -25,6 +26,7 @@ namespace Models.EntityFramework
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pet_disease> pet_disease { get; set; }
 
-        public virtual vaccine_compatible vaccine_compatible { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<vaccine_compatible> vaccine_compatible { get; set; }
     }
 }

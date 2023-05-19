@@ -69,15 +69,33 @@
                                             </button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="@modelId_button"><i class="bx bx-detail me-1"></i> Xem chi tiết</a>
-                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="@manageVacc_button"><i class="bx bx-edit-alt me-1"></i>Cập nhật lộ trình</a>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                                 temp++;
                             }
-                        </tbody>
-                    </table>
+                            @if (temp < 3)
+                            {
+                                for (int i = temp; i < 3; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span> ‌ </span>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            </tbody>
+                        </table>
                     <!--Start of appointment model-->
                     @{
                         temp = 0;
@@ -258,9 +276,7 @@
                                                             <div class="tab-pane fade" id='@("All_navs-pills-justified-profile" + temp.ToString())' role="tabpanel">
                                                                 <div class="card-body">
                                                                     <div class="row">
-                                                                        <div class="mb-3 col-md-6">
-                                                                            <label>- TODO</label>
-                                                                        </div>
+                                                                        <label>@Html.Raw(@Model.petDocuments[temp])</label>
                                                                     </div>
                                                                 </div>
                                                             </div>

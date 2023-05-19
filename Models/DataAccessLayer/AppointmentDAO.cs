@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,13 +33,13 @@ namespace Models.DataAccessLayer
 
         public List<appointment> getUpcommingAppointmentsOfDoctorUsername(string username)
         {
-            var list = context.appointments.Where(a => a.doctor_username == username && a.state == 0 || a.state == 1).ToList() ?? new List<appointment>();
+            var list = context.appointments.Where(a => a.doctor_username == username && (a.state == 0 || a.state == 1)).ToList() ?? new List<appointment>();
             return list;
         }
 
         public List<appointment> getFinishedAppointmentsOfDoctorUsername(string username)
         {
-            var list = context.appointments.Where(a => a.doctor_username == username && a.state == 2 || a.state == 3).ToList() ?? new List<appointment>();
+            var list = context.appointments.Where(a => a.doctor_username == username && (a.state == 2 || a.state == 3)).ToList() ?? new List<appointment>();
             return list;
         }
 
@@ -78,6 +79,17 @@ namespace Models.DataAccessLayer
             context.SaveChanges();
         }
 
+        public void syncRecord(appointment app)
+        {
+            var item = context.appointments.FirstOrDefault(v => v.appointment_id == app.appointment_id) ?? null;
+            if (item == null) { return; }
+            if (item.state != app.state)
+            {
+                item.state = app.state;
+                context.SaveChanges();
+            }
+        }
+        
         private string getLatestAppIDonTable()
         {
             var apps = context.appointments.ToList();

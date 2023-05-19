@@ -15,6 +15,7 @@ namespace TiemChungThuCung.Areas.Client.Models
         public string pet_id { get; set; }
         public string breed_name { get; set; }
         public string pet_name { get; set; }
+        public string petDocuments { get; set; }
         public int age { get; set; }
         public double weight { get; set; }
 

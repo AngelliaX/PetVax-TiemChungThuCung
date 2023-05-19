@@ -72,7 +72,7 @@
         <br><br>
         @if (@Model != null && @Model.pet_id != null)
         {
-            <div class="col-md-6 col-12 mx-auto">
+            <div class="col-md-9 col-12 mx-auto">
                 <h6 class="text-muted">Chi tiết thú cưng</h6>
                 <div class="nav-align-top mb-4">
                     <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
@@ -125,7 +125,7 @@
                         <div class="tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="mb-3 col-md-6">
+                                    <div class="col-12 col-md-9">
                                         <label><b>Số tuổi:</b> @Model.age tháng</label>
                                     </div>
                                     <div class="mb-3 col-md-6">
@@ -137,12 +137,11 @@
                         <div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label>- Hồ sơ tiêm</label>
-                                    </div>
+                                    <label>@Html.Raw(@Model.petDocuments)</label>
                                 </div>
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
                             <div class="card-body">
                                 <div class="row">

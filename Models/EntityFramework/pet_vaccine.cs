@@ -9,6 +9,9 @@ namespace Models.EntityFramework
     public partial class pet_vaccine
     {
         [Key]
+        public int record_id { get; set; }
+
+        [Required]
         [StringLength(10)]
         public string pet_id { get; set; }
 

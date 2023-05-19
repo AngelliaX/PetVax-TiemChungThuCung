@@ -141,6 +141,7 @@
     <Compile Include="Areas\Client\Models\PetInfoModel.cs" />
     <Compile Include="Areas\Client\Models\UpcommingModel.cs" />
     <Compile Include="Areas\CommonUse\AppointmentCommonUse.cs" />
+    <Compile Include="Areas\CommonUse\PetDocumentCommonUse.cs" />
     <Compile Include="Areas\CommonUse\ProfileCommonUse.cs" />
     <Compile Include="Areas\Doctor\Controllers\AppointmentController.cs" />
     <Compile Include="Areas\Doctor\Controllers\ProfileController.cs" />
