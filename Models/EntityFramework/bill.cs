@@ -16,20 +16,20 @@ namespace Models.EntityFramework
         }
 
         [Key]
-        //[StringLength(10, ErrorMessage = "Không được vượt qúa 10 kí tự")]
-        //[Required(ErrorMessage ="Vui lòng không để trống")]
-        [StringLength(10)]
+        [StringLength(10, ErrorMessage = "Không được vượt qúa 10 kí tự")]
+        [Required(ErrorMessage = "Vui lòng không để trống")]
         public string bill_id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Không được vượt quá 50 kí tự")]
         public string client_username { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? init_date { get; set; }
+        [Required(ErrorMessage = "Vui lòng không để trống")]
+        public DateTime init_date { get; set; }
 
-        public int? total_cost { get; set; }
+        public int total_cost { get; set; }
 
         public string description { get; set; }
+
 
         public virtual client client { get; set; }
 

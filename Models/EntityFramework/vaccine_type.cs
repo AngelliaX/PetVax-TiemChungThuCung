@@ -11,9 +11,9 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public vaccine_type()
         {
+            vaccine_lot = new HashSet<vaccine_lot>();
             pet_vaccine = new HashSet<pet_vaccine>();
             vaccine_compatible = new HashSet<vaccine_compatible>();
-            vaccine_lot = new HashSet<vaccine_lot>();
         }
 
         [Key]
@@ -33,12 +33,12 @@
         public string note { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<vaccine_lot> vaccine_lot { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pet_vaccine> pet_vaccine { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<vaccine_compatible> vaccine_compatible { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<vaccine_lot> vaccine_lot { get; set; }
     }
 }
