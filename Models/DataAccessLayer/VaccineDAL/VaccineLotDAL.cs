@@ -64,6 +64,36 @@ namespace Models.DataAccessLayer.VaccineDAL
             var list = db.vaccine_lot.Where(m => m.vaccine_code == VaccineCode).ToList();
             return list;
         }
+        public int GetTotalCostByVaccineLot(string VaccineLot)
+        {
+            vaccine_lot tmp = db.vaccine_lot.Where(m => m.lot_number == VaccineLot).FirstOrDefault();
+            if (tmp != null)
+            {
+                int cost = tmp.import_price * tmp.total_amount;
+                return cost;
+            }
+            else return 0;
+        }
+        public int GetCostByDate(DateTime date)
+        {
+            int cost= 0;
+            foreach (vaccine_lot i in db.vaccine_lot.Where(m => m.rival_date == date).ToList())
+            {
+                cost += i.import_price * i.total_amount;
+            }
+            return cost;
+        }
+        public int GetLostByMonth(int month, int year)
+        {
+            int cost = 0;
+            foreach (vaccine_lot i in db.vaccine_lot.Where(m => m.rival_date.Month == month && m.rival_date.Year == year).ToList())
+            {
+                cost += i.import_price * i.total_amount;
+            }
+            return cost;
+        }
+
+
       
     }
 }

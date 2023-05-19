@@ -9,9 +9,15 @@
     [Table("bill")]
     public partial class bill
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public bill()
+        {
+            bill_vaccine = new HashSet<bill_vaccine>();
+        }
+
         [Key]
-        [StringLength(10, ErrorMessage = "Không được vượt qúa 10 kí tự")]
-        [Required(ErrorMessage ="Vui lòng không để trống")]
+        //[StringLength(10, ErrorMessage = "Không được vượt qúa 10 kí tự")]
+        //[Required(ErrorMessage ="Vui lòng không để trống")]
         public string bill_id { get; set; }
 
         [StringLength(50, ErrorMessage = "Không được vượt quá 50 kí tự")]
@@ -27,6 +33,6 @@
 
         public virtual client client { get; set; }
 
-        public virtual bill_vaccine bill_vaccine { get; set; }
+        public virtual ICollection<bill_vaccine> bill_vaccine { get; set; }
     }
 }

@@ -150,10 +150,10 @@
                     </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                            <div data-i18n="Authentications">Quản lí Vaccine</div>
+                            <i class="menu-icon tf-icons bx bx-archive"></i>
+                            <div data-i18n="Authentications">Quản lí kho</div>
                         </a>
-                        <ul class="menu-sub")>
+                        <ul class="menu-sub" )>
                             <li class="menu-item @(lastURLPart == "VaccineList" ? "active" : "")">
                                 <a href="/Pharmacist/Control/VaccineList" class="menu-link">
                                     <div data-i18n="Basic">Kiểm kho</div>
@@ -162,6 +162,29 @@
                             <li class="menu-item" @(lastURLPart == "Add" ? "active" : "")>
                                 <a href="/Pharmacist/Control/Add" class="menu-link">
                                     <div data-i18n="Basic">Nhập tồn</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="javascript:void(0);" class="menu-link">
+                                    <div data-i18n="Basic">////</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-capsule"></i>
+                            <div data-i18n="Authentications">Thông tin Vaccine</div>
+                        </a>
+                        <ul class="menu-sub" )>
+                            <li class="menu-item @(lastURLPart == "VaccineTypeList" ? "active" : "")">
+                                <a href="/Pharmacist/VaccineType/List" class="menu-link">
+                                    <div data-i18n="Basic">Danh sách</div>
+                                </a>
+                            </li>
+                            <li class="menu-item" @(lastURLPart == "AddVaccineType" ? "active" : "")>
+                                <a href="/Pharmacist/VaccineType/Add" class="menu-link">
+                                    <div data-i18n="Basic">Thêm Vaccine</div>
                                 </a>
                             </li>
                             <li class="menu-item">

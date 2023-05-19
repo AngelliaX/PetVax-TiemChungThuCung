@@ -119,5 +119,6 @@ namespace TiemChungThuCung.Areas.Pharmacist.Controllers
             new VaccineLotDAL().DeleteVaccineLot(LotNumber);
             return RedirectToAction("VaccineList");
         }
+        
     }
 }

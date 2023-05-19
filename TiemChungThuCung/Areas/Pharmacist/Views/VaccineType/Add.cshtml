@@ -1,0 +1,97 @@
+﻿@model Models.EntityFramework.vaccine_type
+
+@{
+    bool isSuccess = TempData["Success"] == null ? false : true;
+}
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card" style="max-width:40rem;
+                                margin: 2% auto">
+            @using (Html.BeginForm("Add", "VaccineType", FormMethod.Post))
+            {
+                Html.AntiForgeryToken();
+                Html.ValidationSummary(true, "", new { @class = "alert-danger", @style = "text-align:center" });
+                
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="text-align: center">THÊM THÔNG TIN VACCINE</h5>
+                    </div>
+                    @if (isSuccess)
+                    {
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            Thêm thông tin Vaccine thành công!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="emailWithTitle" class="form-label">Mã Vaccine</label>
+                                <input type="text"
+                                       name="vaccine_code"
+                                       class="form-control"
+                                       value="@Model.vaccine_code" />
+                                @Html.ValidationMessageFor(Model => Model.vaccine_code, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="dobWithTitle" class="form-label">Tên Vaccine</label>
+                                <input type="text"
+                                       name="vaccine_name"
+                                       class="form-control"
+                                       value="@Model.vaccine_name" />
+                                @Html.ValidationMessageFor(Model => Model.vaccine_name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="emailWithTitle" class="form-label">Nước sản xuất</label>
+                                <input type="text"
+                                       name="country_of_origin"
+                                       class="form-control"
+                                       value="@Model.country_of_origin" />
+                                @Html.ValidationMessageFor(Model => Model.country_of_origin, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="dobWithTitle" class="form-label">Ghi chú</label>
+                                <textarea rows="5"
+                                          cols="40"
+                                          class="form-control"
+                                          name="note">@Model.note</textarea>
+                                @Html.ValidationMessageFor(Model => Model.note, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                onclick="backToList()"
+                                class="btn btn-outline-secondary">
+
+                            Trở về danh sách
+                        </button>
+                        <button type="submit"
+                                class="btn btn-primary">
+                            Lưu thay đổi
+                        </button>
+                        @*<button type="button" class="btn btn-primary">OK</button>*@
+                    </div>
+                </div>
+            }
+
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    function backToList() {
+        window.location.replace('List');
+    }
+</script>

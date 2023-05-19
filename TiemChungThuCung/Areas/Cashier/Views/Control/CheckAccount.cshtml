@@ -3,15 +3,14 @@
 @{
     List<Models.EntityFramework.vaccine_lot> ListVaccineLot = new Models.DataAccessLayer.VaccineDAL.VaccineLotDAL().GetAllVaccineLot();
     List<Models.EntityFramework.client> ListClient = new Models.DataAccessLayer.ClientDAL.ClientDAL().GetAllListClient();
-   
+
 }
 
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card" style="margin:50px 100px">
-            <h5 class="card-header">Tạo hóa đơn</h5>
-            @using (Html.BeginForm("Add", "Control", FormMethod.Post))
+            @using (Html.BeginForm("CheckAccount", "Control", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "alert-danger", @style = "text-align:center" })
@@ -44,86 +43,86 @@
                             </datalist>
                             @Html.ValidationMessageFor(Model => Model.client_username, "", new { @class = "text-danger" })
 
-                        <div class="mt-3">
-                            <!-- Button trigger modal -->
-                            <button type="button"
-                                    class="btn rounded-pill btn-info mt-2"
-                                    data-bs-toggle="modal"
-                                    onclick="setButtonTarget()"
-                                    style="float:right">
-                                Kiểm tra thông tin
-                            </button>
+                            <div class="mt-3">
+                                <!-- Button trigger modal -->
+                                <button type="button"
+                                        class="btn rounded-pill btn-info mt-2"
+                                        data-bs-toggle="modal"
+                                        onclick="setButtonTarget()"
+                                        style="float:right">
+                                    Kiểm tra thông tin
+                                </button>
 
-                            <script>
+                                <script>
                                 function setButtonTarget() {
                                     var targetInput = document.getElementById("username_input");
                                     var targetValue = targetInput.value;
                                     var button = event.target;
                                     button.setAttribute("data-bs-target", "#" + targetValue);
                                 }
-                            </script>
+                                </script>
 
 
-                            <!-- Modal -->
-                            @foreach (var client in ListClient)
-                            {
-                                <div class="modal fade" id="@client.username" tabindex="-1" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel1">Thông tin khách hàng</h5>
-                                                <button type="button"
-                                                        class="btn-close"
-                                                        data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col mb-3">
-                                                        <label for="nameBasic" class="form-label">Tên</label>
-                                                        <input type="text" id="nameBasic" class="form-control" readonly
-                                                               value="@client.account.name" />
+                                <!-- Modal -->
+                                @foreach (var client in ListClient)
+                                {
+                                    <div class="modal fade" id="@client.username" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel1">Thông tin khách hàng</h5>
+                                                    <button type="button"
+                                                            class="btn-close"
+                                                            data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <label for="nameBasic" class="form-label">Tên</label>
+                                                            <input type="text" id="nameBasic" class="form-control" readonly
+                                                                   value="@client.account.name" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row g-2">
+                                                        <div class="col mb-0">
+                                                            <label for="emailBasic" class="form-label">SĐT</label>
+                                                            <input type="text" id="emailBasic" class="form-control" readonly
+                                                                   value="@client.account.phone" />
+                                                        </div>
+                                                        <div class="col mb-0">
+                                                            <label for="dobBasic" class="form-label">Ngày sinh</label>
+                                                            <input type="text" id="dobBasic" class="form-control" readonly
+                                                                   value="@client.account.birthday" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <label for="nameBasic" class="form-label">Email</label>
+                                                            <input type="text" id="nameBasic" class="form-control" readonly
+                                                                   value="@client.account.email" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <label for="nameBasic" class="form-label">Địa chỉ</label>
+                                                            <input type="text" id="nameBasic" class="form-control" readonly
+                                                                   value="@client.account.address" />
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="row g-2">
-                                                    <div class="col mb-0">
-                                                        <label for="emailBasic" class="form-label">SĐT</label>
-                                                        <input type="text" id="emailBasic" class="form-control" readonly
-                                                               value="@client.account.phone" />
-                                                    </div>
-                                                    <div class="col mb-0">
-                                                        <label for="dobBasic" class="form-label">Ngày sinh</label>
-                                                        <input type="text" id="dobBasic" class="form-control" readonly
-                                                               value="@client.account.birthday" />
-                                                    </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                        Close
+                                                    </button>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col mb-3">
-                                                        <label for="nameBasic" class="form-label">Email</label>
-                                                        <input type="text" id="nameBasic" class="form-control" readonly
-                                                               value="@client.account.email" />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col mb-3">
-                                                        <label for="nameBasic" class="form-label">Địa chỉ</label>
-                                                        <input type="text" id="nameBasic" class="form-control" readonly
-                                                               value="@client.account.address" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                                    Close
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            }
+                                }
 
-                        </div>  
+                            </div>
                         </div>
 
                     </div>

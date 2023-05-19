@@ -1,0 +1,93 @@
+﻿@model List<Models.EntityFramework.bill_vaccine>
+
+@{
+    Models.EntityFramework.bill BillModel = new Models.DataAccessLayer.BillDAL.BillDAL().GettBillByBillId(Model[0].bill_id);
+}
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <div class="card-body">
+                <nav class="mb-3 row" style="display:inline-block; margin-left:5%; float: left; width:40%">
+                    <label for="html5-text-input" class="col-md-2 col-form-label" style="width:100%">Mã hóa đơn</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="text" name="[0].bill_id" value="@Model[0].bill_id" readonly />
+
+
+                    </div>
+                </nav>
+
+
+                <div class="mb-3 row" style="display:inline-block; margin-right:5%; float:right; width:40%">
+                    <label for="html5-text-input" class="col-md-2 col-form-label" style="width:100%">Username khách hàng</label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="text" name="[0].client_username" value="@Model[0].bill.client_username" readonly />
+
+                        @*@Html.ValidationMessageFor(Model => Model.client_username, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="display:inline-block">
+                <h5 class="card-header"></h5>
+                <div class="card-body">
+                    <div class="table-responsive text-nowrap">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã Vaccine</th>
+                                    <th>ĐVT</th>
+                                    <th>Số lượng</th>
+                                    <th>Đơn giá</th>
+                                    <th>Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int index = 0;
+                                }
+                                @for (int i = 0; i < Model.Count; i++)
+                                {
+                                    index++;
+
+                                    <tr>
+
+                                        <td>@index</td>
+                                        @*Ma vaccine*@
+                                        <td><input class="form-control" type="text" value="@Model[i].vaccine_lot.vaccine_type.vaccine_name" readonly></td>
+
+                                        <td>
+                                            @*@Html.EditorFor(Model => Model[i].dose_unit, new { htmlAttributes = new { @class = "form-control" } })*@
+                                            <input class="form-control" type="text" value="@Html.Raw(Model[i].vaccine_lot.dose_unit == 1 ? "Liều" : "Lọ")" readonly>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="text" value="@Model[i].amount" readonly>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="text" value="@Html.Raw(Model[i].cost / Model[i].amount)" readonly>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" type="text" value="@Model[i].cost" id="[@i]total_price_each" readonly>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="mb-3 row" style="display:inline-block; margin-top:2%; float:right; width:50%; height: 200%">
+                        <label for="html5-text-input" class="col-md-2 col-form-label" style="width:100%">Ghi chú</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" value="@BillModel.description" readonly style="height:100px" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

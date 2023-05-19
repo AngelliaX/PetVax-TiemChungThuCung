@@ -1,4 +1,4 @@
-namespace Models.EntityFramework
+﻿namespace Models.EntityFramework
 {
     using System;
     using System.Collections.Generic;
@@ -17,16 +17,19 @@ namespace Models.EntityFramework
         }
 
         [Key]
-        [StringLength(10)]
+        [StringLength(10, ErrorMessage = "Dữ liệu không được vượt quá 10 kí tự")]
+        [Required(ErrorMessage = "Vui lòng không để trống dữ liệu")]
         public string vaccine_code { get; set; }
 
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Dữ liệu không được vượt quá 50 kí tự")]
+        [Required(ErrorMessage = "Vui lòng không để trống dữ liệu")]
         public string vaccine_name { get; set; }
 
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Dữ liệu không được vượt quá 50 kí tự")]
+        [Required(ErrorMessage = "Vui lòng không để trống")]
         public string country_of_origin { get; set; }
 
-        [StringLength(400)]
+        [StringLength(400, ErrorMessage = "Dữ liệu không được vượt quá 400 kí tự")]
         public string note { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

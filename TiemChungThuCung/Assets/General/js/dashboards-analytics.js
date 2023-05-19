@@ -2,7 +2,7 @@
  * Dashboard Analytics
  */
 
-'use strict';
+
 
 (function () {
   let cardColor, headingColor, axisColor, shadeColor, borderColor;
@@ -19,7 +19,7 @@
       series: [
         {
           name: '2021',
-          data: [18, 7, 15, 29, 18, 12, 9]
+          data: [18, 7, 15, 29, 18, 12, 100]
         },
         {
           name: '2020',

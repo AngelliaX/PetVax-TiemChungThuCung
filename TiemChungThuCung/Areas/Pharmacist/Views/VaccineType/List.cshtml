@@ -1,0 +1,228 @@
+﻿@model List<Models.EntityFramework.vaccine_type>
+
+@{
+    Models.DataAccessLayer.VaccineDAL.VaccineTypeDAL VaccineHelper = new Models.DataAccessLayer.VaccineDAL.VaccineTypeDAL();
+}
+
+
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card" style="margin-left: 5%; margin-right:5%">
+            <h5 class="card-header">
+                <button type="button"
+                        onclick="goToAdd()"
+                        data-bs-toggle="modal"
+                        data-bs-target="AddModel"
+                        class="btn btn-dark">
+                    Thêm Mới
+                </button>
+                <script>
+                    function goToAdd() {
+                        window.location.replace('Add');
+                    }
+                </script>
+
+            </h5>
+            <div class="table-responsive text-nowrap">
+                <table class="table table-hover" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Mã vaccine</th>
+                            <th>Tên vaccine</th>
+                            <th>SL trong kho</th>
+                            <th>Nước sản xuất</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @{
+                            int i = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            i++;
+                            <tr>
+                                <td scope="row">@i</td>
+                                <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@item.vaccine_code</strong></td>
+                                <td>@item.vaccine_name</td>
+                                <td>@VaccineHelper.GetAmountOfVaccineType(item.vaccine_code)</td>
+                                <td>@item.country_of_origin</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item"
+                                               href="" data-bs-toggle="modal"
+                                               data-bs-target="#Detail-@item.vaccine_code"><i class="bx bx-info-circle"></i> Chi tiết</a>
+                                            <a class="dropdown-item"
+                                               href="" data-bs-toggle="modal"
+                                               data-bs-target="#Edit-@item.vaccine_code"><i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
+                                            <a class="dropdown-item"
+                                               href="@Url.Action("Delete", "VaccineType", new {VaccineCode = item.vaccine_code})"><i class="bx bx-trash me-1"></i> Xóa</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--Detail Modal -->
+        @foreach (var item in Model)
+        {
+            <div class="modal fade" id="Detail-@item.vaccine_code" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:40rem">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalCenterTitle">Thông tin vaccine</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="emailWithTitle" class="form-label">Mã Vaccine</label>
+                                    <input type="text"
+                                           id="emailWithTitle"
+                                           class="form-control"
+                                           value="@item.vaccine_code" readonly />
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="dobWithTitle" class="form-label">Tên Vaccine</label>
+                                    <input type="text"
+                                           id="dobWithTitle"
+                                           class="form-control"
+                                           value="@item.vaccine_name" readonly />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="nameWithTitle" class="form-label">SL trong kho</label>
+                                    <input type="text"
+                                           id="nameWithTitle"
+                                           class="form-control"
+                                           value="@VaccineHelper.GetAmountOfVaccineType(item.vaccine_code)" readonly />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="emailWithTitle" class="form-label">Nước sản xuất</label>
+                                    <input type="text"
+                                           id="emailWithTitle"
+                                           class="form-control"
+                                           value="@item.country_of_origin" readonly />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="dobWithTitle" class="form-label">Ghi chú</label>
+                                    <textarea rows="5" cols="40" class="form-control" readonly>@item.note</textarea>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Đóng
+                            </button>
+                            @*<button type="button" class="btn btn-primary">OK</button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <!--Detail Modal -->
+        <!--Edit Modal -->
+        @using (Html.BeginForm("List", "VaccineType", FormMethod.Post))
+        {
+            Html.AntiForgeryToken();
+            Html.ValidationSummary(true, "", new { @class = "alert-danger", @style = "text-align:center" });
+            foreach (var item in Model)
+            {
+                int index = Model.IndexOf(item);
+                <div class="modal fade" id="Edit-@item.vaccine_code" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:40rem">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalCenterTitle">Thông tin vaccine</h5>
+                                <button type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="emailWithTitle" class="form-label">Mã Vaccine</label>
+                                        <input type="text"
+                                               name="[@Model.IndexOf(item)].vaccine_code"
+                                               class="form-control"
+                                               value="@item.vaccine_code" readonly />
+                                        @Html.ValidationMessageFor(Model => Model[index].vaccine_code, "", new { @class = "text-danger" })
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="dobWithTitle" class="form-label">Tên Vaccine</label>
+                                        <input type="text"
+                                               name="[@Model.IndexOf(item)].vaccine_name"
+                                               class="form-control"
+                                               value="@item.vaccine_name" />
+                                        @Html.ValidationMessageFor(Model => Model[index].vaccine_name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="emailWithTitle" class="form-label">Nước sản xuất</label>
+                                        <input type="text"
+                                               name="[@Model.IndexOf(item)].country_of_origin"
+                                               class="form-control"
+                                               value="@item.country_of_origin" />
+                                        @Html.ValidationMessageFor(Model => Model[index].country_of_origin, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="dobWithTitle" class="form-label">Ghi chú</label>
+                                        <textarea rows="5"
+                                                  cols="40"
+                                                  class="form-control"
+                                                  name="[@Model.IndexOf(item)].note">@item.note</textarea>
+                                        @Html.ValidationMessageFor(Model => Model[index].note, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                    Đóng
+                                </button>
+                                <button type="submit"
+                                        name="SubmitButton" value="@item.vaccine_code"
+                                        class="btn btn-primary">
+                                    Lưu thay đổi
+                                </button>
+                                @*<button type="button" class="btn btn-primary">OK</button>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        <!--Edit Modal -->
+
+    </div>
+</div>
+

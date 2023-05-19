@@ -116,7 +116,7 @@
                 <ul class="menu-inner py-1">
                     @{
                         string currentUrl = HttpContext.Current.Request.Url.AbsoluteUri;
-                        string lastURLPart = Path.GetFileName(currentUrl.TrimEnd('/')) ;
+                        string lastURLPart = Path.GetFileName(currentUrl.TrimEnd('/'));
                     }
                     <!-- Dashboard -->
                     <li class="menu-item @(lastURLPart.ToLower() == "admin" ? "active" : "")">
@@ -271,7 +271,7 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        
+
                                         @Html.ActionLink("Log out", "Logout", "Login", new { area = "" }, new { @class = "dropdown-item bx bx-power-off me-2 align-middle" })
                                         <!--
                                         <a class="dropdown-item" href="auth-login-basic.html">
@@ -290,13 +290,11 @@
                 <!-- / Navbar -->
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
-                    
+
                     <!-- Content -->
                     @RenderBody()
                     <!-- / Content -->
-                    
                     <!-- Footer -->
-                   
                     <!-- / Footer -->
 
                     <div class="content-backdrop fade"></div>
@@ -325,8 +323,11 @@
     <!-- Main JS -->
     <script src="~/Assets/General/js/main.js"></script>
 
+    <!-- Chart JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js"></script>
+
     <!-- Page JS -->
-    <script src="~/Assets/General/js/dashboards-analytics.js"></script>
+    @*<script src="~/Assets/General/js/dashboards-analytics.js"></script>*@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

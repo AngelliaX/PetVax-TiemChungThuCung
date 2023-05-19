@@ -2,12 +2,7 @@
 
 @{
     List<Models.EntityFramework.vaccine_type> ListVaccineType = new Models.DataAccessLayer.VaccineDAL.VaccineTypeDAL().GetAllVaccineType();
-    Models.DataAccessLayer.VaccineDAL.VaccineTypeDAL VCHepler = new Models.DataAccessLayer.VaccineDAL.VaccineTypeDAL();
-    bool SuccessSate = TempData["AddBillSuccess"] == null ? false : true;
-    Models.DataAccessLayer.VaccineDAL.VaccineTypeDAL vaccineTypeDAL = new Models.DataAccessLayer.VaccineDAL.VaccineTypeDAL();
 }
-
-
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -24,16 +19,12 @@
                     <input class="form-control" type="hidden" name="[@i].client_username" value="@Model[0].client_username">
                 }
 
-                if (SuccessSate)
-                {
-                    <div class="alert alert-success" role="alert" style="text-align:center">Tạo hóa đơn thành công</div>
-                    <div class="alert alert-info" role="alert" style="text-align:center">Ngày tạo @DateTime.Now.ToString("dd/MM/yyy lúc H:m:s")</div>
-                }
+
                 <div class="card-body">
                     <nav class="mb-3 row" style="display:inline-block; margin-left:5%; float: left; width:40%">
                         <label for="html5-text-input" class="col-md-2 col-form-label" style="width:100%">Mã hóa đơn</label>
                         <div class="col-md-10">
-                            <input class="form-control" type="text" name="[0].bill_id" value="@Model[0].bill_id" readonly />
+                            <input class="form-control" type="text" name="[0].bill_id" value="@Model[0].bill_id" readonly/>
 
 
                         </div>
@@ -43,7 +34,7 @@
                     <div class="mb-3 row" style="display:inline-block; margin-right:5%; float:right; width:40%">
                         <label for="html5-text-input" class="col-md-2 col-form-label" style="width:100%">Username khách hàng</label>
                         <div class="col-md-10">
-                            <input class="form-control" type="text" name="[0].client_username" value="@Model[0].client_username" readonly />
+                            <input class="form-control" type="text" name="[0].client_username" value="@Model[0].client_username"/>
 
                             @*@Html.ValidationMessageFor(Model => Model.client_username, "", new { @class = "text-danger" })*@
                         </div>
@@ -74,44 +65,8 @@
                                     @{
                                         int index = 1;
                                     }
-                                    <tr>
-                                        @{
-                                            int LastIndex = Model.ToList().Count - 1;
-                                        }
 
-                                        <td>@index</td>
-                                        <td>
-                                            @Html.EditorFor(Model => Model[LastIndex].vaccine_code, new { htmlAttributes = new { @class = "form-control", @list = "vaccine_list", @id = "[" + LastIndex + "]vaccinecode" } })
-                                            <datalist id="vaccine_list">
-                                                @foreach (var item in ListVaccineType)
-                                                {
-
-                                                    <option value="@item.vaccine_code">@Html.Raw(item.vaccine_name + "(SL còn " + VCHepler.GetAmountOfVaccineType(item.vaccine_code) + ")")</option>
-                                                }
-                                            </datalist>
-                                            @Html.ValidationMessageFor(Model => Model[LastIndex].vaccine_code, "", new { @class = "text-danger" })
-
-                                        </td>
-                                        <td>
-                                            @*@Html.EditorFor(Model => Model[index - 1].dose_unit, new { htmlAttributes = new { @class = "form-control" } })*@
-                                            <select class="form-control" name="[@Html.Raw(LastIndex)].dose_unit">
-                                                <option value="0" @Html.Raw(@Model[LastIndex].dose_unit == 0 ? "selected" : "")>Lọ</option>
-                                                <option value="1" @Html.Raw(@Model[LastIndex].dose_unit == 1 ? "selected" : "")>Liều</option>
-                                            </select>
-                                            @Html.ValidationMessageFor(Model => Model[LastIndex].dose_unit, "", new { @class = "text-danger" })
-
-                                        </td>
-                                        <td>
-                                            @Html.EditorFor(Model => Model[LastIndex].amount, new { htmlAttributes = new { @class = "form-control", @id = "[" + LastIndex + "]amount" } })
-                                            @Html.ValidationMessageFor(Model => Model[LastIndex].amount, "", new { @class = "text-danger" })
-
-                                        </td>
-                                        <td><input class="form-control" type="text" name="" id="[@LastIndex]price_each" readonly></td>
-                                        <td><input class="form-control" type="text" name="" id="[@LastIndex]total_price_each" readonly></td>
-
-                                    </tr>
-
-                                    @for (int i = Model.ToList().Count - 2; i >= 0; i--)
+                                    @for (int i = Model.ToList().Count - 1; i >= 0; i--)
                                     {
                                         index++;
 
@@ -120,12 +75,12 @@
                                             <td>@index</td>
                                             @*Ma vaccine*@
                                             <td>
-                                                @Html.EditorFor(Model => Model[i].vaccine_code, new { htmlAttributes = new { @class = "form-control", @list = "vaccine_list", @id = "[" + i + "]vaccinecode" } })
+                                                @Html.EditorFor(Model => Model[i].vaccine_code, new { htmlAttributes = new {@class = "form-control", @list = "vaccine_list", @id = "[" + i + "]vaccinecode" } })
                                                 <datalist id="vaccine_list">
                                                     @foreach (var item in ListVaccineType)
                                                     {
 
-                                                        <option value="@item.vaccine_code">@Html.Raw(item.vaccine_name + "(SL còn " + VCHepler.GetAmountOfVaccineType(item.vaccine_code) + ")")</option>
+                                                        <option value="@item.vaccine_code">@item.vaccine_name</option>
                                                     }
                                                 </datalist>
                                                 @Html.ValidationMessageFor(Model => Model[i].vaccine_code, "", new { @class = "text-danger" })
@@ -181,36 +136,3 @@
         </div>
     </div>
 </div>
-
-
-
-@*js xu li tinh toan gia tien*@
-@*<script>
-    let vaccine_code = [];
-    let amount = [];
-    let price_each = [];
-    let total_price_each = [];
-
-    for (var i = 0; i < @Model.ToList().Count; i++) {
-        vaccine_code[i] = document.getElementById("[" + i + "]vaccine_code");
-        amount[i] = document.getElementById("[" + i + "]amount");
-        price_each[i] = document.getElementById("[" + i + "]price_each");
-        total_price_each[i] = document.getElementById("[" + i + "]total_price_each");
-    };
-
-    for (var i = 0; i < @Model.ToList().Count; i++) {
-        
-
-        vaccine_code[i].oninput = function () {
-            price_each[i].value = @{vaccineTypeDAL.GetPriceByVaccineCode( vaccine_code[i]); }
-        }
-    }
-
-    function PriceChange(int index) {
-        vaccine_code[inde]
-
-        price_each[index] = @vaccineTypeDAL.GetPriceByVaccineCode(vaccine_code[index]);
-
-    }
-</script>*@
-

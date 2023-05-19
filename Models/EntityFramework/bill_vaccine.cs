@@ -8,10 +8,15 @@
 
     public partial class bill_vaccine
     {
-
+       
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int bill_vaccine_key { get; set; }
+
+        [Required]
         [StringLength(10)]
         public string bill_id { get; set; }
+         
 
         [StringLength(10, ErrorMessage = "Không được vượt quá 10 kí tự")]
         public string vaccine_lot_number { get; set; }

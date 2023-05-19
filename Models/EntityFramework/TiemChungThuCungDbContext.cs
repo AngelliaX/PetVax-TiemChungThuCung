@@ -16,6 +16,7 @@ namespace Models.EntityFramework
         public virtual DbSet<admin> admins { get; set; }
         public virtual DbSet<appointment> appointments { get; set; }
         public virtual DbSet<bill> bills { get; set; }
+        public virtual DbSet<bill_vaccine> bill_vaccine { get; set; }
         public virtual DbSet<breed> breeds { get; set; }
         public virtual DbSet<cashier> cashiers { get; set; }
         public virtual DbSet<client> clients { get; set; }
@@ -25,7 +26,6 @@ namespace Models.EntityFramework
         public virtual DbSet<pharmacist> pharmacists { get; set; }
         public virtual DbSet<vaccine_lot> vaccine_lot { get; set; }
         public virtual DbSet<vaccine_type> vaccine_type { get; set; }
-        public virtual DbSet<bill_vaccine> bill_vaccine { get; set; }
         public virtual DbSet<doctor_major> doctor_major { get; set; }
         public virtual DbSet<pet_disease> pet_disease { get; set; }
         public virtual DbSet<pet_vaccine> pet_vaccine { get; set; }
@@ -106,8 +106,17 @@ namespace Models.EntityFramework
                 .IsUnicode(false);
 
             modelBuilder.Entity<bill>()
-                .HasOptional(e => e.bill_vaccine)
-                .WithRequired(e => e.bill);
+                .HasMany(e => e.bill_vaccine)
+                .WithRequired(e => e.bill)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<bill_vaccine>()
+                .Property(e => e.bill_id)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<bill_vaccine>()
+                .Property(e => e.vaccine_lot_number)
+                .IsUnicode(false);
 
             modelBuilder.Entity<breed>()
                 .Property(e => e.breed_id)
@@ -199,14 +208,6 @@ namespace Models.EntityFramework
 
             modelBuilder.Entity<vaccine_type>()
                 .Property(e => e.vaccine_code)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<bill_vaccine>()
-                .Property(e => e.bill_id)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<bill_vaccine>()
-                .Property(e => e.vaccine_lot_number)
                 .IsUnicode(false);
 
             modelBuilder.Entity<doctor_major>()

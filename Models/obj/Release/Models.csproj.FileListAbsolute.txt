@@ -10,3 +10,15 @@ C:\Users\namxm\OneDrive\Máy tính\Ki2Nam2\Pbl3 - Quan li tiem chung thu\ASP.NET
 C:\Users\namxm\OneDrive\Máy tính\Ki2Nam2\Pbl3 - Quan li tiem chung thu\ASP.NET MVC Code\TiemChungThuCung\Models\obj\Release\Models.csproj.CopyComplete
 C:\Users\namxm\OneDrive\Máy tính\Ki2Nam2\Pbl3 - Quan li tiem chung thu\ASP.NET MVC Code\TiemChungThuCung\Models\obj\Release\Models.dll
 C:\Users\namxm\OneDrive\Máy tính\Ki2Nam2\Pbl3 - Quan li tiem chung thu\ASP.NET MVC Code\TiemChungThuCung\Models\obj\Release\Models.pdb
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Release\Models.dll.config
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Release\Models.dll
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Release\Models.pdb
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Release\EntityFramework.dll
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Release\EntityFramework.xml
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\obj\Release\Models.csproj.AssemblyReference.cache
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\obj\Release\Models.csproj.CoreCompileInputs.cache
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\obj\Release\Models.csproj.CopyComplete
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\obj\Release\Models.dll
+C:\Users\hi\Desktop\dai hac\ki 4\pbl3\PBL3\PetVax-TiemChungThuCung\Models\obj\Release\Models.pdb
