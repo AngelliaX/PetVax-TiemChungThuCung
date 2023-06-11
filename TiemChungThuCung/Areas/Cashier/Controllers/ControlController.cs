@@ -244,9 +244,14 @@ namespace TiemChungThuCung.Areas.Cashier.Controllers
           
         }
 
-        public ActionResult ListBill()
+        [HttpGet]
+        public ActionResult ListBill(string SearchText = "", string PropName = "None", bool Order = false)
         {
-            List<bill> models = new BillDAL().GetAllBillList();
+            TempData["SearchTextOfBill"] = SearchText;
+            TempData["PropNameOfBill"] = PropName;
+            TempData["OrderOfBill"] = Order;
+
+            List<bill> models = new BillDAL().SearchByFiter(SearchText, PropName, Order) ;
             return View(models);
         }
         public ActionResult Detail(string BillID)

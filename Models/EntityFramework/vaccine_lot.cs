@@ -46,7 +46,7 @@
 
         //====================================================================
         [Required(ErrorMessage = "Vui lòng không để trống")]
-        [Range(1, 99999, ErrorMessage = "Số lượng nhập không hợp lệ hoặc quá lớn")]
+        [Range(0, 99999, ErrorMessage = "Số lượng nhập không hợp lệ hoặc quá lớn")]
         public int remain_amount { get; set; }
 
         //====================================================================
@@ -74,6 +74,8 @@
         public string publisher { get; set; }
 
         public string note { get; set; }
+
+        public bool isDeleted { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bill_vaccine> bill_vaccine { get; set; }

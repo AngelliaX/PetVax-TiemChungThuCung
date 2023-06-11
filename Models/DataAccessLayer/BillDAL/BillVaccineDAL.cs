@@ -1,4 +1,5 @@
-﻿using Models.EntityFramework;
+﻿using Models.DataAccessLayer.VaccineDAL;
+using Models.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -21,8 +22,12 @@ namespace Models.DataAccessLayer.BillDAL
         {
             db.bill_vaccine.Add(BillVaccine);
 
-            vaccine_lot tmp = db.vaccine_lot.Where(m => m.lot_number == BillVaccine.vaccine_lot_number).FirstOrDefault();
-            tmp.remain_amount -= BillVaccine.amount;
+            //vaccine_lot tmp = db.vaccine_lot.Where(m => m.lot_number == BillVaccine.vaccine_lot_number).FirstOrDefault();
+            //tmp.remain_amount -= BillVaccine.amount;
+            string vaccineCode = new VaccineTypeDAL().GetVaccineCodeByLotNumber(BillVaccine.vaccine_lot_number);
+
+            new VaccineLotDAL().ReduceVaccineAmount(vaccineCode, BillVaccine.amount);
+
             db.SaveChanges();
         }
 
@@ -35,6 +40,7 @@ namespace Models.DataAccessLayer.BillDAL
         public void DeleteBillVaccine(string billID) 
         {
             db.bill_vaccine.RemoveRange(db.bill_vaccine.Where(m => m.bill_id == billID));
+            db.SaveChanges();
         }
 
         //public void Update(List<bill_vaccine> BillVaccine)

@@ -65,10 +65,10 @@
                                             <input class="form-control" type="text" value="@Model[i].amount" readonly>
                                         </td>
                                         <td>
-                                            <input class="form-control" type="text" value="@Html.Raw(Model[i].cost / Model[i].amount)" readonly>
+                                            <input class="form-control" type="text" value="@Html.Raw((Model[i].cost / Model[i].amount).ToString("N0", System.Globalization.CultureInfo.CurrentCulture) + ",000")" readonly>
                                         </td>
                                         <td>
-                                            <input class="form-control" type="text" value="@Model[i].cost" id="[@i]total_price_each" readonly>
+                                            <input class="form-control" type="text" value="@Html.Raw(Model[i].cost.ToString("N0", System.Globalization.CultureInfo.CurrentCulture) + ",000")" id="[@i]total_price_each" readonly>
                                         </td>
                                         <td>
                                         </td>

@@ -17,11 +17,12 @@ namespace TiemChungThuCung.Areas.Pharmacist.Controllers.VaccineType
             return RedirectToAction("Index", "Home", new { area = "Pharmacist" });
         }
 
-        public ActionResult List()
+        [HttpGet]
+        public ActionResult List(string SearchText = "")
         {
-            List<vaccine_type> models = new List<vaccine_type>();
-            models = new VaccineTypeDAL().GetAllVaccineType();
-            return View(models);    
+            TempData["SearchTextOfVaccineType"] = SearchText;
+            List<vaccine_type> models = new VaccineTypeDAL().SearchByFilter(SearchText);
+            return View(models);
         }
 
         [HttpPost]

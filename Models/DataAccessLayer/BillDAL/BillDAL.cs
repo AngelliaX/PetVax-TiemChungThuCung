@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations.Model;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +22,32 @@ namespace Models.DataAccessLayer.BillDAL
         {
             var billList = db.bills.Select(m => m);
             return billList.ToList();
+        }
+        public List<bill> SearchByFiter(string SearchText = "", string PropName = "", bool Order = true)
+        {
+            List<bill> list = new List<bill>();
+            list = db.bills.Where(m => m.bill_id.Contains(SearchText) || m.client.account.name.Contains(SearchText)).ToList();
+            if(PropName == "None")
+            {
+                return list;
+            }
+            else
+            {
+                switch (PropName)
+                {
+                    case "client_name":
+                        if (Order == true) return list.OrderBy(m => m.client.account.name).ToList();
+                        else return list.OrderByDescending(m => m.client.account.name).ToList();
+                        break;
+                    default:
+                        PropertyInfo prop = typeof(bill).GetProperty(PropName); 
+                        if(Order == true) return list.OrderBy(m => prop.GetValue(m)).ToList();
+                        else return list.OrderByDescending(m => prop.GetValue(m)).ToList();
+                }
+            }
+
+
+     
         }
         public bool CheckIfBillIsExist(string BillId)
         {
@@ -48,7 +76,7 @@ namespace Models.DataAccessLayer.BillDAL
         public void DeleteBill(string BillId)
         {
             new BillVaccineDAL().DeleteBillVaccine(BillId);
-            db.bills.Remove(db.bills.Where(m => m.bill_id == BillId).FirstOrDefault());
+            db.bills.Remove(db.bills.Find(BillId));
             db.SaveChanges();
         }
         public bill GettBillByBillId(string BillId)
