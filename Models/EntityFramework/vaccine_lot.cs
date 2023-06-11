@@ -75,7 +75,7 @@
 
         public string note { get; set; }
 
-        public bool isDeleted { get; set; } 
+        public bool isDeleted { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bill_vaccine> bill_vaccine { get; set; }

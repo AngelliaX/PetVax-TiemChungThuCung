@@ -1,13 +1,118 @@
 ﻿@model IEnumerable<Models.EntityFramework.bill>
 
 @{
+    string searchText = "", propName = "", displayPropName = "";
+    bool order = true;
+    if (TempData["SearchTextOfBill"] != null) { searchText = TempData["SearchTextOfBill"].ToString(); }
+    if (TempData["PropNameOfBill"] != null) { propName = TempData["PropNameOfBill"].ToString(); }
+    if (TempData["OrderOfBill"] != null) { order = Convert.ToBoolean(TempData["OrderOfBill"]); }
 
+
+    switch (propName)
+    {
+        case "None":
+            displayPropName = "None";
+            break;
+        case "bill_id":
+            displayPropName = "Mã hóa đơn";
+            break;
+        case "client_name":
+            displayPropName = "Tên khách hàng";
+            break;
+        case "init_date":
+            displayPropName = "Ngày tạo";
+            break;
+
+    }
 }
 
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card">
-            <h5 class="card-header">Striped rows</h5>
+
+            @*CARD HEADER*@
+            <div class="card-header">
+                <div class="card-header">
+                    <div class="mb-4" style="text-align: center">
+
+                        <strong style="font-size:19px">DANH SÁCH HÓA ĐƠN</strong>
+                    </div>
+                    @using (Html.BeginForm("ListBill", "Control", FormMethod.Get))
+                    {
+                        <div class="row g-3">
+
+                            @*SEARCH AREA*@
+
+                            <div class="col-md-5 mb-4">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
+                                    <input type="text"
+                                           class="form-control"
+                                           placeholder="Search..."
+                                           name="SearchText"
+                                           value="@searchText" />
+                                    <button class="btn btn-outline-primary" type="submit" id="button-addon2">Tìm kiếm</button>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="PropName" value="@propName" />
+                            <input type="hidden" name="Order" value="@order" />
+
+                            @*SORT AREA*@
+                            <div class="col" style="margin-left:4%">
+                                <a class="text-muted" style="font-size: 14px">Sắp xếp theo</a>
+
+                                <div class="btn-group" style="margin-left: 1%">
+                                    <button type="button"
+                                            class="btn btn-outline-warning dropdown-toggle"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        @displayPropName
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="@Url.Action("ListBill", "Control", new { SearchText = searchText })">Không có</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider" />
+                                        </li>
+                                        <li><a class="dropdown-item" href="@Url.Action("ListBill", "Control", new { SearchText = searchText, PropName = "bill_id", Order = !order })">Mã hóa đơn</a></li>
+                                        <li><a class="dropdown-item" href="@Url.Action("ListBill", "Control", new { SearchText = searchText, PropName = "client_name", Order = !order  })">Tên khách hàng</a></li>
+                                        <li><a class="dropdown-item" href="@Url.Action("ListBill", "Control", new { SearchText = searchText, PropName = "init_date", Order = !order  })">Ngày tạo</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <a class="text-muted" style="font-size: 14px">Hiển thị</a>
+
+                                <div class="btn-group" style="margin-left: 1%">
+                                    <button type="button"
+                                            class="btn btn-outline-info dropdown-toggle"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        Tất cả
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Tất cả</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider" />
+
+                                        </li>
+                                        
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <strong>Có @Model.ToList().Count hóa đơn</strong>
+                </div>
+
+            </div>
+                @*/CARD HEADER*@
+
+             
+           
             <div class="table-responsive text-nowrap">
                 <table class="table table-striped">
                     <thead style="text-align:center">
@@ -35,7 +140,7 @@
                                 </td>
                                 <td>@item.init_date.ToString("dd/MM/yyyy H:m:s")</td>
                                 <td>
-                                    @item.total_cost
+                                    @Html.Raw(item.total_cost.ToString("N0", System.Globalization.CultureInfo.CurrentCulture) + ",000")
                                 </td>
                                 <td>
                                     <div class="dropdown">
@@ -64,109 +169,6 @@
 
                 </table>
 
-
-                <!--Detail Modal -->
-                @foreach(var item in Model)
-                {
-                    <div class="modal fade" id="Detail-@item.bill_id" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalCenterTitle">Modal title</h5>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col mb-3">
-                                            <label for="nameWithTitle" class="form-label">Mã Hóa đơn</label>
-                                            <input type="text"
-                                                   id="nameWithTitle"
-                                                   class="form-control"
-                                                   placeholder="Enter Name" 
-                                                   value="@item.bill_id"/>
-                                        </div>
-                                    </div>
-                                    <div class="row g-2">
-                                        <div class="col mb-0">
-                                            <label for="emailWithTitle" class="form-label">Email</label>
-                                            <input type="text"
-                                                   id="emailWithTitle"
-                                                   class="form-control"
-                                                   placeholder="xxxx@xxx.xx" />
-                                        </div>
-                                        <div class="col mb-0">
-                                            <label for="dobWithTitle" class="form-label">DOB</label>
-                                            <input type="text"
-                                                   id="dobWithTitle"
-                                                   class="form-control"
-                                                   placeholder="DD / MM / YY" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                        Close
-                                    </button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-                <!--Detail Modal -->
-
-
-                <!--Detail Modal -->
-                <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalCenterTitle">Modal title</h5>
-                                <button type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col mb-3">
-                                        <label for="nameWithTitle" class="form-label">Name</label>
-                                        <input type="text"
-                                               id="nameWithTitle"
-                                               class="form-control"
-                                               placeholder="Enter Name" />
-                                    </div>
-                                </div>
-                                <div class="row g-2">
-                                    <div class="col mb-0">
-                                        <label for="emailWithTitle" class="form-label">Email</label>
-                                        <input type="text"
-                                               id="emailWithTitle"
-                                               class="form-control"
-                                               placeholder="xxxx@xxx.xx" />
-                                    </div>
-                                    <div class="col mb-0">
-                                        <label for="dobWithTitle" class="form-label">DOB</label>
-                                        <input type="text"
-                                               id="dobWithTitle"
-                                               class="form-control"
-                                               placeholder="DD / MM / YY" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                    Close
-                                </button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--Detail Modal -->
 
             </div>
         </div>

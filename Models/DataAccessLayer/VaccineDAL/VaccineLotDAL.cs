@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,8 +22,42 @@ namespace Models.DataAccessLayer.VaccineDAL
             var allVaccineLot = db.vaccine_lot.Select(x => x).ToList();
             return allVaccineLot;
         }
+        public List<vaccine_lot> GetAvailableLots()
+        {
+            return db.vaccine_lot.Where(m => m.isDeleted == false).ToList();
+        }
+        public List<vaccine_lot> SearchByFilter(string SearchText = "", string PropName = "None", bool order = true){
+
+            List<vaccine_lot> list = new List<vaccine_lot>();
+            list = GetAvailableLots();
+            list = list.Where(m => m.vaccine_type.vaccine_name.ToLower().Contains(SearchText) || m.lot_number.ToLower().Contains(SearchText)).ToList();
+            if(PropName == "None")
+            {
+                return list;
+            }
+            else
+            {
+                switch (PropName)
+                {
+                    case "vaccine_name":
+                        if (order == true) return list.OrderBy(m => m.vaccine_type.vaccine_name).ToList();
+                        else return list.OrderByDescending(m => m.vaccine_type.vaccine_name).ToList();
+                        break;
+                    case "total_cost":
+                        if(order == true) return list.OrderBy(m => m.total_amount * m.import_price).ToList();
+                        else return list.OrderByDescending(m => m.total_amount * m.import_price).ToList();
+                        break;
+                    default:
+                        PropertyInfo prop = typeof(vaccine_lot).GetProperty(PropName);
+                        if (order == true) return list.OrderBy(m => prop.GetValue(m)).ToList();
+                        else return list.OrderByDescending(m => prop.GetValue(m)).ToList();      
+                        break;
+                }
+            }
+        }
         public void AddVaccineLot(vaccine_lot lot)
         {
+            lot.isDeleted = false;
             db.vaccine_lot.Add(lot);
             db.SaveChanges();
         }
@@ -50,7 +86,7 @@ namespace Models.DataAccessLayer.VaccineDAL
             vaccine_lot LotToDel = db.vaccine_lot.Where(x => x.lot_number == LotNumber).FirstOrDefault();
             if (LotToDel != null) 
             {
-                db.vaccine_lot.Remove(LotToDel);
+                LotToDel.isDeleted = true;
                 db.SaveChanges();
             }
         }
@@ -92,8 +128,28 @@ namespace Models.DataAccessLayer.VaccineDAL
             }
             return cost;
         }
-
-
-      
+        public vaccine_lot GetAppropriateVaccineLotByVaccineCode(string VaccineCode)
+        { 
+            //vaccine_lot Lot = db.vaccine_lot.OrderBy(m => m.expiration_date).FirstOrDefault();
+            vaccine_lot Lot = db.vaccine_lot.Where(m => m.vaccine_code == VaccineCode && m.remain_amount > 0 && m.expiration_date > DateTime.Now && m.isDeleted == false).OrderBy(m => m.expiration_date).FirstOrDefault();
+            return Lot;
+        }
+        public void ReduceVaccineAmount(string VaccineCode, int amountToReduce)
+        {
+            foreach(var lot in db.vaccine_lot.Where(m => m.vaccine_code == VaccineCode && m.expiration_date > DateTime.Now && m.isDeleted == false).OrderBy(m => m.expiration_date))
+            {
+                if (lot.remain_amount < amountToReduce)
+                {
+                    amountToReduce -= lot.remain_amount;
+                    lot.remain_amount = 0;
+                }
+                else
+                {
+                    lot.remain_amount -= amountToReduce;
+                    break;
+                }
+            }
+            db.SaveChanges();
+        }
     }
 }

@@ -2,240 +2,346 @@
 
 
 @{
-    Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
-    string lot_number = "";
+    //Layout = "~/Areas/Pharmacist/Views/Shared/_Layout.cshtml";
+    string searchText = "", propName = "", displayPropName = "";
+    bool order = true;
+    if (TempData["SearchText"] != null) { searchText = TempData["SearchText"].ToString(); }
+    if (TempData["PropName"] != null) { propName = TempData["PropName"].ToString(); }
+    if (TempData["Order"] != null) { order = Convert.ToBoolean(TempData["Order"]); }
+
+
+    switch (propName)
+    {
+        case "None":
+            displayPropName = "None";
+            break;
+        case "vaccine_name":
+            displayPropName = "Tên Vaccine";
+            break;
+        case "total_amount":
+            displayPropName = "Tổng SL";
+            break;
+        case "remain_amount":
+            displayPropName = "SL còn lại";
+            break;
+        case "expiration_date":
+            displayPropName = "Hạn SD";
+            break;
+        case "total_cost":
+            displayPropName = "Giá nhập";
+            break;
+        case "sale_price":
+            displayPropName = "Giá bán";
+            break;
+    }
+    //if (TempData["Order"] != null) { order = "false"; }
+    //else if (TempData["Order"] == null) { order = "true"; }
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>VaccineList</title>
-</head>
-<body>
-    <div>
-        <div class="card" style="margin:30px 30px">
-            @*<h5 class="card-header">*@
-                <div class="navbar-nav align-items-start">
-                    <div class="nav-item d-flex align-items-center" style="margin: 2% 2%">
-                        <i class="bx bx-search fs-4 lh-0"></i>
+<div class="card" style="margin:30px 30px">
+    <div class="card-header">
+        <div class="mb-4" style="text-align: center">
+
+            <strong style="font-size:19px">DANH SÁCH LÔ VACCINE</strong>
+        </div>
+        @using (Html.BeginForm("VaccineList", "Control", FormMethod.Get))
+        {
+            <div class="row g-3">
+
+                @*SEARCH AREA*@
+
+                <div class="col-md-5 mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
                         <input type="text"
-                               class="form-control border-0 shadow-none"
+                               class="form-control"
                                placeholder="Search..."
-                               aria-label="Search..." />
+                               name="SearchText"
+                               value="@searchText" />
+                        <button class="btn btn-outline-primary" type="submit" id="button-addon2">Tìm kiếm</button>
                     </div>
                 </div>
-            @*</h5>*@
-        <div class="table-responsive text-nowrap">
 
-            <table class="table">
-                <thead style="text-align:center">
-                    <tr class="text-nowrap">
-                        <th>#</th>
-                        <th>Số lô</th>
-                        <th>Tên Vaccine</th>
-                        <th>Tổng SL</th>
-                        <th>SL Còn lại</th>
-                        <th>Đơn vị</th>
-                        <th>Hạn sử dụng</th>
-                        <th>Giá nhập</th>
-                        <th>Giá Bán</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{
-                        int i = 0;
+                <input type="hidden" name="PropName" value="@propName" />
+                <input type="hidden" name="Order" value="@order" />
 
-                    }
-                    @foreach (var item in Model)
-                    {
-                        i++;
-                        <tr style="text-align:center">
-                            <th scope="row">@i</th>
-                            <td>@item.lot_number</td>
-                            <td>@item.vaccine_type.vaccine_name</td>
-                            <td>@item.total_amount</td>
+                @*SORT AREA*@
+                <div class="col" style="margin-left:4%">
+                    <a class="text-muted" style="font-size: 14px">Sắp xếp theo</a>
+
+                    <div class="btn-group" style="margin-left: 1%">
+                        <button type="button"
+                                class="btn btn-outline-warning dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            @displayPropName
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="@Url.Action("VaccineList", "Control", new { SearchText = searchText })">Không có</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><a class="dropdown-item" href="@Url.Action("VaccineList", "Control", new { SearchText = searchText, PropName = "vaccine_name", Order = !order })">Tên Vaccine</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("VaccineList", "Control", new { SearchText = searchText, PropName = "total_amount", Order = !order  })">Tổng SL</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("VaccineList", "Control", new { SearchText = searchText, PropName = "remain_amount", Order = !order  })">SL còn lại</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("VaccineList", "Control", new { SearchText = searchText, PropName = "rival_date", Order = !order  })">Ngày nhập</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("VaccineList", "Control", new { SearchText = searchText, PropName = "expiration_date", Order = !order  })">Hạn sử dụng</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("VaccineList", "Control", new { SearchText = searchText, PropName = "total_cost", Order = !order  })">Tổng giá nhập</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <a class="text-muted" style="font-size: 14px">Hiển thị</a>
+
+                    <div class="btn-group" style="margin-left: 1%">
+                        <button type="button"
+                                class="btn btn-outline-info dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            Tất cả
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="javascript:void(0);">Tất cả</a></li>
+                            <li>
+                               <hr class="dropdown-divider" />
+                                
+                            </li>
+                           
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <strong>Có @Model.ToList().Count lô</strong>
+    </div>
+
+
+
+    <div class="table-responsive text-nowrap">
+
+        <table class="table">
+            <thead style="text-align:center">
+                <tr class="text-nowrap">
+                    <th>#</th>
+                    <th>Số lô</th>
+                    <th>Tên Vaccine</th>
+                    <th>Tổng SL</th>
+                    <th>SL Còn lại</th>
+                    @*<th>Đơn vị</th>*@
+                    <th>Ngày nhập</th>
+                    <th>Hạn sử dụng</th>
+                    <th>Tổng giá nhập</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+            int i = 0;
+
+        }
+        @foreach (var item in Model)
+        {
+            i++;
+                    <tr style="text-align:center">
+                        <th scope="row">@i</th>
+                        <td>@item.lot_number</td>
+                        <td>@item.vaccine_type.vaccine_name</td>
+                        <td>@item.total_amount</td>
+                        @if (item.remain_amount == 0)
+                        {
+                            <td><span class="badge bg-label-danger">Đã hết</span></td>
+                        }
+                        else
+    {
                             <td>@item.remain_amount</td>
-                            <td>@Html.Raw(item.dose_unit == 0 ? "Lọ" : "Liều")</td>
+                        }
+                        @*<td>@Html.Raw(item.dose_unit == 0 ? "Lọ" : "Liều")</td>*@
+                        <td>@item.rival_date.ToString("dd-MM-yyyy")</td>
+                        @if (item.expiration_date < DateTime.Now)
+                        {
+                            <td><span class="badge bg-label-danger">@item.expiration_date.ToString("dd-MM-yyyy")</span></td>
+                        }
+                        else
+    {
                             <td>@item.expiration_date.ToString("dd-MM-yyyy")</td>
-                            <td>@item.import_price</td>
-                            <td>@item.sale_price</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item"
-                                           href="" data-bs-toggle="modal"
-                                           data-bs-target="#Detail-@item.lot_number"><i class="bx bx-info-circle"></i> Chi tiết</a>
-                                        <a class="dropdown-item" href="@Url.Action("Edit", "Control", new {LotNumber = item.lot_number})"><i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
-                                        <a class="dropdown-item" href="@Url.Action("Delete", "Control", new {LotNumber = item.lot_number})"><i class="bx bx-trash me-1"></i> Xóa</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                        }
 
-            <!--Detail Modal -->
-            @foreach(var item in Model)
-            {
-                <div class="modal fade" id="Detail-@item.lot_number" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:40rem">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalCenterTitle">Thông tin vaccine</h5>
-                                <button type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row g-2">
-                                    <div class="col mb-3" style="margin-right:1rem">
-                                        <label for="emailWithTitle" class="form-label">Số lô</label>
-                                        <input type="text"
-                                               id="emailWithTitle"
-                                               class="form-control"
-                                               value="@item.lot_number" readonly />
-                                    </div>
-                                    <div class="col mb-3">
-                                        <label for="dobWithTitle" class="form-label">Mã Vaccine</label>
-                                        <input type="text"
-                                               id="dobWithTitle"
-                                               class="form-control"
-                                               value="@item.vaccine_code" readonly />
-
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-3" >
-                                        <label for="nameWithTitle" class="form-label">Tên Vaccine</label>
-                                        <input type="text"
-                                               id="nameWithTitle"
-                                               class="form-control"
-                                               value="@item.vaccine_type.vaccine_name" readonly />
-                                    </div>
-                                </div>
-                                <div class="row g-2">
-                                    <div class="col mb-3" style="margin-right:1rem">
-                                        <label for="emailWithTitle" class="form-label">Tổng SL</label>
-                                        <input type="text"
-                                               id="emailWithTitle"
-                                               class="form-control"
-                                               value="@item.total_amount" readonly />
-                                    </div>
-                                    <div class="col mb-3">
-                                        <label for="dobWithTitle" class="form-label">SL Còn lại</label>
-                                        <input type="text"
-                                               id="dobWithTitle"
-                                               class="form-control"
-                                               value="@item.remain_amount" readonly />
-
-                                    </div>
-                                </div>
-                                <div class="row g-2">
-                                    <div class="col mb-3" style="margin-right:1rem">
-                                        <label for="emailWithTitle" class="form-label">Đơn vị</label>
-                                        <input type="text"
-                                               id="emailWithTitle"
-                                               class="form-control"
-                                               value="@Html.Raw(item.dose_unit == 0 ? "Lọ": "Liều")" readonly />
-                                    </div>
-                                    <div class="col mb-3">
-                                        <label for="dobWithTitle" class="form-label">Nhà sản xuất</label>
-                                        <input type="text"
-                                               id="dobWithTitle"
-                                               class="form-control"
-                                               value="@item.publisher" readonly />
-                                    </div>
-                                </div>
-                                <div class="row g-2">
-                                    <div class="col mb-3" style="margin-right:1rem">
-                                        <label for="emailWithTitle" class="form-label">Ngày sản xuất</label>
-                                        <input type="text"
-                                               id="emailWithTitle"
-                                               class="form-control"
-                                               value="@item.production_date.ToString("dd/MM/yyyy")" readonly />
-                                    </div>
-                                    <div class="col mb-3">
-                                        <label for="dobWithTitle" class="form-label">Hạn sử dụng</label>
-                                        <input type="text"
-                                               id="dobWithTitle"
-                                               class="form-control"
-                                               value="@item.expiration_date.ToString("dd/MM/yyyy")" readonly />
-                                    </div>
-                                </div>
-                                <div class="row g-3">
-                                    <div class="col mb-3">
-                                        <label for="emailWithTitle" class="form-label">Giá nhập</label>
-                                        <input type="text"
-                                               id="emailWithTitle"
-                                               class="form-control"
-                                               value="@item.import_price" readonly />
-                                    </div>
-                                    <div class="col mb-3">
-                                        <label for="dobWithTitle" class="form-label">Giá bán</label>
-                                        <input type="text"
-                                               id="dobWithTitle"
-                                               class="form-control"
-                                               value="@item.sale_price" readonly />
-                                    </div>
-                                    <div class="col mb-3">
-                                        <label for="dobWithTitle" class="form-label">Thuế</label>
-                                        <input type="text"
-                                               id="dobWithTitle"
-                                               class="form-control"
-                                               value="@item.tax" readonly />
-                                    </div>
-                                </div>
-                                <div class="row g-2">
-                                    <div class="col mb-3" style="margin-right:1rem">
-                                        <label for="emailWithTitle" class="form-label">Nước sản xuất</label>
-                                        <input type="text"
-                                               id="emailWithTitle"
-                                               class="form-control"
-                                               value="@item.vaccine_type.country_of_origin" readonly />
-                                    </div>
-                                    <div class="col mb-3">
-                                        <label for="dobWithTitle" class="form-label">Ngày nhập</label>
-                                        <input type="text"
-                                               id="dobWithTitle"
-                                               class="form-control"
-                                               value="@item.rival_date.ToString("dd/MM/yyyy")" readonly />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-3">
-                                        <label for="nameWithTitle" class="form-label">Ghi chú</label>
-                                        <input type="text"
-                                               id="nameWithTitle"
-                                               class="form-control"
-                                               value="@item.note" readonly />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                    Đóng
+                        <td>@Html.Raw((item.import_price * item.total_amount).ToString("N0", System.Globalization.CultureInfo.CurrentCulture) + ",000")</td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
                                 </button>
-                                @*<button type="button" class="btn btn-primary">OK</button>*@
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item"
+                                       href="" data-bs-toggle="modal"
+                                       data-bs-target="#Detail-@item.lot_number"><i class="bx bx-info-circle"></i> Chi tiết</a>
+                                    <a class="dropdown-item" href="@Url.Action("Edit", "Control", new {LotNumber = item.lot_number})"><i class="bx bx-edit-alt me-1"></i> Chỉnh sửa</a>
+                                    <a class="dropdown-item" href="@Url.Action("Delete", "Control", new {LotNumber = item.lot_number})"><i class="bx bx-trash me-1"></i> Xóa</a>
+                                </div>
                             </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!--Detail Modal -->
+        @foreach (var item in Model)
+        {
+            <div class="modal fade" id="Detail-@item.lot_number" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:40rem">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalCenterTitle">Thông tin vaccine</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row g-2">
+                                <div class="col mb-3" style="margin-right:1rem">
+                                    <label for="emailWithTitle" class="form-label">Số lô</label>
+                                    <input type="text"
+                                           id="emailWithTitle"
+                                           class="form-control"
+                                           value="@item.lot_number" readonly />
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="dobWithTitle" class="form-label">Mã Vaccine</label>
+                                    <input type="text"
+                                           id="dobWithTitle"
+                                           class="form-control"
+                                           value="@item.vaccine_code" readonly />
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="nameWithTitle" class="form-label">Tên Vaccine</label>
+                                    <input type="text"
+                                           id="nameWithTitle"
+                                           class="form-control"
+                                           value="@item.vaccine_type.vaccine_name" readonly />
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-3" style="margin-right:1rem">
+                                    <label for="emailWithTitle" class="form-label">Tổng SL</label>
+                                    <input type="text"
+                                           id="emailWithTitle"
+                                           class="form-control"
+                                           value="@item.total_amount" readonly />
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="dobWithTitle" class="form-label">SL Còn lại</label>
+                                    <input type="text"
+                                           id="dobWithTitle"
+                                           class="form-control"
+                                           value="@item.remain_amount" readonly />
+
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-3" style="margin-right:1rem">
+                                    <label for="emailWithTitle" class="form-label">Đơn vị</label>
+                                    <input type="text"
+                                           id="emailWithTitle"
+                                           class="form-control"
+                                           value="@Html.Raw(item.dose_unit == 0 ? "Lọ": "Liều")" readonly />
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="dobWithTitle" class="form-label">Nhà sản xuất</label>
+                                    <input type="text"
+                                           id="dobWithTitle"
+                                           class="form-control"
+                                           value="@item.publisher" readonly />
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-3" style="margin-right:1rem">
+                                    <label for="emailWithTitle" class="form-label">Ngày sản xuất</label>
+                                    <input type="text"
+                                           id="emailWithTitle"
+                                           class="form-control"
+                                           value="@item.production_date.ToString("dd/MM/yyyy")" readonly />
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="dobWithTitle" class="form-label">Hạn sử dụng</label>
+                                    <input type="text"
+                                           id="dobWithTitle"
+                                           class="form-control"
+                                           value="@item.expiration_date.ToString("dd/MM/yyyy")" readonly />
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col mb-3">
+                                    <label for="emailWithTitle" class="form-label">Giá nhập</label>
+                                    <input type="text"
+                                           id="emailWithTitle"
+                                           class="form-control"
+                                           value="@item.import_price" readonly />
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="dobWithTitle" class="form-label">Giá bán</label>
+                                    <input type="text"
+                                           id="dobWithTitle"
+                                           class="form-control"
+                                           value="@item.sale_price" readonly />
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="dobWithTitle" class="form-label">Thuế</label>
+                                    <input type="text"
+                                           id="dobWithTitle"
+                                           class="form-control"
+                                           value="@item.tax" readonly />
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col mb-3" style="margin-right:1rem">
+                                    <label for="emailWithTitle" class="form-label">Nước sản xuất</label>
+                                    <input type="text"
+                                           id="emailWithTitle"
+                                           class="form-control"
+                                           value="@item.vaccine_type.country_of_origin" readonly />
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="dobWithTitle" class="form-label">Ngày nhập</label>
+                                    <input type="text"
+                                           id="dobWithTitle"
+                                           class="form-control"
+                                           value="@item.rival_date.ToString("dd/MM/yyyy")" readonly />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="nameWithTitle" class="form-label">Ghi chú</label>
+                                    <input type="text"
+                                           id="nameWithTitle"
+                                           class="form-control"
+                                           value="@item.note" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Đóng
+                            </button>
+                            @*<button type="button" class="btn btn-primary">OK</button>*@
                         </div>
                     </div>
                 </div>
-            }
-            <!--Detail Modal -->
-            
-        </div>
-        </div>
+            </div>
+        }
+        <!--Detail Modal -->
+
     </div>
-</body>
-</html>
 
+    <div class="card-footer">
 
-
+    </div>
+</div>
 

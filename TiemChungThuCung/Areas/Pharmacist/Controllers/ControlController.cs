@@ -22,10 +22,20 @@ namespace TiemChungThuCung.Areas.Pharmacist.Controllers
             vaccine_lot model = new VaccineLotDAL().GetVaccineLotByLotNumber(LotNumber);
             return View(model);
         }
-        public ActionResult VaccineList()
+        //public ActionResult VaccineList()
+        //{
+        //    List<vaccine_lot> model = new VaccineLotDAL().GetAllVaccineLot();
+        //    return View(model);
+        //}
+
+        [HttpGet]
+        public ActionResult VaccineList(string SearchText = "", string PropName = "None", bool Order = false)
         {
-            List<vaccine_lot> model = new VaccineLotDAL().GetAllVaccineLot();
-            return View(model);
+            TempData["SearchText"] = SearchText;
+            TempData["PropName"] = PropName;
+            TempData["Order"] = Order;
+            List<vaccine_lot> models = new VaccineLotDAL().SearchByFilter(SearchText, PropName, Order); 
+            return View(models);    
         }
         public ActionResult Edit(string LotNumber)
         {
