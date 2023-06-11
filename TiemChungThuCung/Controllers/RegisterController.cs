@@ -15,7 +15,7 @@ namespace TiemChungThuCung.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return View(new RegisterModel());
         }
 
         [HttpPost]
@@ -41,7 +41,9 @@ namespace TiemChungThuCung.Controllers
             {
 
             }
-            return View();
+            model.password = "";
+            model.confirmPassword = "";
+            return View(model);
         }
 
     }

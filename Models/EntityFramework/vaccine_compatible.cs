@@ -9,6 +9,9 @@ namespace Models.EntityFramework
     public partial class vaccine_compatible
     {
         [Key]
+        public int record_id { get; set; }
+
+        [Required]
         [StringLength(10)]
         public string disease_code { get; set; }
 

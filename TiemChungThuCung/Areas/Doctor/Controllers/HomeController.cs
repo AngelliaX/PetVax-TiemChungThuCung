@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,10 @@ namespace TiemChungThuCung.Areas.Doctor.Controllers
         // GET: Doctor/Home
         public ActionResult Index()
         {
+            string username = User.Identity.Name;
+            AccountDAO accountDAO = new AccountDAO();
+            string name = accountDAO.getNamebyUsername(username);
+            ViewBag.Name = name;
             return View();
         }
     }

@@ -63,27 +63,27 @@
         </div>
 
         <br><br>
-
         @if (@Model != null && @Model.pet_id != null)
         {
-            <div class="col-md-6 col-12 mx-auto">
-                <h6 class="text-muted">Chi tiết thú cưng</h6>
-                <div class="nav-align-top mb-4">
-                    <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
-                        <li class="nav-item">
-                            <button type="button"
-                                    class="nav-link active"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-home"
-                                    aria-controls="navs-pills-justified-home"
-                                    aria-selected="true">
-                                <i class="tf-icons bx bx-home"></i> Thông tin chung
-                            </button>
-                        </li>
-                    </ul>
-                    @using (Html.BeginForm())
-                    {
+            using (Html.BeginForm())
+            {
+                <div class="col-md-6 col-12 mx-auto">
+                    <h6 class="text-muted">Chi tiết thú cưng</h6>
+                    <div class="nav-align-top mb-4">
+                        <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+                            <li class="nav-item">
+                                <button type="button"
+                                        class="nav-link active"
+                                        role="tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#navs-pills-justified-home"
+                                        aria-controls="navs-pills-justified-home"
+                                        aria-selected="true">
+                                    <i class="tf-icons bx bx-home"></i> Thông tin chung
+                                </button>
+                            </li>
+                        </ul>
+
 
                         <input type="text"
                                class="form-control d-none"
@@ -172,9 +172,10 @@
                                 </div>
                             </div>
                         </div>
-                    }
+
+                    </div>
                 </div>
-            </div>
+            }
         }
     </div>
 </div>

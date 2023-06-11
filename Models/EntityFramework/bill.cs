@@ -1,4 +1,4 @@
-﻿namespace Models.EntityFramework
+namespace Models.EntityFramework
 {
     using System;
     using System.Collections.Generic;
@@ -16,8 +16,8 @@
         }
 
         [Key]
-        //[StringLength(10, ErrorMessage = "Không được vượt qúa 10 kí tự")]
-        //[Required(ErrorMessage ="Vui lòng không để trống")]
+        [StringLength(10, ErrorMessage = "Không được vượt qúa 10 kí tự")]
+        [Required(ErrorMessage = "Vui lòng không để trống")]
         public string bill_id { get; set; }
 
         [StringLength(50, ErrorMessage = "Không được vượt quá 50 kí tự")]

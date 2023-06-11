@@ -27,7 +27,11 @@ namespace TiemChungThuCung.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult CreateStaffAccount()
         {
-            return View();
+            CreateStaffAccountModel model = new CreateStaffAccountModel();
+            model.username = "";
+            model.password = "";
+            model.account_type = 1;
+            return View(model);
         }
 
         [HttpPost]
@@ -55,7 +59,12 @@ namespace TiemChungThuCung.Areas.Admin.Controllers
             }
             Trace.WriteLine("Info: " + model.username + "," + model.password + "," + model.account_type);
             // do something with the data...
-            return View();
+            
+            CreateStaffAccountModel modelNew = new CreateStaffAccountModel();
+            model.username = "";
+            model.password = "";
+            model.account_type = 1;
+            return View(modelNew);
 
         }
     }
